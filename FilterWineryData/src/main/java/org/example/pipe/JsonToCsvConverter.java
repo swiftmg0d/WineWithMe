@@ -20,7 +20,7 @@ public class JsonToCsvConverter implements Pipe {
         JsonNode jsonNode = (JsonNode) data;
         FileWriter out = new FileWriter("output.csv");
         CSVPrinter printer = new CSVPrinter(out, CSVFormat.DEFAULT
-                .withHeader("Title", "CategoryName", "Address", "Neighborhood", "Street", "City", "State", "CountryCode", "Website", "Phone", "Location", "PlusCode"));
+                .withHeader("Title", "CategoryName", "Address", "Street", "City", "CountryCode", "Website", "Phone", "Location", "PlusCode"));
         nextPipe.dataFlow(new Object[]{jsonNode, printer});
     }
 }

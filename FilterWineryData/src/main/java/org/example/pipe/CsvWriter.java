@@ -24,11 +24,9 @@ public class CsvWriter implements Pipe {
             title.replaceAll("\"", "'");
             String categoryName = feature.get("categoryName").asText();
             String address = feature.get("address").asText();
-            String neighborhood = feature.get("neighborhood").asText();
             String street = feature.get("street").asText();
             String city = feature.get("city").asText();
             String postalCode = feature.get("postalCode").asText();
-            String state = feature.get("state").asText();
             String countryCode = feature.get("countryCode").asText();
             String website = feature.get("website").asText();
             String phone = feature.get("phone").asText();
@@ -42,7 +40,7 @@ public class CsvWriter implements Pipe {
             String plusCode = feature.get("plusCode").asText();
 
 
-            printer.printRecord(title, categoryName, address, neighborhood, street, city, state, countryCode, website, phone, location.toString(), plusCode);
+            printer.printRecord(title, categoryName, address, street, city, countryCode, website, phone, location.toString(), plusCode);
         }
 
         printer.close();
