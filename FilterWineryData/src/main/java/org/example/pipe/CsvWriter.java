@@ -40,7 +40,7 @@ public class CsvWriter implements Pipe {
             String plusCode = feature.get("plusCode").asText();
 
 
-            printer.printRecord(title, categoryName,address,  street, city, countryCode, website, phone, location.toString(), plusCode);
+            printer.printRecord(title, categoryName,address,  street, city, countryCode, website, phone, location.toString().replaceAll(","," "), plusCode);
         }
 
         printer.close();
