@@ -31,4 +31,9 @@ public class MainPageControler {
         return "register";
     }
 
+    @GetMapping("/main")
+    private String mainPage(){
+        return "index";
+    }
+
 }
