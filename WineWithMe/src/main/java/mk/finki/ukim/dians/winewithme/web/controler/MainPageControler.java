@@ -22,4 +22,8 @@ public class MainPageControler {
         model.addAttribute("list0f", jsonString);
         return "main";
     }
+    @GetMapping("/login")
+    private String login(){
+        return "login";
+    }
 }
