@@ -26,4 +26,9 @@ public class MainPageControler {
     private String login(){
         return "login";
     }
+    @GetMapping("/register")
+    private String register(){
+        return "register";
+    }
+
 }
