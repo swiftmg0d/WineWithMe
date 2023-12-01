@@ -29,7 +29,7 @@ public class DataHolder {
         BufferedReader bufferedReader = null;
         String line = "";
         try {
-            bufferedReader = new BufferedReader(new FileReader("../FilterWineryData/output.csv"));
+            bufferedReader = new BufferedReader(new FileReader("../../Data filtering and requirements analysis/FilterWineryData/output.csv"));
             list0fWineries = bufferedReader.lines().map(Winery::createWinery).toList().stream().skip(1).toList();
         } catch (Exception e) {
         }

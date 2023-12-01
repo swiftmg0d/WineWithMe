@@ -19,6 +19,7 @@ public class MainPageControler {
 
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = objectMapper.writeValueAsString(wineryService.getAllWineries());
+        int number0f=wineryService.getAllWineries().size();
         model.addAttribute("list0f", jsonString);
         return "main";
     }
