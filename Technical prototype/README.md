@@ -2,7 +2,7 @@
 ### Име на веб апликација: "WineWithMe"
 
 ### Во прилог е видео со објаснување околу изработениот прототип:
-[![Watch the video](https://i.ibb.co/9rf4LGZ/99bbc9f7-6fa9-49b8-acac-3711a08df1ef.jpg)](https://www.youtube.com/watch?v=mKby1JWpsj8)
+[![Watch the video]](https://www.youtube.com/watch?v=mKby1JWpsj8)
 <br>
 <br>
 <br>
