@@ -3,7 +3,7 @@
 
 ### Во прилог е видео со објаснување околу изработениот прототип:
 <video width="800" height="600" controls>
-  <source src="../Video/Video.mp4" type="video/mp4">
+  <source src="Video/Video.mp4" type="video/mp4">
 </video>
 <br>
 <br>
