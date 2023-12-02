@@ -1,0 +1,81 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Quick Start - Leaflet</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico"/>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .leaflet-container {
+            height: 400px;
+            width: 600px;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        #map {
+            width: 1200px;
+            height: 900px;
+        }
+    </style>
+
+
+</head>
+<body>
+
+
+<div id="map"></div>
+<script th:inline="javascript">
+    var wineries = JSON.parse(/*[[${list0f}]]*/ '[]');
+
+
+    var customIcon = L.icon({
+        iconUrl: '/img/marker.png',
+        iconSize: [70, 60],
+        iconAnchor: [22, 94],
+        popupAnchor: [-3, -76]
+    });
+    var customIcon1 = L.icon({
+        iconUrl: '/img/urPosition.png',
+        iconSize: [70, 60],
+        iconAnchor: [22, 94],
+        popupAnchor: [-3, -76]
+    });
+
+
+    const map = L.map('map').setView([51.505, -0.09], 13);
+    map.locate({setView: true, maxZoom: 20});
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    map.on('locationfound', function (e) {
+        // var marker = L.marker(e.latlng).addTo(map);
+        map.flyTo(e.latlng, 10);
+    });
+    wineries.forEach(function (wine) {
+
+        var location = wine.location;
+        latlnt = {"Lat": location.split("  ")[0], "Lng": location.split("  ")[1]}
+        L.marker([location.split("  ")[0], location.split("  ")[1]],{icon:customIcon}).addTo(map).bindPopup(wine.name);
+
+    });
+    </script>
+
+</body>
+</html>
