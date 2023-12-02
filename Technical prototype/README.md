@@ -2,8 +2,7 @@
 ### Име на веб апликација: "WineWithMe"
 
 ### Во прилог е видео со објаснување околу изработениот прототип:
-[![Watch the video](https://i.ibb.co/5Rs5740/viber-image-2023-12-02-20-50-09-316.jpg)](https://www.youtube.com/watch?v=mKby1JWpsj8)
-<br>
+[![Watch the video](https://i.ibb.co/5Rs5740/viber-image-2023-12-02-20-50-09-316.jpg)](https://www.youtube.com/watch?v=mKby1JWpsj8)<br>
 <br>
 <br>
 
