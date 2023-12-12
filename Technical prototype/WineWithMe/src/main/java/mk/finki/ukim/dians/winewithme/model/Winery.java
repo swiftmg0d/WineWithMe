@@ -3,8 +3,6 @@ package mk.finki.ukim.dians.winewithme.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 @Data
-@AllArgsConstructor
-
 public class Winery {
     private String name;
     private String address;
