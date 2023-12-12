@@ -7,6 +7,7 @@ import mk.finki.ukim.dians.winewithme.service.WineryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -16,5 +17,10 @@ public class WineryServiceImpl implements WineryService {
     @Override
     public List<Winery> getAllWineries() {
         return wineryRepository.findAll();
+    }
+
+    @Override
+    public Optional<Winery> findById(Long id) {
+        return wineryRepository.findById(id);
     }
 }
