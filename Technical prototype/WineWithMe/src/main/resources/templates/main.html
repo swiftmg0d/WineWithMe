@@ -1,5 +1,6 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <base target="_top">
     <meta charset="utf-8">
@@ -10,18 +11,156 @@
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans serif;
+        }
+
+        .hero {
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(rgba(12, 3, 51, 0.3), rgba(12, 3, 51, 0.3));
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        nav {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 5px 2%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 2;
+        }
+
+        img.logo {
+            width: 120px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 17px;
+            padding: 10px;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-evenly;
+        }
 
 
+        .back-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        #map {
+            z-index: 2;
+            width: 1000px;
+            height: 800px;
+            border: 2px solid white;
+            border-radius: 1.15rem;
+            margin-left: 120px;
+
+        }
+
+        #left-container {
+            width: 400px;
+            height: 800px;
+            padding-right: 300px;
+            margin-right: 10px;
+            margin-left: 180px;
+            background-color: whitesmoke;
+
+        }
+
+        .styleborder {
+            border-radius: 1.15rem;
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+            border: 2px solid whitesmoke;
+
+        }
+
+        #profile {
+            margin-left: 45px;
+            margin-top: 20px;
+            width: 300px;
+            height: 200px;
+            background-color: ghostwhite;
+        }
+
+        #wineries {
+            margin-left: 45px;
+            margin-top: 20px;
+            background-color: ghostwhite;
+            width: 300px;
+            height: 500px;
+        }
+
+        button {
+            width: 70px;
+            color: black;
+            font-size: 10px;
+            padding: 12px 0;
+            background: mediumpurple;
+            border: 0;
+            border-radius: 20px;
+            outline: none;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        #icon-profile {
+            width: 100px;
+            height: 80px;
+            background-color: darkslategray;
+            border: 3px solid floralwhite;
+            margin-right: 20px;
+            border-radius: 100px;
+            padding: 20px;
+            margin-left: 20px;
+        }
+
+        #info-profile {
+            height: 50px;
+            width: 300px;
+            margin-top: 5px;
+            padding: 9px
+        }
+
+        .lists-profile {
+            background-color: darkslategray;
+            margin-bottom: 10px;
+            border: 3px solid floralwhite;
+        }
+    </style>
     <link rel="icon" href="/img/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="/cssjs-dir/main.css">
 </head>
 <body>
-
-
 <div class="hero">
-
     <video autoplay loop muted playsinline class="back-video">
         <source src="/video/Sparkling wine commercial.mp4" type="video/mp4">
     </video>
@@ -38,7 +177,7 @@
 
                     <div id="info-profile">
                         <p style="color: darkslategray; margin-bottom: 15px; margin-top: 2px; width: 150px; text-align: left; font-size: 15px; margin-left: 8px">
-                            Welcome dear <th:block th:text="${user.name}"></th:block>, make sure u get the right dose of wine!
+                            Welcome dear user, make sure u get the right dose of wine!
                         </p>
                         <p class="styleborder lists-profile">
                             <a href="#" style="text-decoration: none; color: ghostwhite; ">Profile</a>
@@ -47,7 +186,7 @@
                             <a href="#" style="text-decoration: none; color: ghostwhite ">My wineries</a>
                         </p>
                         <p class="styleborder lists-profile">
-                        <a href="/logout" style="text-decoration: none; color: ghostwhite ">Logout</a>
+                            <a href="#" style="text-decoration: none; color: ghostwhite ">Logout</a>
                         </p>
                     </div>
 
@@ -62,14 +201,6 @@
                 <p style="color: darkslategray; margin-top: 20px">
                     Winery info:
                 </p>
-
-                <p style="color: darkslategray; margin-top: 20px" th:if="(${wine}!=null)">
-                    <th:block th:text="${wine.getName()}"></th:block>
-                    <th:block th:text="${wine.getAddress()}"></th:block>
-                    <th:block th:text="${wine.getCity()}"></th:block>
-                    <a th:href="${wine.getWebSite()}">Website</a>
-                    <th:block th:text="${wine.getPhone()}"></th:block>
-                </p>
             </div>
 
         </div>
@@ -79,7 +210,39 @@
     </div>
 
 </div>
-<script type="text/javascript" src="/cssjs-dir/script.js"></script>
+</div>
+
+
+<script th:inline="javascript">
+    var wineries = JSON.parse(/*[[${list0f}]]*/ '[]');
+
+
+    var customIcon = L.icon({
+        iconUrl: '/img/marker.png',
+        iconSize: [40, 45],
+        iconAnchor: [20, 45],
+        popupAnchor: [0, -30]
+    });
+
+
+    const map = L.map('map').setView([51.505, -0.09], 13);
+    map.locate({setView: true, maxZoom: 20});
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    map.on('locationfound', function (e) {
+        // var marker = L.marker(e.latlng).addTo(map);
+        map.flyTo(e.latlng, 10);
+    });
+    wineries.forEach(function (wine) {
+
+        var location = wine.location;
+        latlnt = {"Lat": location.split("  ")[0], "Lng": location.split("  ")[1]}
+        L.marker([location.split("  ")[0], location.split("  ")[1]], {icon: customIcon}).addTo(map).bindPopup(wine.name);
+
+    });
+</script>
 
 </body>
 </html>
