@@ -29,11 +29,15 @@
         </div>
         <form method="post" action="/login">
             <div class="input-field">
-                <input name="username" type="text" class="input" placeholder="Username" required>
+                <label>
+                    <input name="username" type="text" class="input" placeholder="Username" required>
+                </label>
                 <i class="bx bx-user"></i>
             </div>
             <div class="input-field">
-                <input name="password" type="password" class="input" placeholder="Password" required>
+                <label>
+                    <input name="password" type="password" class="input" placeholder="Password" required>
+                </label>
                 <i class="bx bx-lock-alt"></i>
             </div>
             <div class="input-field">
@@ -52,7 +56,7 @@
         </div>
         <th:block th:if="(${error}!=null)">
             <div class="input-field" style="margin-top: 20px">
-                <label style="color: darkred; font-weight: bold; font-size: 14px";>Warning:</label>
+                <label style="color: darkred; font-weight: bold; font-size: 14px">Warning:</label>
                 <label th:text="${error}" style="color: floralwhite; font-weight: bold; font-size: 14px"></label>
             </div>
         </th:block>
