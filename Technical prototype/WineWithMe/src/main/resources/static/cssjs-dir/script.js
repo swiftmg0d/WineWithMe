@@ -42,7 +42,8 @@ function onMarkerClick(e) {
         dataType: "html",
         success: function(success) {
             if (success) {
-                window.location.href = "http://localhost:8080/homepage?id="+e.target.id
+                console.log(success)
+                window.location.href = "http://localhost:8080/mainpage?id="+e.target.id;
 
             }
         },

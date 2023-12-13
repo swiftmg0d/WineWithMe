@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,44 +12,52 @@
 
 </head>
 <body>
+
 <video autoplay muted loop id="myVideo">
 
     <source src="/video/videoBackground.mp4" type="video/mp4">
 </video>
-<div id="lang">
-    <a>МK</a>
-    <a>EN</a>
-</div>
+
 
 <div class="box">
+
+
 
     <div class="container">
         <div class="top-header">
             <span>Have an account?</span>
             <header>Login</header>
         </div>
+        <form method="post" action="/login">
+            <div class="input-field">
+                <input name="username" type="text" class="input" placeholder="Username" required>
+                <i class="bx bx-user"></i>
+            </div>
+            <div class="input-field">
+                <input name="password" type="password" class="input" placeholder="Password" required>
+                <i class="bx bx-lock-alt"></i>
+            </div>
+            <div class="input-field">
+                <input type="submit" class="submit" value="Login">
+            </div>
+        </form>
 
-        <div class="input-field">
-            <input type="text" class="input" placeholder="Username" required>
-            <i class="bx bx-user"></i>
-        </div>
-        <div class="input-field">
-            <input type="password" class="input" placeholder="Password" required>
-            <i class="bx bx-lock-alt"></i>
-        </div>
-        <div class="input-field">
-            <input type="submit" class="submit" value="Login">
-        </div>
 
         <div class="bottom">
             <div class="left">
-                <input type="checkbox"  id="check">
-                <label for="check"> Remember Me</label>
+                <input type="hidden"  id="check">
+                <label for="check"><a href="/register">Don't have an account?</a></label>
             </div>
             <div class="right">
-                <label><a href="#">Forgot password?</a></label>
             </div>
         </div>
+        <th:block th:if="(${error}!=null)">
+            <div class="input-field" style="margin-top: 20px">
+                <label style="color: darkred; font-weight: bold; font-size: 14px";>Warning:</label>
+                <label th:text="${error}" style="color: floralwhite; font-weight: bold; font-size: 14px"></label>
+            </div>
+        </th:block>
+
     </div>
 </div>
 </body>

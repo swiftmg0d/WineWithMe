@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +14,9 @@
 </head>
 <body>
 
+
 <div class="box">
+
     <video autoplay muted loop id="myVideo">
         <source src="/video/videoBackground.mp4" type="video/mp4">
     </video>
@@ -25,38 +28,47 @@
             <span>Create an account</span>
             <header>Register</header>
         </div>
+        <form method="post" action="/register">
+
         <div class="input-field">
-            <input type="text" class="input" placeholder="Name" required>
+            <input name="name" type="text" class="input" placeholder="Name" required>
             <i class="bx bx-user"></i>
         </div>
         <div class="input-field">
-            <input type="text" class="input" placeholder="Surname" required>
+            <input name="surname" type="text" class="input" placeholder="Surname" required>
             <i class="bx bx-user"></i>
         </div>
         <div class="input-field">
-            <input type="text" class="input" placeholder="Username" required>
+            <input name="username" type="text" class="input" placeholder="Username" required>
             <i class="bx bx-user"></i>
         </div>
         <div class="input-field">
-            <input type="password" class="input" placeholder="Password" required>
+            <input name="password" type="password" class="input" placeholder="Password" required>
             <i class="bx bx-lock-alt"></i>
         </div>
         <div class="input-field">
-            <input type="password" class="input" placeholder="Confirm password" required>
+            <input name="rpassword" type="password" class="input" placeholder="Confirm password" required>
             <i class="bx bx-lock-alt"></i>
         </div>
         <div class="input-field">
-            <input type="submit" class="submit" value="Register">
+                <input type="submit" class="submit" value="Register">
+
         </div>
+        </form>
+
         <div class="bottom">
             <div class="left">
-                <input type="checkbox"  id="check">
+                <input type="checkbox"  id="check" required>
                 <label>I accept the<a href="#" class="terms"> Terms of Use</a> and <a href="#" class="terms">Privacy Policy</a> </label>
             </div>
-            <div class="right">
-
-            </div>
         </div>
+        <th:block th:if="(${error}!=null)">
+            <div class="input-field" style="margin-top: 20px">
+                <label style="color: darkred; font-weight: bold; font-size: 14px";>Warning:</label>
+                <label th:text="${error}" style="color: floralwhite; font-weight: bold; font-size: 14px"></label>
+            </div>
+        </th:block>
+
     </div>
 </div>
 </body>

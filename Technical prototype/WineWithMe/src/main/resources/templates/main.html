@@ -18,7 +18,10 @@
     <link rel="stylesheet" href="/cssjs-dir/main.css">
 </head>
 <body>
+
+
 <div class="hero">
+
     <video autoplay loop muted playsinline class="back-video">
         <source src="/video/Sparkling wine commercial.mp4" type="video/mp4">
     </video>
@@ -35,7 +38,7 @@
 
                     <div id="info-profile">
                         <p style="color: darkslategray; margin-bottom: 15px; margin-top: 2px; width: 150px; text-align: left; font-size: 15px; margin-left: 8px">
-                            Welcome dear user, make sure u get the right dose of wine!
+                            Welcome dear <th:block th:text="${user.name}"></th:block>, make sure u get the right dose of wine!
                         </p>
                         <p class="styleborder lists-profile">
                             <a href="#" style="text-decoration: none; color: ghostwhite; ">Profile</a>
@@ -44,7 +47,7 @@
                             <a href="#" style="text-decoration: none; color: ghostwhite ">My wineries</a>
                         </p>
                         <p class="styleborder lists-profile">
-                            <a href="#" style="text-decoration: none; color: ghostwhite ">Logout</a>
+                        <a href="/logout" style="text-decoration: none; color: ghostwhite ">Logout</a>
                         </p>
                     </div>
 

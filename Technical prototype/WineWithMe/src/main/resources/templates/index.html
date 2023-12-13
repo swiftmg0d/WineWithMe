@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>WineWithMe</title>
@@ -14,7 +14,7 @@
     <nav>
         <img src="/img/logo.png" class="logo">
         <ul>
-            <li><a href="#">HOME</a></li>
+            <li><a href="/">HOME</a></li>
             <li><a href="#">ABOUT</a></li>
             <li><a href="#">CONTACT</a></li>
         </ul>
@@ -22,7 +22,9 @@
     <div class="container">
         <h1>WineWithMe</h1>
         <p>Travel to the world of winemaking with just one touch of the screen. Share your experiences, explore new aromas and create delicious memories.</p>
-        <button type="button">Lets's Wine!</button>
+        <form th:method="post" action="/auth-status">
+            <input type="submit" value="Let's wine">
+        </form>
     </div>
 </div>
 
