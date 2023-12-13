@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,152 +8,15 @@
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Register</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-        *{
-            font-family: 'Poppins', sans serif;
-        }
-        body{
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        .box{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 90vh;
-        }
-        .container{
-            width: 350px;
-            display: flex;
-            flex-direction: column;
-            padding: 0 15px 0 15px;
-        }
-        span{
-            color: #fff;
-            font-size: small;
-            display: flex;
-            justify-content: center;
-            padding: 10px 0 10px 0;
-        }
-        header{
-            color: #fff;
-            font-size: 30px;
-            display: flex;
-            justify-content: center;
-            padding: 10px 0 10px 0;
-        }
-        .input-field{
-            display: flex;
-            flex-direction: column;
-        }
-        .input-field .input{
-            height: 45px;
-            width: 87%;
-            border: none;
-            outline: none;
-            border-radius: 30px;
-            color: #fff;
-            padding: 0 0 0 42px;
-            background: rgba(255,255,255,0.1);
-        }
-        i{
-            position: relative;
-            top: -31px;
-            left: 17px;
-            color: #fff;
-        }
-        ::-webkit-input-placeholder{
-            color: #fff;
-        }
-        .submit{
-            border: none;
-            border-radius: 30px;
-            font-size: 15px;
-            height: 45px;
-            outline: none;
-            width: 100%;
-            background: rgba(255,255,255,0.7);
-            cursor: pointer;
-            transition: .3s;
-        }
-        .submit:hover{
-            box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
-        }
-        .bottom{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            font-size: small;
-            color: #fff;
-            margin-top: 10px;
-        }
-        .left{
-            display: flex;
-        }
-        label a{
-            color: #fff;
-            text-decoration: none;
-        }
-        #myVideo {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-        }
-
-        .content {
-            position: fixed;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            color: #f1f1f1;
-            width: 100%;
-            padding: 20px;
-        }
-
-
-        #myBtn {
-            width: 200px;
-            font-size: 18px;
-            padding: 10px;
-            border: none;
-            background: #000;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        #myBtn:hover {
-            background: #ddd;
-            color: black;
-        }
-        .container {
-            z-index: 1;
-        }
-        #myVideo {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-        }
-        .container {
-            position: absolute;
-            z-index: 2;
-            right: 200px;
-        }
-        .terms{
-            color: aquamarine;
-        }
-    </style>
     <link rel="icon" href="/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/cssjs-dir/register.css">
 
 </head>
 <body>
 
+
 <div class="box">
+
     <video autoplay muted loop id="myVideo">
         <source src="/video/videoBackground.mp4" type="video/mp4">
     </video>
@@ -164,38 +28,47 @@
             <span>Create an account</span>
             <header>Register</header>
         </div>
+        <form method="post" action="/register">
+
         <div class="input-field">
-            <input type="text" class="input" placeholder="Name" required>
+            <input name="name" type="text" class="input" placeholder="Name" required>
             <i class="bx bx-user"></i>
         </div>
         <div class="input-field">
-            <input type="text" class="input" placeholder="Surname" required>
+            <input name="surname" type="text" class="input" placeholder="Surname" required>
             <i class="bx bx-user"></i>
         </div>
         <div class="input-field">
-            <input type="text" class="input" placeholder="Username" required>
+            <input name="username" type="text" class="input" placeholder="Username" required>
             <i class="bx bx-user"></i>
         </div>
         <div class="input-field">
-            <input type="password" class="input" placeholder="Password" required>
+            <input name="password" type="password" class="input" placeholder="Password" required>
             <i class="bx bx-lock-alt"></i>
         </div>
         <div class="input-field">
-            <input type="password" class="input" placeholder="Confirm password" required>
+            <input name="rpassword" type="password" class="input" placeholder="Confirm password" required>
             <i class="bx bx-lock-alt"></i>
         </div>
         <div class="input-field">
-            <input type="submit" class="submit" value="Register">
+                <input type="submit" class="submit" value="Register">
+
         </div>
+        </form>
+
         <div class="bottom">
             <div class="left">
-                <input type="checkbox"  id="check">
+                <input type="checkbox"  id="check" required>
                 <label>I accept the<a href="#" class="terms"> Terms of Use</a> and <a href="#" class="terms">Privacy Policy</a> </label>
             </div>
-            <div class="right">
-
-            </div>
         </div>
+        <th:block th:if="(${error}!=null)">
+            <div class="input-field" style="margin-top: 20px">
+                <label style="color: darkred; font-weight: bold; font-size: 14px";>Warning:</label>
+                <label th:text="${error}" style="color: floralwhite; font-weight: bold; font-size: 14px"></label>
+            </div>
+        </th:block>
+
     </div>
 </div>
 </body>

@@ -1,165 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Login</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-        *{
-            font-family: 'Poppins', sans serif;
-        }
-        body{
-            /*background-image: url("images/1.jpg");*/
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        #lang{
-            display: inline-block;
-            float: right;
-            color: white;
-        }
-        #myVideo {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            z-index: -1;
-        }
-
-        .container {
-            position: absolute;
-            z-index: 2;
-            right: 200px;
-        }
-
-
-        .box{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 90vh;
-        }
-        .container{
-            width: 350px;
-            display: flex;
-            flex-direction: column;
-            padding: 0 15px 0 15px;
-        }
-        span{
-            color: #fff;
-            font-size: small;
-            display: flex;
-            justify-content: center;
-            padding: 10px 0 10px 0;
-        }
-        header{
-            color: #fff;
-            font-size: 30px;
-            display: flex;
-            justify-content: center;
-            padding: 10px 0 10px 0;
-        }
-        .input-field{
-            display: flex;
-            flex-direction: column;
-        }
-        .input-field .input{
-            height: 45px;
-            width: 87%;
-            border: none;
-            outline: none;
-            border-radius: 30px;
-            color: #fff;
-            padding: 0 0 0 42px;
-            background: rgba(255,255,255,0.1);
-        }
-        i{
-            position: relative;
-            top: -31px;
-            left: 17px;
-            color: #fff;
-        }
-        ::-webkit-input-placeholder{
-            color: #fff;
-        }
-        .submit{
-            border: none;
-            border-radius: 30px;
-            font-size: 15px;
-            height: 45px;
-            outline: none;
-            width: 100%;
-            background: rgba(255,255,255,0.7);
-            cursor: pointer;
-            transition: .3s;
-        }
-        .submit:hover{
-            box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
-        }
-        .bottom{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            font-size: small;
-            color: #fff;
-            margin-top: 10px;
-        }
-        .left{
-            display: flex;
-        }
-        label a{
-            color: #fff;
-            text-decoration: none;
-        }
-    </style>
     <link rel="icon" href="/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/cssjs-dir/login.css">
 
 </head>
 <body>
+
 <video autoplay muted loop id="myVideo">
 
     <source src="/video/videoBackground.mp4" type="video/mp4">
 </video>
-<div id="lang">
-    <a>МK</a>
-    <a>EN</a>
-</div>
+
 
 <div class="box">
+
+
 
     <div class="container">
         <div class="top-header">
             <span>Have an account?</span>
             <header>Login</header>
         </div>
+        <form method="post" action="/login">
+            <div class="input-field">
+                <input name="username" type="text" class="input" placeholder="Username" required>
+                <i class="bx bx-user"></i>
+            </div>
+            <div class="input-field">
+                <input name="password" type="password" class="input" placeholder="Password" required>
+                <i class="bx bx-lock-alt"></i>
+            </div>
+            <div class="input-field">
+                <input type="submit" class="submit" value="Login">
+            </div>
+        </form>
 
-        <div class="input-field">
-            <input type="text" class="input" placeholder="Username" required>
-            <i class="bx bx-user"></i>
-        </div>
-        <div class="input-field">
-            <input type="password" class="input" placeholder="Password" required>
-            <i class="bx bx-lock-alt"></i>
-        </div>
-        <div class="input-field">
-            <input type="submit" class="submit" value="Login">
-        </div>
 
         <div class="bottom">
             <div class="left">
-                <input type="checkbox"  id="check">
-                <label for="check"> Remember Me</label>
+                <input type="hidden"  id="check">
+                <label for="check"><a href="/register">Don't have an account?</a></label>
             </div>
             <div class="right">
-                <label><a href="#">Forgot password?</a></label>
             </div>
         </div>
+        <th:block th:if="(${error}!=null)">
+            <div class="input-field" style="margin-top: 20px">
+                <label style="color: darkred; font-weight: bold; font-size: 14px";>Warning:</label>
+                <label th:text="${error}" style="color: floralwhite; font-weight: bold; font-size: 14px"></label>
+            </div>
+        </th:block>
+
     </div>
 </div>
 </body>
