@@ -85,7 +85,7 @@
         left: 0;
         z-index: 0;
     }
-    input{
+    button{
         width: 180px;
         color: black;
         font-size: 12px;
@@ -96,13 +96,15 @@
         outline: none;
         margin-top: 30px;
         font-weight: bold;
+
     }
 </style>
 </head>
 <body>
+
 <div class="hero">
     <video autoplay loop muted playsinline class="back-video">
-        <source src="/static/video/videoBackground1.mp4" type="video/mp4">
+        <source src="/video/mainVideoBackground.mp4" type="video/mp4">
     </video>
     <nav>
         <img src="/img/logo.png" class="logo" alt="">
@@ -116,7 +118,19 @@
         <h1>WineWithMe</h1>
         <p>Travel to the world of winemaking with just one touch of the screen. Share your experiences, explore new aromas and create delicious memories.</p>
         <form th:method="post" action="/auth-status">
-            <input type="submit" value="Let's wine">
+            <button type="submit">Let's wine<!doctype html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport"
+                          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                    <title>Document</title>
+                </head>
+                <body>
+                
+                </body>
+                </html></button>
         </form>
     </div>
 </div>
