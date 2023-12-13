@@ -41,14 +41,14 @@ public class Winery {
     public static Winery createWinery(String line) {
         String[] splited = line.split(",");
         return new Winery(splited[0],
-                splited[2],
-                splited[3],
-                splited[4],
-                splited[5],
-                splited[6],
-                splited[7],
-                splited[8],
-                splited[9]
+                splited[2].contains("null") ? "Not mention!" : splited[2],
+                splited[3].contains("null") ? "Not mention!" : splited[3],
+                splited[4].contains("null") ? "Not mention!" : splited[4],
+                splited[5].contains("null") ? "Not mention!" : splited[5],
+                splited[6].contains("null") ? "Not mention!" : splited[6],
+                splited[7].contains("null") ? "Not mention!" : splited[7],
+                splited[8].contains("null") ? "Not mention!" : splited[8],
+                splited[9].contains("null") ? "Not mention!" : splited[9]
         );
     }
 }
