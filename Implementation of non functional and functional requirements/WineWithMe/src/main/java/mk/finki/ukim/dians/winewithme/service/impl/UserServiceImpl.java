@@ -7,13 +7,16 @@ import mk.finki.ukim.dians.winewithme.model.exception.Username0rPasswordDoesntMa
 import mk.finki.ukim.dians.winewithme.model.exception.UsernameExistsException;
 import mk.finki.ukim.dians.winewithme.repository.UserRepository;
 import mk.finki.ukim.dians.winewithme.service.UserService;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
@@ -32,5 +35,10 @@ public class UserServiceImpl implements UserService {
             throw new Username0rPasswordDoesntMatchException("Your username or password don't match!");
         }
         return currentUser.get();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }

@@ -11,6 +11,9 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/video/**")
                 .addResourceLocations("classpath:/static/video/");
-
+        registry.addResourceHandler("/img/**")
+                .addResourceLocations("classpath:/static/img/");
+        registry.addResourceHandler("/cssjs-dir/**")
+                .addResourceLocations("classpath:/static/cssjs-dir/");
     }
 }
