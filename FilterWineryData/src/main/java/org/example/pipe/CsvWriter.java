@@ -20,8 +20,11 @@ public class CsvWriter implements Pipe {
         while (elements.hasNext()) {
             JsonNode feature = elements.next();
             JsonNode feature1 = feature.get("location");
+            if(!(feature.get("categoryName").asText().toLowerCase().contains("winery") )) continue;
             String title = feature.get("title").asText();
-            title.replaceAll("\"", "'");
+            title.replaceAll("“","");
+            StringBuilder title1 = new StringBuilder();
+            title1.append(title);
             String categoryName = feature.get("categoryName").asText();
             String address = feature.get("address").asText();
             String street = feature.get("street").asText();
@@ -30,7 +33,8 @@ public class CsvWriter implements Pipe {
             String countryCode = feature.get("countryCode").asText();
             String website = feature.get("website").asText();
             String phone = feature.get("phone").asText();
-
+            String totalScore = feature.get("totalScore").asText().equals("null") ? "0" : feature.get("totalScore").asText();
+            String reviewsCount = feature.get("reviewsCount").asText();
             StringBuilder location = new StringBuilder();
 
             location.append(feature1.get("lat").asText());
@@ -40,7 +44,7 @@ public class CsvWriter implements Pipe {
             String plusCode = feature.get("plusCode").asText();
 
 
-            printer.printRecord(title, categoryName, address, street, city, countryCode, website, phone, location.toString(), plusCode);
+            printer.printRecord(title1, categoryName, address, street, city, countryCode, website, phone, location.toString(), plusCode, postalCode, totalScore, reviewsCount);
         }
 
         printer.close();

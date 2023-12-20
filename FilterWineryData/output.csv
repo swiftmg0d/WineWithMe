@@ -1,50 +1,84 @@
-Title,CategoryName,Address,Street,City,CountryCode,Website,Phone,Location,PlusCode
-Krnjevo - BAROVO winery and vineyards,Winery,"109 1437, North Macedonia",109 1437,null,MK,https://tikves.com.mk/en/domaine-barovo/,null,"41.3153854, 22.1279782","848H+55 Krnjevo, North Macedonia"
-"Family winery ""Micevi""",Winery,"Braka Miladinovi 55, Negotino 1440, North Macedonia",Braka Miladinovi 55,Negotino,MK,null,+389 70 916 794,"41.4769755, 22.0890711","F3GQ+QJ Negotino, North Macedonia"
-"Kralska Vinarija ""Kralica Marija""",Winery,"Marshal Tito 63, 1442, North Macedonia",Marshal Tito 63,null,MK,http://www.wineryqueenmaria.com/,+389 43 446 500,"41.41392, 22.233563","C67M+HC Demir Kapija, North Macedonia"
-"Winery ""Kitvin""",Winery,"MK, R1103, Vozartsi 1424, North Macedonia","MK, R1103",Vozartsi,MK,null,null,"41.4342679, 21.924049","CWMF+PJ Vozartsi, North Macedonia"
-BOVIN WINERY,Winery,"Ulica 29 Noemvri br, Negotino 1440, North Macedonia",Ulica 29 Noemvri br,Negotino,MK,http://bovin.mk/,+389 43 371 433,"41.4890625, 22.0885625","F3QQ+JC Negotino, North Macedonia"
-GD Tikves Winery,Winery,"Ul. Kamendol - Trstenik S MK, Trstenik 1422, North Macedonia",Ul. Kamendol - Trstenik S MK,Trstenik,MK,null,+389 43 415 916,"41.475839, 21.9211189","FWGC+8C Trstenik, North Macedonia"
-"Vinarija ""Vardar""",Winery,"C2Q2+CHG, Kavadarci, North Macedonia",C2Q2+CHG,Kavadarci,MK,null,null,"41.4385582, 22.0014642",null
-"Vinarija ""Povardarie Anevski""",Winery,"F29M+M4Q, Marena, North Macedonia",F29M+M4Q,Marena,MK,http://www.acpwinery.com/,+389 43 445 455,"41.4692103, 22.0328551",null
-"Winery ""Ilijevi""",Winery,"C2MH+X8J, Kavadarci, North Macedonia",C2MH+X8J,Kavadarci,MK,null,null,"41.4349507, 22.0282654",null
-MILEV Winery,Winery,"Ul. Kamendol - Trstenik S, Trstenik 1422, North Macedonia",Ul. Kamendol - Trstenik S,Trstenik,MK,null,null,"41.4758331, 21.9211223","FWGC+8C Trstenik, North Macedonia"
-MG-Winery,Winery,"Industriska 2, Kavadarci 1430, North Macedonia",Industriska 2,Kavadarci,MK,null,+389 70 253 465,"41.442416, 21.9999796","CXRX+XX Kavadarci, North Macedonia"
-Traikovsky Wines & Spirits,Winery,"109, Krnjevo, North Macedonia",109,Krnjevo,MK,http://www.traikovsky.com/,+389 43 370 287,"41.3069414, 22.1272239","844G+QV Krnjevo, North Macedonia"
-Anevski Winery,Winery,"Q53C+VH7, Shtip, North Macedonia",Q53C+VH7,Shtip,MK,http://www.acpwinery.com/,+389 70 394 157,"41.7546567, 22.1714311",null
-Izvorno,Winery,"M5, North Macedonia",M5,null,MK,null,+389 77 901 169,"41.6038007, 21.6928107","JM3V+G4 Dolno Vranovtsi, North Macedonia"
-"Winery ""Movino""",Winery,"GXC7+HVF, MK, Industriska BB, Rosoman 1422, North Macedonia","GXC7+HVF, MK, Industriska BB",Rosoman,MK,http://www.movino.mk/,+389 43 400 731,"41.5214442, 21.9646746",null
-Ezimit,Winery,"Ul. Bregalnicka 64a, Shtip, North Macedonia",Ul. Bregalnicka 64a,Shtip,MK,http://www.ezimit.mk/,+389 32 387 809,"41.7755648, 22.18112","Q5GJ+6C Shtip, North Macedonia"
-Angelovski Villa,Winery,null,null,null,null,null,+389 70 389 484,"41.6137143, 21.7432336",null
-Brzanov,Winery,"ul 1 br. 4 MK, Trubarevo 1047, North Macedonia",ul 1 br. 4 MK,Trubarevo,MK,http://www.brzanov.mk/,+389 75 406 116,"41.9856456, 21.5171839","XGP8+7V Trubarevo, North Macedonia"
-"Winery ""Kartal""",Winery,"ul.1519 br.7 Skopje MK, 1000, North Macedonia",ul.1519 br.7 Skopje MK,Skopje,MK,http://www.kartal.com.mk/,+389 70 242 419,"41.962434, 21.4763996","XF6G+XH Skopje, North Macedonia"
-Bela Voda - Tikves Winery Vineyadrs,Vineyard,"QQXC+GVP, Sojaklari, North Macedonia",QQXC+GVP,Sojaklari,MK,http://www.tikves.com.mk/,null,"41.7988315, 21.7721987",null
-"Winery ""Kamnik""",Winery,"Kamnik bb Skopje MK, 1000, North Macedonia",Kamnik bb Skopje MK,null,MK,http://www.chateaukamnik.com/,+389 2 252 1789,"42.0077507, 21.4902834","2F5R+44 Skopje, North Macedonia"
-Tristo,Winery,"QQQR+GCP, Otovica Sujaklari, Sojaklari, North Macedonia","QQQR+GCP, Otovica Sujaklari",Sojaklari,MK,null,+389 43 212 065,"41.7888443, 21.7910901",null
-Kocev Family Wines,Winery,"Prohor Pcinski, Veles, North Macedonia",Prohor Pcinski,Veles,MK,null,+389 72 245 483,"41.7096692, 21.787771","PQ5Q+V4 Veles, North Macedonia"
-"Winery ""Chateau Sopot""",Winery,"MK, Veles 1400, North Macedonia",MK,Veles,MK,https://www.facebook.com/chateausopotmacedonia/,+389 78 663 300,"41.7777559, 21.7409903","QPHR+49 Veles, North Macedonia"
-OldSchoolWinery,Winery,"Lake Mladost Veles MK, 1400, North Macedonia",Lake Mladost Veles MK,null,MK,https://m.facebook.com/OldSchoolWinery2020/,+389 75 355 900,"41.7736154, 21.767121","QQF8+CR Otovitsa, North Macedonia"
-Kievo Winery,Winery,null,null,null,null,null,+389 78 420 672,"41.7449384, 22.1913421",null
-"Winery ""Stefan""",Winery,"Boulevard Macedonia 2, Kavadarci, North Macedonia",Boulevard Macedonia 2,Kavadarci,MK,null,+389 43 420 412,"41.438669, 22.001734","C2Q2+FM Kavadarci, North Macedonia"
-"Winery ""Venec""",Winery,"s Dolni Disan, Negotino 1443, North Macedonia",s Dolni Disan,Negotino,MK,http://venec.mk/,+389 43 369 200,"41.433904, 22.092974","C3MV+H5 Dolni Disan, North Macedonia"
-Jakovlevski winery,Winery,"4th of July 16, Kavadarci 1430, North Macedonia",4th of July 16,Kavadarci,MK,null,null,"41.4380905, 22.0098042","C2Q5+6W Kavadarci, North Macedonia"
-"Winery ""Stobi""",Winery,"Avtopat b.b., Gradsko 1400, North Macedonia",Avtopat b.b.,Gradsko,MK,http://stobiwinery.mk/,+389 78 221 427,"41.5812326, 21.9362267","HWJP+FF Gradsko, North Macedonia"
-"Winery ""Lazar""",Winery,"Naseleno mesto bez ulicen sistem MK, Stobi, Palikura 1422, North Macedonia","Naseleno mesto bez ulicen sistem MK, Stobi",Palikura,MK,http://www.lazarwinery.mk/,+389 71 281 566,"41.546456, 21.9724705","GXWC+HX Palikura, North Macedonia"
-Ivanov Winery,Winery,"MK MK, Igman 11, Kavadarci 1430, North Macedonia","MK MK, Igman 11",Kavadarci,MK,null,+389 75 350 084,"41.4358661, 22.0053509","C2P4+84 Kavadarci, North Macedonia"
-Imako Vino Winery,Winery,"M5X4+MX, 6th km local road Stip-Radovis MK, Sofilari 2000, North Macedonia","M5X4+MX, 6th km local road Stip-Radovis MK",Sofilari,MK,http://www.imakovino.com.mk/,+389 32 308 703,"41.7016794, 22.1561355",null
-"Winery ""Sarafov""",Winery,"F38M+P87, Negotino, North Macedonia",F38M+P87,Negotino,MK,null,null,"41.4667795, 22.0833099",null
-"Winery ""Bovin""",Winery,"Industriska, Negotino 1440, North Macedonia",Industriska,Negotino,MK,http://www.bovin.mk/,+389 43 365 322,"41.4933002, 22.0924896","F3VR+8X Negotino, North Macedonia"
-"Royal winery ""Queen Maria""",Winery,"Marshal Tito 63, 1442, North Macedonia","Marshal Tito 63, 1442",null,MK,https://wineryqueenmaria.com/,+389 70 324 921,"41.4140987, 22.233366","C67M+J8 Demir Kapija, North Macedonia"
-"Winery ""Pivka""",Winery,"107, North Macedonia",107,null,MK,http://www.winerypivka.com.mk/,+389 43 371 416,"41.4919487, 22.093001","F3RV+Q6 Negotino, North Macedonia"
-"Winery ""Vardarska dolina""",Winery,"G2JC+WW6, Kurija, North Macedonia",G2JC+WW6,Kurija,MK,http://www.vardarskadolina.mk/,+389 71 320 867,"41.5322771, 22.0222751",null
-"Winery ""Badi""",Winery,"Pere Toshev 3, Kavadartsi 1430, North Macedonia","Pere Toshev 3, Kavadartsi 1430",Kavadarci,MK,https://www.instagram.com/badiwinery/?hl=en,+389 77 832 746,"41.4321479, 22.0061189","C2J4+VC Kavadarci, North Macedonia"
-"Family Winery ""Peškov""",Winery,"C2G3+7HV, Kavadarci, North Macedonia",C2G3+7HV,Kavadarci,MK,null,+389 70 204 799,"41.4257426, 22.0039158",null
-Domaine Lepovo,Winery,"Negotino, North Macedonia",null,Negotino,MK,http://www.domainelepovo.com/,+389 2 318 1741,"41.5176405, 22.0342244","G29M+3M Negotino, North Macedonia"
-Zaharchev Winery and Distillery,Winery,"Kosovska 16, Kavadarci 1430, North Macedonia",Kosovska 16,Kavadarci,MK,https://www.zaharchev.mk/,+389 70 253 103,"41.4360468, 22.0048696","C2P3+CW Kavadarci, North Macedonia"
-"Winery ""Paragon""",Winery,"G4C8+R4, Krivolak 1440, North Macedonia",G4C8+R4,Krivolak,MK,null,+389 71 302 478,"41.5220625, 22.1153125",null
-"Family Winery ""Nalej""",Winery,"Timjanik 1440, North Macedonia",null,Timjanik,MK,null,+389 71 963 630,"41.4688812, 22.0836355","F39M+HF Timjanik, North Macedonia"
-"Winery ""Popova kula""",Winery,"Wine Boulevard No.1, Demir Kapija 1442, North Macedonia",Wine Boulevard No.1,Demir Kapija,MK,http://www.popovakula.com.mk/,+389 76 432 630,"41.410885, 22.226565","C66G+9J Demir Kapija, North Macedonia"
-"Family Winery ""Tomov""",Winery,"Timjanik 1440, North Macedonia",null,Timjanik,MK,https://family-winery-tomov.business.site/?utm_source=gmb&utm_medium=referral,+389 76 808 994,"41.4676689, 22.0844239","F39M+3Q Timjanik, North Macedonia"
-Notkov Winery,Winery,"Leninova 35, Negotino, North Macedonia",Leninova 35,Negotino,MK,null,+389 71 229 766,"41.48324, 22.0946753","F3MV+7V Negotino, North Macedonia"
-"Winery ""Eros""",Winery,"MK, Marshal Tito 59, Marena 1430, North Macedonia","MK, Marshal Tito 59",Marena,MK,null,+389 71 375 795,"41.4667585, 22.0301764","F28J+P3 Marena, North Macedonia"
-"Winery ""Popov""",Winery,"F2RC+JH6, Sopot, North Macedonia",F2RC+JH6,Sopot,MK,http://popovwinery.com.mk/,+389 43 551 000,"41.4915359, 22.0213826",null
+Title,CategoryName,Address,Street,City,CountryCode,Website,Phone,Location,PlusCode,postalCode,totalScore,reviewsCount
+AgroLozar AD,Winery,"6MPC+C6C, Crnichani, North Macedonia",6MPC+C6C,Crnichani,MK,null,null,"41.2360545, 22.6705194",null,null,0,0
+Alesto Winery,Winery,"Arvati, North Macedonia",null,Arvati,MK,null,+389 76 387 262,"40.9429755, 21.1120544","W4V6+5R Arvati, North Macedonia",null,5,11
+Anevski Winery,Winery,"Q53C+VH7, Shtip, North Macedonia",Q53C+VH7,Shtip,MK,http://www.acpwinery.com/,+389 70 394 157,"41.7546567, 22.1714311",null,null,4.2,5
+Angelovski Villa,Winery,null,null,null,null,null,+389 70 389 484,"41.6137143, 21.7432336",null,null,0,0
+Bobi,Winery,"4HQW+P26, Stojakovo, North Macedonia",4HQW+P26,Stojakovo,MK,null,null,"41.1392814, 22.5950025",null,null,0,0
+Bord Life,Winery,"1106, Skopje 1000, Skopje, North Macedonia","1106, Skopje 1000",Skopje,MK,null,+389 70 331 114,"42.0586418, 21.3176565","3859+F3 Skopje, North Macedonia",null,4.9,18
+BOVIN WINERY,Winery,"Ulica 29 Noemvri br, Negotino 1440, North Macedonia",Ulica 29 Noemvri br,Negotino,MK,http://bovin.mk/,+389 43 371 433,"41.4890625, 22.0885625","F3QQ+JC Negotino, North Macedonia",1440,4.8,4
+Brazda Hills,Winery,"Chucher-Sandevo, North Macedonia",null,Chucher-Sandevo,MK,null,null,"42.0774592, 21.404118","3CG3+XJ Chucher-Sandevo, North Macedonia",null,5,1
+Brzanov,Winery,"ul 1 br. 4, Trubarevo 1047, North Macedonia",ul 1 br. 4,Trubarevo,MK,http://www.brzanov.mk/,+389 75 406 116,"41.985545, 21.5174371","XGP8+6X Trubarevo, North Macedonia",1047,4.9,113
+Ciflik Winery,Winery,"2 br.18 Brusnik, Bitola, North Macedonia",2 br.18 Brusnik,Bitola,MK,http://www.ciflikwinery.com/,+389 78 305 369,"41.0319937, 21.2929092","27JV+Q5 Bitola, North Macedonia",null,4.5,667
+Dalvina Winery,Winery,"R1302, Hamzali 2431, North Macedonia",R1302,Hamzali,MK,http://www.dalvina.com.mk/,+389 34 375 578,"41.4899341, 22.7446734","FPQV+XV Hamzali, North Macedonia",2431,4.8,21
+Domaine Lepovo,Winery,"Negotino, North Macedonia",null,Negotino,MK,http://www.domainelepovo.com/,+389 2 318 1741,"41.5176405, 22.0342244","G29M+3M Negotino, North Macedonia",null,4.4,9
+Dvorec Winery,Winery,"G49M+PG9, R1103, Pepelishte, North Macedonia","G49M+PG9, R1103",Pepelishte,MK,null,null,"41.5196165, 22.1339296",null,null,5,1
+Ezimit,Winery,"Ul. Bregalnicka 64a, Shtip, North Macedonia",Ul. Bregalnicka 64a,Shtip,MK,http://www.ezimit.mk/,+389 32 387 809,"41.7755648, 22.18112","Q5GJ+6C Shtip, North Macedonia",null,4.5,11
+Family Winery  Arabeska,Winery,"Ilindenska b.b, Sopot 1430, North Macedonia",Ilindenska b.b,Sopot,MK,null,+389 72 313 538,"41.4914269, 22.0254967","F2RG+H5 Sopot, North Macedonia",1430,5,3
+Family winery  Micevi,Winery,"Braka Miladinovi 55, Negotino 1440, North Macedonia",Braka Miladinovi 55,Negotino,MK,null,+389 70 916 794,"41.4769755, 22.0890711","F3GQ+QJ Negotino, North Macedonia",1440,0,0
+Family Winery  Nalej,Winery,"Timjanik 1440, North Macedonia",null,Timjanik,MK,null,+389 71 963 630,"41.4688812, 22.0836355","F39M+HF Timjanik, North Macedonia",1440,5,2
+Family Winery  Peškov,Winery,"C2G3+7HV, Kavadarci, North Macedonia",C2G3+7HV,Kavadarci,MK,null,+389 70 204 799,"41.4257426, 22.0039158",null,null,4.6,10
+Family Winery  Tomov,Winery,"Timjanik 1440, North Macedonia",null,Timjanik,MK,https://family-winery-tomov.business.site/?utm_source=gmb&utm_medium=referral,+389 76 808 994,"41.4676689, 22.0844239","F39M+3Q Timjanik, North Macedonia",1440,5,7
+Filovski Winery,Winery,"23, 11th October St. 1/1, Skopje 1000, North Macedonia","23, 11th October St. 1/1",Skopje,MK,null,+389 2 313 3394,"41.9922146, 21.4342922","XCRM+VP Skopje, North Macedonia",1000,0,0
+Galvin,Winery,"VFVR+P9V, Vinica, North Macedonia",VFVR+P9V,Vinica,MK,null,null,"41.8945413, 22.4905057",null,null,0,0
+Galvin Winery,Winery,null,null,null,null,null,+389 71 213 232,"41.6137143, 21.7432336",null,null,0,0
+GALVIN WINERY&VINEYARDS,Winery,"VGM4+882, Marsal Tito, Vinica, North Macedonia","VGM4+882, Marsal Tito",Vinica,MK,null,null,"41.883273, 22.5057707",null,null,0,0
+GD Tikves Winery,Winery,"Ul. Kamendol - Trstenik S MK, Trstenik 1422, North Macedonia",Ul. Kamendol - Trstenik S MK,Trstenik,MK,null,+389 43 415 916,"41.475839, 21.9211189","FWGC+8C Trstenik, North Macedonia",1422,5,1
+Imako Vino Winery,Winery,"M5X4+MX, 6th km local road Stip-Radovis MK, Sofilari 2000, North Macedonia","M5X4+MX, 6th km local road Stip-Radovis MK",Sofilari,MK,http://www.imakovino.com.mk/,+389 32 308 703,"41.7016794, 22.1561355",null,2000,4.5,42
+Ivanov Winery,Winery,"MK MK, Igman 11, Kavadarci 1430, North Macedonia","MK MK, Igman 11",Kavadarci,MK,null,+389 75 350 084,"41.4358661, 22.0053509","C2P4+84 Kavadarci, North Macedonia",1430,5,1
+Izvorno,Winery,"M5, North Macedonia",M5,null,MK,null,+389 77 901 169,"41.6038007, 21.6928107","JM3V+G4 Dolno Vranovtsi, North Macedonia",null,4.7,7
+Jakovlevski winery,Winery,"4th of July 16, Kavadarci 1430, North Macedonia",4th of July 16,Kavadarci,MK,null,null,"41.4380905, 22.0098042","C2Q5+6W Kavadarci, North Macedonia",1430,0,0
+Jostela Winery,Winery,"Moinski Pat, Gevgelija 1480, North Macedonia",Moinski Pat,Gevgelija,MK,http://www.jostela.com/,+389 70 305 149,"41.1355959, 22.4833692","4FPM+68 Gevgelija, North Macedonia",1480,5,20
+Kievo Winery,Winery,null,null,null,null,null,+389 78 420 672,"41.7449384, 22.1913421",null,null,0,0
+KM-VIN,Winery,"6HRW+9Q7, Vevchani, North Macedonia",6HRW+9Q7,Vevchani,MK,null,+389 70 628 952,"41.2409027, 20.5969125",null,null,5,1
+Kocev Family Wines,Winery,"Prohor Pcinski, Veles, North Macedonia",Prohor Pcinski,Veles,MK,null,+389 72 245 483,"41.7096692, 21.787771","PQ5Q+V4 Veles, North Macedonia",null,5,2
+Krnjevo - winery and vineyards,Winery,"109 1437, North Macedonia",109 1437,null,MK,null,null,"41.3153854, 22.1279782","848H+55 Krnjevo, North Macedonia",null,0,0
+Kukutanov Winery,Winery,"Bela Crkva bb, Radovish 2420, North Macedonia",Bela Crkva bb,Radovish,MK,http://www.kukutanov.com/,+389 78 412 927,"41.6310025, 22.4657802","JFJ8+C8 Radovish, North Macedonia",2420,4,1
+Kupenica Winery,Winery,"6Q5P+X83, Nikuljane, North Macedonia",6Q5P+X83,Nikuljane,MK,null,null,"42.2098796, 21.7857985",null,null,4,7
+LOZA,Winery,"Gjorgji Sugare No.1, Kavadarci 1430, North Macedonia",Gjorgji Sugare No.1,Kavadarci,MK,null,+389 75 403 738,"41.4293238, 22.0053729","C2H4+P4 Kavadarci, North Macedonia",1430,0,0
+Manager Tikves Wine Tourism,Winery,"8 mi septemvri, 1431, North Macedonia",8 mi septemvri,null,MK,null,+389 70 388 507,"41.608635, 21.745275","JP5W+F4 Vojnica, North Macedonia",1431,0,0
+Markudov Winery,Winery,"5G24+M98, Industriska, Gevgelija, North Macedonia","5G24+M98, Industriska",Gevgelija,MK,null,+389 34 214 094,"41.1516572, 22.5059438",null,null,4.9,15
+MILEV Winery,Winery,"Ul. Kamendol - Trstenik S, Trstenik 1422, North Macedonia",Ul. Kamendol - Trstenik S,Trstenik,MK,null,null,"41.4758331, 21.9211223","FWGC+8C Trstenik, North Macedonia",1422,0,0
+Monastery Winery,Winery,"MK, Ohrid 6000, North Macedonia",MK,Ohrid,MK,http://www.monasterywinery.com/,+389 78 474 656,"41.1847951, 20.8772488","5VMG+WV Ohrid, North Macedonia",6000,4.9,153
+Notkov Winery,Winery,"Leninova 35, Negotino, North Macedonia",Leninova 35,Negotino,MK,null,+389 71 229 766,"41.48324, 22.0946753","F3MV+7V Negotino, North Macedonia",null,0,0
+OldSchoolWinery,Winery,"Lake Mladost Veles MK, 1400, North Macedonia",Lake Mladost Veles MK,null,MK,https://m.facebook.com/OldSchoolWinery2020/,+389 75 355 900,"41.7736154, 21.767121","QQF8+CR Otovitsa, North Macedonia",1400,4.7,6
+Pirgan,Winery,"�?ароден Херој, MK, Орде Чопела бб, Prilep 7500, North Macedonia","�?ароден Херој, MK, Орде Чопела бб",Prilep,MK,https://winery-362.business.site/?utm_source=gmb&utm_medium=referral,+389 70 353 218,"41.365444, 21.5155086","9G88+56 Prilep, North Macedonia",7500,4.2,6
+Plus Ingenering,Winery,"2C6J+PXP, Makedonsko Kosovska Brigada, Skopje 1000, North Macedonia","2C6J+PXP, Makedonsko Kosovska Brigada",Skopje,MK,null,null,"42.0118414, 21.4324617",null,1000,0,0
+S&S Winery,Winery,"Ohrid, North Macedonia",null,Ohrid,MK,http://sswinery.com/,+389 70 780 608,"41.1384154, 20.7757859","4QQG+98 Ohrid, North Macedonia",null,5,27
+Sarika Winery,Winery,"Mirche Acev 128, Prilep 7500, North Macedonia",Mirche Acev 128,Prilep,MK,null,+389 71 278 316,"41.3403377, 21.5624017","8HR6+4X Prilep, North Macedonia",7500,5,5
+Skovin AD Skopje Winery,Winery,"15th Korpus No. 3 Skopje 1000, 1000, North Macedonia",15th Korpus No. 3 Skopje 1000,Skopje,MK,null,+389 2 314 5701,"42.0004846, 21.4785826","2F2H+5C Skopje, North Macedonia",1000,4.9,11
+Traikovsky Wines & Spirits,Winery,"109, Krnjevo, North Macedonia",109,Krnjevo,MK,http://www.traikovsky.com/,+389 43 370 287,"41.3069414, 22.1272239","844G+QV Krnjevo, North Macedonia",null,4,8
+Tristo,Winery,"QQQR+GCP, Otovica Sujaklari, Sojaklari, North Macedonia","QQQR+GCP, Otovica Sujaklari",Sojaklari,MK,null,+389 43 212 065,"41.7888443, 21.7910901",null,null,5,20
+Valandovo Winery,Winery,"Orce Nikolov 6, Valandovo 2460, North Macedonia",Orce Nikolov 6,Valandovo,MK,https://vizbavalandovo.com.mk/,+389 34 383 880,"41.3195595, 22.5663368","8H98+RG Valandovo, North Macedonia",2460,4.7,16
+Vardar Winery & Wines,Winery,"Vasil Gjorgov, Skopje 1000, North Macedonia",Vasil Gjorgov,Skopje,MK,null,+389 43 370 287,"41.9929627, 21.4158512",null,1000,0,0
+Vardar Winery & Wines,Winery,"Dame Gruev, Skopje 1000, North Macedonia",Dame Gruev,Skopje,MK,null,+389 43 371 416,"41.9946606, 21.4280648",null,1000,0,0
+Vinarija Baso,Winery,"Mara Ugrinova - Gina, Ki�?evo, North Macedonia",Mara Ugrinova - Gina,Ki�?evo,MK,null,null,"41.502958, 20.9534628","GX33+59 Ki�?evo, North Macedonia",null,0,0
+Vinarija Jordanov,Winery,"Gjorgi Boskov 52 s, Beli, North Macedonia",Gjorgi Boskov 52 s,Beli,MK,null,+389 70 309 975,"41.9305869, 22.3750617","W9JG+62 Beli, North Macedonia",null,1,1
+Vinarija Jordanov,Winery,"Local Road MK, Beli 2300, North Macedonia",Local Road MK,Beli,MK,null,+389 70 309 975,"41.9311719, 22.3749938","W9JF+FX Beli, North Macedonia",2300,0,0
+Vinarija PREMIUM,Winery,"4P8X+FF9, Kumanovo, North Macedonia",4P8X+FF9,Kumanovo,MK,null,null,"42.1161624, 21.7487212",null,null,4.9,10
+Vinika Winery,Winery,"Ilindenska 4, Vinica 2310, North Macedonia",Ilindenska 4,Vinica,MK,https://www.vinika.mk/,+389 78 451 456,"41.8859178, 22.5001307","VGP2+93 Vinica, North Macedonia",2310,0,0
+Wine Cellar Tikves AD Skopje,Winery,"810 no. 2, Skopje 1000, North Macedonia",810 no. 2,Skopje,MK,https://www.tikves.com.mk/,+389 2 318 1700,"42.001556, 21.467886","2F29+J5 Skopje, North Macedonia",1000,4.2,10
+Winery  Badi,Winery,"Pere Toshev 3, Kavadartsi 1430, North Macedonia","Pere Toshev 3, Kavadartsi 1430",Kavadarci,MK,https://www.instagram.com/badiwinery/?hl=en,+389 77 832 746,"41.4321479, 22.0061189","C2J4+VC Kavadarci, North Macedonia",null,5,11
+Winery  Bovin,Winery,"Инду�?три�?ка, Negotino 1440, North Macedonia",Инду�?три�?ка,Negotino,MK,http://www.bovin.mk/,+389 43 365 322,"41.4933002, 22.0924896","F3VR+8X Negotino, North Macedonia",1440,4.8,76
+Winery  Chateau Sopot,Winery,"MK, Veles 1400, North Macedonia",MK,Veles,MK,https://www.facebook.com/chateausopotmacedonia/,+389 78 663 300,"41.7777559, 21.7409903","QPHR+49 Veles, North Macedonia",1400,4.4,673
+Winery  Eros,Winery,"MK, Marshal Tito 59, Marena 1430, North Macedonia","MK, Marshal Tito 59",Marena,MK,null,+389 71 375 795,"41.4667585, 22.0301764","F28J+P3 Marena, North Macedonia",1430,4.5,11
+Winery  Ilijevi,Winery,"C2MH+X8J, Kavadarci, North Macedonia",C2MH+X8J,Kavadarci,MK,null,null,"41.4349507, 22.0282654",null,null,4.9,7
+Winery  Kamnik,Winery,"Kamnik bb Skopje MK, 1000, North Macedonia",Kamnik bb Skopje MK,null,MK,http://www.chateaukamnik.com/,+389 70 343 488,"42.0077507, 21.4902834","2F5R+44 Skopje, North Macedonia",1000,4.8,160
+Winery  Kartal,Winery,"ul.1519 br.7 Skopje MK, 1000, North Macedonia",ul.1519 br.7 Skopje MK,Skopje,MK,http://www.kartal.com.mk/,+389 70 242 419,"41.962434, 21.4763996","XF6G+XH Skopje, North Macedonia",1000,4.9,56
+Winery  Kitvin,Winery,"MK, R1103, Vozartsi 1424, North Macedonia","MK, R1103",Vozartsi,MK,null,null,"41.4342679, 21.924049","CWMF+PJ Vozartsi, North Macedonia",1424,0,0
+Winery  Klin�?arov,Winery,"Pionerska br. 1, Kavadarci, North Macedonia",Pionerska br. 1,Kavadarci,MK,null,+389 70 789 282,"41.4333505, 22.0077984","C2M5+84 Kavadarci, North Macedonia",null,5,6
+Winery  Lazar,Winery,"Naseleno mesto bez ulicen sistem MK, Stobi, Palikura 1422, North Macedonia","Naseleno mesto bez ulicen sistem MK, Stobi",Palikura,MK,http://www.lazarwinery.mk/,+389 71 281 566,"41.546456, 21.9724705","GXWC+HX Palikura, North Macedonia",1422,4.8,310
+Winery  Movino,Winery,"GXC7+HVF, MK, Industriska BB, Rosoman 1422, North Macedonia","GXC7+HVF, MK, Industriska BB",Rosoman,MK,http://www.movino.mk/,+389 43 400 731,"41.5214442, 21.9646746",null,1422,5,2
+Winery  Paragon,Winery,"G4C8+R4, Krivolak 1440, North Macedonia",G4C8+R4,Krivolak,MK,null,+389 71 302 478,"41.5220625, 22.1153125",null,1440,4.8,12
+Winery  Pivka,Winery,"107, North Macedonia",107,null,MK,http://www.winerypivka.com.mk/,+389 43 371 416,"41.4919487, 22.093001","F3RV+Q6 Negotino, North Macedonia",null,5,2
+Winery  Popov,Winery,"F2RC+JH6, Sopot, North Macedonia",F2RC+JH6,Sopot,MK,http://popovwinery.com.mk/,+389 43 551 000,"41.4915359, 22.0213826",null,null,4.6,30
+Winery  Popova kula,Winery,"Wine Boulevard No.1, Demir Kapija 1442, North Macedonia",Wine Boulevard No.1,Demir Kapija,MK,http://www.popovakula.com.mk/,+389 76 432 630,"41.410885, 22.226565","C66G+9J Demir Kapija, North Macedonia",1442,4.5,573
+Winery  Sarafov,Winery,"F38M+P87, Negotino, North Macedonia",F38M+P87,Negotino,MK,null,null,"41.4667795, 22.0833099",null,null,4.1,22
+Winery  Stefan,Winery,"41°26'19. 22°00'06.2""E, Boulevard Macedonia 2, Kavadarci, North Macedonia","41°26'19. 22°00'06.2""E, Boulevard Macedonia 2",Kavadarci,MK,null,+389 43 420 412,"41.438669, 22.001734","C2Q2+FM Kavadarci, North Macedonia",null,0,0
+Winery  Stobi,Winery,"Avtopat b.b., Gradsko 1400, North Macedonia",Avtopat b.b.,Gradsko,MK,http://stobiwinery.mk/,+389 78 221 427,"41.5812326, 21.9362267","HWJP+FF Gradsko, North Macedonia",1400,4.7,376
+Winery  Vardarska dolina,Winery,"G2QG+888, Kurija, North Macedonia",G2QG+888,Kurija,MK,http://www.vardarskadolina.mk/,+389 71 320 867,"41.5382989, 22.0258156",null,null,0,0
+Winery  Venec,Winery,"s Dolni Disan, Negotino 1443, North Macedonia",s Dolni Disan,Negotino,MK,http://venec.mk/,+389 43 369 200,"41.433904, 22.092974","C3MV+H5 Dolni Disan, North Macedonia",1443,4.8,35
+Winery DRUM ,Winery,"VJW3+3XG, Dragobrashte, North Macedonia",VJW3+3XG,Dragobrashte,MK,null,+389 78 350 406,"41.8951769, 22.6049661",null,null,0,0
+Winery Kuvin,Winery,"Makedonska Prerodba бр.70, Skopje 1000, North Macedonia",Makedonska Prerodba бр.70,Skopje,MK,http://www.winerykuvin.com/,+389 75 233 340,"42.0094835, 21.351241","2952+QF Skopje, North Macedonia",1000,5,10
+Winery Ohrid,Winery,"4QHV+56P, Бул. Железничка ББ, Ohrid 6000, North Macedonia","4QHV+56P, Бул. Железничка ББ",Ohrid,MK,null,+389 46 279 225,"41.1279708, 20.7930905",null,6000,5,7
+Zaharchev Winery and Distillery,Winery,"Kosovska 16, Kavadarci 1430, North Macedonia",Kosovska 16,Kavadarci,MK,https://www.zaharchev.mk/,+389 70 253 103,"41.4360468, 22.0048696","C2P3+CW Kavadarci, North Macedonia",1430,5,14
+ZIK Winery,Winery,"2W3H+G56, K'shanje, North Macedonia",2W3H+G56,K'shanje,MK,http://zikwine.com/,+389 71 209 603,"42.0037876, 21.9278854",null,null,5,8
