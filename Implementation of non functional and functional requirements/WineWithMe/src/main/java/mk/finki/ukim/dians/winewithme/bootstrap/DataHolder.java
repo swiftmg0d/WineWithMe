@@ -33,6 +33,7 @@ public class DataHolder {
             BufferedReader bufferedReader = null;
             try {
                 bufferedReader = new BufferedReader(new FileReader("../../Data filtering and requirements analysis/FilterWineryData/output.csv"));
+                String s=bufferedReader.readLine();
                 list0fWineries = bufferedReader.lines().map(Winery::createWinery).toList().stream().skip(1).toList();
                 wineryRepository.saveAll(list0fWineries);
             } catch (Exception e) {

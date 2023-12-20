@@ -65,24 +65,24 @@
                     Winery info:
                 </p>
 
-                <th style="color: darkslategray; margin-top: 20px" th:if="(${wine}!=null)">
+                <th style="color: darkslategray; margin-top: 20px">
                     <p style="color: darkslategray; margin-top: 9px;">
-                        <span style=" font-weight: bold">Name:</span>: <br> <span style="font-size: 15px" th:text="${wine.getName()}"></span>
+                        <span style=" font-weight: bold">Name:</span>: <br> <span style="font-size: 15px" th:text="${wine?.getTitle()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Address</span>:<br><span style="font-size: 15px" th:text="${wine.getAddress()}"></span>
+                        <span style=" font-weight: bold">Address</span>:<br><span style="font-size: 15px" th:text="${wine?.getAddress()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">City:</span>: <br> <span style="font-size: 15px" th:text="${wine.getCity()}"></span>
+                        <span style=" font-weight: bold">City:</span>: <br> <span style="font-size: 15px" th:text="${wine?.getCity()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Phone:</span>:<br> <span style="font-size: 15px"  th:text="${wine.getPhone()}"></span>
+                        <span style=" font-weight: bold">Phone:</span>:<br> <span style="font-size: 15px"  th:text="${wine?.getPhone()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Country code:</span>: <br><span style="font-size: 15px" th:text="${wine.getCountryCode()}"></span>
+                        <span style=" font-weight: bold">Country code:</span>: <br><span style="font-size: 15px"  th:text="${wine?.getCountryCode()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Website:</span>: <br><a  style="font-size: 15px;text-decoration: none;"  th:href="(${wine.getWebSite()}!='Not mention!' ? ${wine.getWebSite()} : '#'  )" th:text="(${wine.getWebSite()}!='Not mention!' ? 'Click here!' : 'Not mention!'  )"></a>
+                        <span style=" font-weight: bold">Website:</span>: <br><a  style="font-size: 15px;text-decoration: none;"  th:href="${wine?.getWebsite()}"></a>
                     </p>
                 </th>
             </div>
@@ -144,7 +144,7 @@
         var location = wine.location;
         latlnt = {"Lat": location.split("  ")[0], "Lng": location.split("  ")[1]}
 
-        var marker = L.marker([location.split("  ")[0], location.split("  ")[1]], {icon: customIcon}).bindPopup(wine.name);
+        var marker = L.marker([location.split(" ")[0], location.split(" ")[1]], {icon: customIcon}).bindPopup(wine.name);
 
         marker.on("click", onMarkerClick);
         marker.id=wine.id

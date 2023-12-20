@@ -30,8 +30,8 @@ public class MainPageControler {
         if(id!=null){
             wineryService.findById(id).ifPresent(i->{
                 model.addAttribute("wine",i);
-                model.addAttribute("lat",i.getLocation().split("\\s+")[0]);
-                model.addAttribute("lng",i.getLocation().split("\\s+")[1]);
+                model.addAttribute("lat",i.getLocation().split(" ")[0]);
+                model.addAttribute("lng",i.getLocation().split(" ")[1]);
 
             });
         }

@@ -13,34 +13,47 @@ public class Winery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String name;
-    private String address;
-    private String street;
-    private String city;
-    private String countryCode;
-    private String webSite;
-    private String phone;
-    private String location;
-    private String plusCode;
+    private String Title;
+    private String CategoryName;
+    private String Address;
+    private String Street;
+    private String City;
+    private String CountryCode;
+    private String Website;
+    private String Phone;
+    private String Location;
+    private String PlusCode;
+    private String postalCode;
+    private String totalScore;
+    private String reviewsCount;
 
-    public Winery(String name, String address, String street, String city, String countryCode, String webSite, String phone, String location, String plusCode) {
-        this.name = name;
-        this.address = address;
-        this.street = street;
-        this.city = city;
-        this.countryCode = countryCode;
-        this.webSite = webSite;
-        this.phone = phone;
-        this.location = location;
-        this.plusCode = plusCode;
-    }
 
     public Winery() {
     }
 
+    public Winery(String title, String categoryName, String address, String street, String city, String countryCode, String website, String phone, String location, String plusCode, String postalCode, String totalScore, String reviewsCount) {
+        Title = title;
+        CategoryName = categoryName;
+        Address = address;
+        Street = street;
+        City = city;
+        CountryCode = countryCode;
+        Website = website;
+        Phone = phone;
+        Location = location;
+        PlusCode = plusCode;
+        this.postalCode = postalCode;
+        this.totalScore = totalScore;
+        this.reviewsCount = reviewsCount;
+    }
+
     public static Winery createWinery(String line) {
         String[] splited = line.split(",");
-        return new Winery(splited[0],
+
+
+        return new Winery(
+                splited[0],
+                splited[1].contains("null") ? "Not mention!" : splited[1],
                 splited[2].contains("null") ? "Not mention!" : splited[2],
                 splited[3].contains("null") ? "Not mention!" : splited[3],
                 splited[4].contains("null") ? "Not mention!" : splited[4],
@@ -48,7 +61,13 @@ public class Winery {
                 splited[6].contains("null") ? "Not mention!" : splited[6],
                 splited[7].contains("null") ? "Not mention!" : splited[7],
                 splited[8].contains("null") ? "Not mention!" : splited[8],
-                splited[9].contains("null") ? "Not mention!" : splited[9]
-        );
+                splited[9].contains("null") ? "Not mention!" : splited[9],
+                splited[10].contains("null") ? "Not mention!" : splited[10],
+                splited[11].contains("null") ? "Not mention!" : splited[11],
+                splited[12].contains("null") ? "Not mention!" : splited[12]
+
+                );
+
+
     }
 }
