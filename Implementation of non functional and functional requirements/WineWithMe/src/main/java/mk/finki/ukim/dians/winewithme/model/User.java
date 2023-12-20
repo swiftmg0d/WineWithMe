@@ -11,11 +11,9 @@ import java.util.List;
 @Data
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String username;
     private String name;
     private String surname;
-    private String username;
     private String password;
     @ManyToMany
     private List<Winery> list0fWineries;
