@@ -11,8 +11,8 @@
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://onpkg.com/leaflet@1.2.0/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="https://onpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"/>
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
@@ -28,7 +28,10 @@
         <source src="/video/Sparkling wine commercial.mp4" type="video/mp4">
     </video>
     <nav>
-        <img src="/img/logo.png" class="logo">
+        <a href="/homepage">
+            <img  src="/img/logo.png" class="logo">
+
+        </a>
     </nav>
     <div class="container" style="display: flex; justify-content: space-between">
 
@@ -40,8 +43,11 @@
                     </div>
                     <div id="info-profile">
                         <p style="color: darkslategray; margin-bottom: 15px; margin-top: 2px; width: 150px; text-align: left; font-size: 15px; margin-left: 8px">
-                            Welcome dear <th:block th:text="${user.name}"></th:block>, make sure u get the right dose of wine!
+                            Welcome dear
+                            <th:block th:text="${user?.name}"></th:block>
+                            , make sure u get the right dose of wine!
                         </p>
+
                         <p class="styleborder lists-profile">
                             <a href="#" style="text-decoration: none; color: ghostwhite; ">Profile</a>
                         </p>
@@ -49,7 +55,7 @@
                             <a href="#" style="text-decoration: none; color: ghostwhite ">My wineries</a>
                         </p>
                         <p class="styleborder lists-profile">
-                        <a href="/logout" style="text-decoration: none; color: ghostwhite ">Logout</a>
+                            <a href="/logout" style="text-decoration: none; color: ghostwhite ">Logout</a>
                         </p>
                     </div>
 
@@ -65,26 +71,48 @@
                     Winery info:
                 </p>
 
-                <th style="color: darkslategray; margin-top: 20px">
+
+                <th:block th:if="(${wine}!=null)" style="color: darkslategray; margin-top: 20px">
                     <p style="color: darkslategray; margin-top: 9px;">
-                        <span style=" font-weight: bold">Name:</span>: <br> <span style="font-size: 15px" th:text="${wine?.getTitle()}"></span>
+                        <span style=" font-weight: bold">Name:</span>: <br> <span style="font-size: 15px"
+                                                                                  th:text="${wine?.getTitle()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Address</span>:<br><span style="font-size: 15px" th:text="${wine?.getAddress()}"></span>
+                        <span style=" font-weight: bold">Address</span>:<br><span style="font-size: 15px"
+                                                                                  th:text="${wine?.getAddress()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">City:</span>: <br> <span style="font-size: 15px" th:text="${wine?.getCity()}"></span>
+                        <span style=" font-weight: bold">City:</span>: <br> <span style="font-size: 15px"
+                                                                                  th:text="${wine?.getCity()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Phone:</span>:<br> <span style="font-size: 15px"  th:text="${wine?.getPhone()}"></span>
+                        <span style=" font-weight: bold">Phone:</span>:<br> <span style="font-size: 15px"
+                                                                                  th:text="${wine?.getPhone()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Country code:</span>: <br><span style="font-size: 15px"  th:text="${wine?.getCountryCode()}"></span>
+                        <span style=" font-weight: bold">Country code:</span>: <br><span style="font-size: 15px"
+                                                                                         th:text="${wine?.getCountryCode()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Website:</span>: <br><a  style="font-size: 15px;text-decoration: none;"  th:href="${wine?.getWebsite()}"></a>
+                        <span style=" font-weight: bold">Website:</span>: <br>
+                        <a th:text="(${wine.getWebsite()}!='Not mention!' ? 'Click for the website!' : 'Information not provided!' )" style="font-size: 15px;text-decoration: none; color: darkslategray"
+                           th:href="(${wine.getWebsite()}!='Not mention!' ? ${wine.getWebsite()} : '#' )"></a>
                     </p>
-                </th>
+
+                    <th:block th:if="${user?.getList0fWineries()?.contains(wine)}==true">
+                        <form th:method="post" th:action="@{'/mainpage/{id}/undo'(id=${wine.getId()})}">
+                            <button style="width: 200px; color: ghostwhite;" class="lists-profile" type="submit">Undo favorite!</button>
+                            <input name="user" type="hidden" th:value="${user.getId()}">
+                        </form>
+                    </th:block>
+                    <th:block th:if="${user?.getList0fWineries()?.contains(wine)}==false">
+                        <form th:method="post" th:action="@{'/mainpage/{id}/favorite'(id=${wine.getId()})}">
+                            <button style="width: 200px; color: ghostwhite;" class="lists-profile" type="submit">Add to favorite!</button>
+
+                            <input name="user" type="hidden" th:value="${user.getId()}">
+                        </form>
+                    </th:block>
+                </th:block>
             </div>
 
         </div>
@@ -99,7 +127,7 @@
     console.log(lat)
     var lng = /*[[${lng}]]*/ 'default';
     console.log(lng)
-    var wineries=JSON.parse(/*[[${list0f}]]*/ '[]');
+    var wineries = JSON.parse(/*[[${list0f}]]*/ '[]');
     var customIcon = L.icon({
         iconUrl: '/img/marker.png',
         iconSize: [40, 45],
@@ -116,26 +144,25 @@
     }).addTo(map);
 
 
-    if(lat != null && lng != null){
+    if (lat != null && lng != null) {
         map.on('locationfound', function (e) {
-           // var marker = L.marker(e.latlng).bindPopup("Your current location!").addTo(map);
-            map.flyTo([lat,lng], 11);
+            // var marker = L.marker(e.latlng).bindPopup("Your current location!").addTo(map);
+            map.flyTo([lat, lng], 14);
 
             // Create a routing control
             var control = L.Routing.control({
                 waypoints: [
-                L.latLng(e.latlng.lat, e.latlng.lng), // Current location
+                    L.latLng(e.latlng.lat, e.latlng.lng), // Current location
                     L.latLng(lat, lng) // Destination
                 ],
                 routeWhileDragging: true
             }).addTo(map);
         });
-    }
-        else {
+    } else {
         map.on('locationfound', function (e) {
             //var marker = L.marker(e.latlng).addTo(map);
             map.removeLayer(L.marker(e.latlng));
-            map.flyTo(e.latlng, 10);
+            map.flyTo(e.latlng, 11);
         });
     }
 
@@ -147,10 +174,9 @@
         var marker = L.marker([location.split(" ")[0], location.split(" ")[1]], {icon: customIcon}).bindPopup(wine.name);
 
         marker.on("click", onMarkerClick);
-        marker.id=wine.id
+        marker.id = wine.id
         marker.addTo(map)
     });
-
 
 
     function onMarkerClick(e) {
@@ -158,14 +184,14 @@
             type: "POST",
             url: "/showinfo",
             dataType: "html",
-            success: function(success) {
+            success: function (success) {
                 if (success) {
                     console.log(success)
-                    window.location.href = "http://localhost:8080/mainpage?id="+e.target.id;
+                    window.location.href = "http://localhost:8080/mainpage?id=" + e.target.id;
 
                 }
             },
-            fail: function(xhr, status, error) {
+            fail: function (xhr, status, error) {
                 console.log(error);
             }
         });
