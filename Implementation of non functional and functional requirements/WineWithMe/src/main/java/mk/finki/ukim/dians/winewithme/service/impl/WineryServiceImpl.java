@@ -23,4 +23,14 @@ public class WineryServiceImpl implements WineryService {
     public Optional<Winery> findById(Long id) {
         return wineryRepository.findById(id);
     }
+
+    @Override
+    public List<Winery> searchWineries(String city) {
+        if(city!=null){
+            return wineryRepository.findWineriesByCityEquals(city);
+        }
+        return getAllWineries();
+    }
+
+
 }

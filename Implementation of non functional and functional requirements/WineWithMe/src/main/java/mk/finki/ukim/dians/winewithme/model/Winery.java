@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
@@ -17,7 +16,7 @@ public class Winery {
     private String CategoryName;
     private String Address;
     private String Street;
-    private String City;
+    private String city;
     private String CountryCode;
     private String Website;
     private String Phone;
@@ -36,7 +35,7 @@ public class Winery {
         CategoryName = categoryName;
         Address = address;
         Street = street;
-        City = city;
+        this.city = city;
         CountryCode = countryCode;
         Website = website;
         Phone = phone;

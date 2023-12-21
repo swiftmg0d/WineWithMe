@@ -22,13 +22,23 @@ public class MainPageControler {
     private final UserRepository userRepository;
 
     @GetMapping("/mainpage")
-    private String listAllWiniers(HttpSession session, Model model, @RequestParam(required = false) Long id) throws JsonProcessingException {
+    private String listAllWiniers(HttpSession session,
+                                  Model model,
+                                  @RequestParam(required = false) Long id,
+                                  @RequestParam(required = false) String city) throws JsonProcessingException {
         User currentUser = (User) session.getAttribute("User");
         model.addAttribute("wineries", wineryService.getAllWineries());
         model.addAttribute("user", userRepository.findById(currentUser.getId()).get());
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonString = objectMapper.writeValueAsString(wineryService.getAllWineries());
+        String jsonString = null;
         int number0f = wineryService.getAllWineries().size();
+
+        if (city != null) {
+            jsonString = objectMapper.writeValueAsString(wineryService.searchWineries(city));
+        } else {
+            jsonString = objectMapper.writeValueAsString(wineryService.getAllWineries());
+        }
+
         model.addAttribute("list0f", jsonString);
         if (id != null) {
             wineryService.findById(id).ifPresent(i -> {
@@ -73,5 +83,25 @@ public class MainPageControler {
         return "redirect:/mainpage?id=" + id;
     }
 
+    @GetMapping("/mainpage/mywineries")
+    private String showMyWineries(HttpSession session, Model model) {
+        final User[] currentUser = {(User) session.getAttribute("User")};
+        userRepository.findById(currentUser[0].getId()).ifPresent(i->{
+            currentUser[0] =i;
+        });
+        model.addAttribute("wineries", currentUser[0].getList0fWineries());
+        model.addAttribute("user", currentUser[0]);
 
+        return "mywineries";
+    }
+    @PostMapping("/mainpage/mywineries/{id}/undo")
+    private String undoShowMyWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
+        wineryService.findById(id).ifPresent(i -> {
+            userRepository.findById(user).ifPresent(k -> {
+                k.getList0fWineries().remove(i);
+                userRepository.save(k);
+            });
+        });
+        return "redirect:/mainpage/mywineries";
+    }
 }

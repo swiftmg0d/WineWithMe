@@ -29,7 +29,7 @@
     </video>
     <nav>
         <a href="/homepage">
-            <img  src="/img/logo.png" class="logo">
+            <img src="/img/logo.png" class="logo">
 
         </a>
     </nav>
@@ -52,7 +52,7 @@
                             <a href="#" style="text-decoration: none; color: ghostwhite; ">Profile</a>
                         </p>
                         <p class="styleborder lists-profile">
-                            <a href="#" style="text-decoration: none; color: ghostwhite ">My wineries</a>
+                            <a href="/mainpage/mywineries" style="text-decoration: none; color: ghostwhite ">My wineries</a>
                         </p>
                         <p class="styleborder lists-profile">
                             <a href="/logout" style="text-decoration: none; color: ghostwhite ">Logout</a>
@@ -67,6 +67,10 @@
             </div>
 
             <div id="wineries" class="styleborder">
+                <form th:method="get" action="/mainpage">
+                    <input name="city">
+                    <button type="submit">Search</button>
+                </form>
                 <p style="color: darkslategray; margin-top: 20px; font-weight: bold; font-size: 20px; font-style: oblique">
                     Winery info:
                 </p>
@@ -95,19 +99,24 @@
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
                         <span style=" font-weight: bold">Website:</span>: <br>
-                        <a th:text="(${wine.getWebsite()}!='Not mention!' ? 'Click for the website!' : 'Information not provided!' )" style="font-size: 15px;text-decoration: none; color: darkslategray"
+                        <a th:text="(${wine.getWebsite()}!='Not mention!' ? 'Click for the website!' : 'Information not provided!' )"
+                           style="font-size: 15px;text-decoration: none; color: darkslategray"
                            th:href="(${wine.getWebsite()}!='Not mention!' ? ${wine.getWebsite()} : '#' )"></a>
                     </p>
 
                     <th:block th:if="${user?.getList0fWineries()?.contains(wine)}==true">
                         <form th:method="post" th:action="@{'/mainpage/{id}/undo'(id=${wine.getId()})}">
-                            <button style="width: 200px; color: ghostwhite;" class="lists-profile" type="submit">Undo favorite!</button>
+                            <button style="width: 200px; color: ghostwhite;" class="lists-profile" type="submit">Undo
+                                favorite!
+                            </button>
                             <input name="user" type="hidden" th:value="${user.getId()}">
                         </form>
                     </th:block>
                     <th:block th:if="${user?.getList0fWineries()?.contains(wine)}==false">
                         <form th:method="post" th:action="@{'/mainpage/{id}/favorite'(id=${wine.getId()})}">
-                            <button style="width: 200px; color: ghostwhite;" class="lists-profile" type="submit">Add to favorite!</button>
+                            <button style="width: 200px; color: ghostwhite;" class="lists-profile" type="submit">Add to
+                                favorite!
+                            </button>
 
                             <input name="user" type="hidden" th:value="${user.getId()}">
                         </form>
@@ -117,7 +126,7 @@
 
         </div>
 
-        <div id="map" class="styleborder"></div>
+        <div  id="map" class="styleborder"></div>
 
     </div>
 
