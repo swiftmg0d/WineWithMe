@@ -4,9 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import mk.finki.ukim.dians.winewithme.model.Contact;
 import mk.finki.ukim.dians.winewithme.model.User;
-import mk.finki.ukim.dians.winewithme.model.exception.PasswordNotMatchException;
-import mk.finki.ukim.dians.winewithme.model.exception.Username0rPasswordDoesntMatchException;
-import mk.finki.ukim.dians.winewithme.model.exception.UsernameExistsException;
+import mk.finki.ukim.dians.winewithme.model.exception.*;
 import mk.finki.ukim.dians.winewithme.service.ContactService;
 import mk.finki.ukim.dians.winewithme.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -34,7 +32,8 @@ public class AuthControler {
     private String registerAccount(Model model, @RequestParam String name, @RequestParam String surname, @RequestParam String username, @RequestParam String password, @RequestParam String rpassword) {
         try {
             userService.registerAccount(name, surname, username, password, rpassword);
-        } catch (PasswordNotMatchException | UsernameExistsException e) {
+        } catch (PasswordNotMatchException | UsernameExistsException | InvalidPasswordException |
+                 UsernameInPasswordException e) {
             model.addAttribute("error", e.getMessage());
             return "register";
         }

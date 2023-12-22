@@ -29,46 +29,60 @@ public class WineryServiceImpl implements WineryService {
         return wineryRepository.findById(id);
     }
 
+    private Double getNewScore(Double score, Double cntReview) {
+        double newScore = score / cntReview;
+        long number = Math.round(newScore * 100);
+        newScore = number / 100.00;
+        return newScore;
+    }
+
+
     @Override
     public void addReview(Winery winery, User user, Integer review) {
+        Double score = winery.scoreCalculate();
+        double cntReview = Double.parseDouble(winery.getReviewsCount());
         if (review == null) {
-            if(user.getWineryReview().containsKey(winery)){
+            if (user.getWineryReview().containsKey(winery)) {
 
-                Double score = winery.scoreCalculate();
-                double cntReview = Double.parseDouble(winery.getReviewsCount());
-                cntReview-=1;
+                cntReview -= 1;
                 score -= user.getWineryReview().get(winery);
                 user.getWineryReview().remove(winery);
                 winery.setReviewsCount(Double.toString(cntReview));
-                Double newScore=score/cntReview;
-                long number = Math.round(newScore * 100);
-                newScore = number/100.00;
 
-                winery.setTotalScore(String.valueOf(newScore));
+
+                winery.setTotalScore(String.valueOf(getNewScore(score, cntReview)));
 
                 wineryRepository.save(winery);
                 userRepository.save(user);
             }
         } else {
-            if(!user.getWineryReview().containsKey(winery)){
-                Double score = winery.scoreCalculate();
-                double cntReview = Double.parseDouble(winery.getReviewsCount());
-                cntReview+=1;
+            if (!user.getWineryReview().containsKey(winery)) {
+                cntReview += 1;
                 score += review;
                 winery.setReviewsCount(Double.toString(cntReview));
-                Double newScore=score/cntReview;
-                long number = Math.round(newScore * 100);
-                newScore = number/100.00;
 
-                winery.setTotalScore(String.valueOf(newScore));
+
+                winery.setTotalScore(String.valueOf(getNewScore(score, cntReview)));
+
                 user.getWineryReview().put(winery, review);
                 wineryRepository.save(winery);
                 userRepository.save(user);
+            } else {
+                score -= user.getWineryReview().get(winery);
+                score += review;
+                user.getWineryReview().remove(winery);
+                userRepository.save(user);
+
+                winery.setTotalScore(String.valueOf(getNewScore(score, cntReview)));
+
+                user.getWineryReview().put(winery, review);
+
+                userRepository.save(user);
+                wineryRepository.save(winery);
             }
 
         }
 
+
     }
-
-
 }
