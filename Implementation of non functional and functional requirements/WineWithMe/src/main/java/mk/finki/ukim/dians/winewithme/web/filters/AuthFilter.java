@@ -5,7 +5,11 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import mk.finki.ukim.dians.winewithme.model.Contact;
 import mk.finki.ukim.dians.winewithme.model.User;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
 
@@ -43,7 +47,10 @@ public class AuthFilter implements Filter {
 
         if (user != null || uri.contains(ignorePaths[0]) || uri.contains(ignorePaths[1]) ||
                 uri.contains(ignorePaths[2]) || uri.contains(ignorePaths[3]) ||
-                uri.startsWith(ignorePaths[4]) || uri.startsWith(ignorePaths[5])) {
+                uri.startsWith(ignorePaths[4]) || uri.startsWith(ignorePaths[5])
+      
+                || uri.startsWith("/contact") || uri.startsWith("/about") || uri.startsWith("/submitContactForm")
+        ) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             resp.sendRedirect("/homepage");
