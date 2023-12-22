@@ -6,5 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface WineryRepository extends JpaRepository<Winery,Long> {
-    List<Winery> findWineriesByCityEquals(String city);
+    List<Winery> findWineriesByCityEqualsIgnoreCase(String city);
+    List<Winery>findWineriesByTitleContainsIgnoreCase(String title);
+    List<Winery>findWineriesByCityEqualsIgnoreCaseAndTitleContainsIgnoreCase(String city,String title);
 }

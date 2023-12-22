@@ -1,5 +1,6 @@
 package mk.finki.ukim.dians.winewithme.service;
 
+import mk.finki.ukim.dians.winewithme.model.User;
 import mk.finki.ukim.dians.winewithme.model.Winery;
 
 import java.util.List;
@@ -9,5 +10,7 @@ public interface WineryService {
     List<Winery>getAllWineries();
 
     Optional<Winery> findById(Long id);
-    List<Winery>searchWineries(String city);
+
+
+    void addReview(Winery winery, User user, Integer review);
 }
