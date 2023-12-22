@@ -50,20 +50,22 @@ public class WineryServiceImpl implements WineryService {
                 userRepository.save(user);
             }
         } else {
+            if(!user.getWineryReview().containsKey(winery)){
+                Double score = winery.scoreCalculate();
+                double cntReview = Double.parseDouble(winery.getReviewsCount());
+                cntReview+=1;
+                score += review;
+                winery.setReviewsCount(Double.toString(cntReview));
+                Double newScore=score/cntReview;
+                long number = Math.round(newScore * 100);
+                newScore = number/100.00;
 
-            Double score = winery.scoreCalculate();
-            double cntReview = Double.parseDouble(winery.getReviewsCount());
-            cntReview+=1;
-            score += review;
-            winery.setReviewsCount(Double.toString(cntReview));
-            Double newScore=score/cntReview;
-            long number = Math.round(newScore * 100);
-            newScore = number/100.00;
+                winery.setTotalScore(String.valueOf(newScore));
+                user.getWineryReview().put(winery, review);
+                wineryRepository.save(winery);
+                userRepository.save(user);
+            }
 
-            winery.setTotalScore(String.valueOf(newScore));
-            user.getWineryReview().put(winery, review);
-            wineryRepository.save(winery);
-            userRepository.save(user);
         }
 
     }
