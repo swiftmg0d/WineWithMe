@@ -103,4 +103,16 @@ public class MainPageControler {
         });
         return "redirect:/mainpage/mywineries";
     }
+    @PostMapping("/mainpage/{id}/addreview")
+    private String addReviewWinery(HttpSession session,@PathVariable Long id,@RequestParam(required = false)Integer review){
+        final User[] currentUser = {(User) session.getAttribute("User")};
+        userRepository.findById(currentUser[0].getId()).ifPresent(i -> {
+            currentUser[0] = i;
+        });
+        wineryService.addReview(wineryService.findById(id).get(),currentUser[0],review);
+
+
+
+        return "redirect:/mainpage?id="+id;
+    }
 }

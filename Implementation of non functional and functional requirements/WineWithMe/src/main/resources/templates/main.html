@@ -52,7 +52,8 @@
                             <a href="#" style="text-decoration: none; color: ghostwhite; ">Profile</a>
                         </p>
                         <p class="styleborder lists-profile">
-                            <a href="/mainpage/mywineries" style="text-decoration: none; color: ghostwhite ">My wineries</a>
+                            <a href="/mainpage/mywineries" style="text-decoration: none; color: ghostwhite ">My
+                                wineries</a>
                         </p>
                         <p class="styleborder lists-profile">
                             <a href="/logout" style="text-decoration: none; color: ghostwhite ">Logout</a>
@@ -67,11 +68,16 @@
             </div>
 
             <div id="wineries" class="styleborder">
-                <div  style="margin-top: 10px">
+                <div style="margin-top: 10px">
                     <form th:method="get" action="/mainpage">
-                        <input name="city" class="styleborder lists-profile" style="display: inline-block; width: 85px; height: 30px; color: white" placeholder="  by city!">
-                        <input name="title" class="styleborder lists-profile" style="display: inline-block; width: 85px; height: 30px; color: white" placeholder=" by title!">
-                        <input class="styleborder lists-profile" type="submit" value="Search" style="width: 60px; height: 30px; color: white">
+                        <input name="city" class="styleborder lists-profile"
+                               style="display: inline-block; width: 85px; height: 30px; color: white"
+                               placeholder="     by city!">
+                        <input name="title" class="styleborder lists-profile"
+                               style="display: inline-block; width: 85px; height: 30px; color: white"
+                               placeholder="     by title!">
+                        <input class="styleborder lists-profile" type="submit" value="Search"
+                               style="width: 60px; height: 30px; color: white">
                     </form>
                 </div>
 
@@ -109,11 +115,24 @@
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
                         <span style=" font-weight: bold">Total score:</span>: <br><span style="font-size: 15px"
-                                                                                         th:text="${wine?.getTotalScore()}"></span>
+                                                                                        th:text="${wine?.getTotalScore()}"></span>
+                    </p>
+                    <p style="color: darkslategray; margin-top: 6px">
+                        <span style=" font-weight: bold">Add review:</span>: <br>
+                    <form method="post" th:action="@{'/mainpage/{id}/addreview'(id=${wine.getId()})}">
+
+                        <input style="border-radius: 10px; width: 100px; text-align: center" name="review"
+                               type="number" max="5" min="1"
+                        th:value="(${user?.getWineryReview()?.get(wine)})"
+                        >
+
+
+                    </form>
                     </p>
                     <th:block th:if="${user?.getList0fWineries()?.contains(wine)}==true">
                         <form th:method="post" th:action="@{'/mainpage/{id}/undo'(id=${wine.getId()})}">
-                            <button style="width: 200px; color: ghostwhite;" class="lists-profile" type="submit">Undo
+                            <button style="width: 200px; color: ghostwhite; margin-top: 10px" class="lists-profile"
+                                    type="submit">Undo
                                 favorite!
                             </button>
                             <input name="user" type="hidden" th:value="${user.getId()}">
@@ -121,7 +140,8 @@
                     </th:block>
                     <th:block th:if="${user?.getList0fWineries()?.contains(wine)}==false">
                         <form th:method="post" th:action="@{'/mainpage/{id}/favorite'(id=${wine.getId()})}">
-                            <button style="width: 200px; color: ghostwhite;" class="lists-profile" type="submit">Add to
+                            <button style="width: 200px; color: ghostwhite; margin-top: 10px" class="lists-profile"
+                                    type="submit">Add to
                                 favorite!
                             </button>
 
@@ -133,7 +153,7 @@
 
         </div>
 
-        <div  id="map" class="styleborder"></div>
+        <div id="map" class="styleborder"></div>
 
     </div>
 

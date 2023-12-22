@@ -45,6 +45,9 @@ public class Winery {
         this.totalScore = totalScore;
         this.reviewsCount = reviewsCount;
     }
+    public Double scoreCalculate(){
+        return Double.valueOf(totalScore)*Double.valueOf(reviewsCount);
+    }
 
     public static Winery createWinery(String line) {
         String[] splited = line.split(",");
