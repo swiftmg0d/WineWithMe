@@ -9,5 +9,4 @@ public interface WineryService {
     List<Winery>getAllWineries();
 
     Optional<Winery> findById(Long id);
-    List<Winery>searchWineries(String city);
 }

@@ -12,16 +12,16 @@ public class Winery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String Title;
-    private String CategoryName;
-    private String Address;
-    private String Street;
+    private String title;
+    private String categoryName;
+    private String address;
+    private String street;
     private String city;
-    private String CountryCode;
-    private String Website;
-    private String Phone;
-    private String Location;
-    private String PlusCode;
+    private String countryCode;
+    private String website;
+    private String phone;
+    private String location;
+    private String plusCode;
     private String postalCode;
     private String totalScore;
     private String reviewsCount;
@@ -31,16 +31,16 @@ public class Winery {
     }
 
     public Winery(String title, String categoryName, String address, String street, String city, String countryCode, String website, String phone, String location, String plusCode, String postalCode, String totalScore, String reviewsCount) {
-        Title = title;
-        CategoryName = categoryName;
-        Address = address;
-        Street = street;
+        this.title = title;
+        this.categoryName = categoryName;
+        this.address = address;
+        this.street = street;
         this.city = city;
-        CountryCode = countryCode;
-        Website = website;
-        Phone = phone;
-        Location = location;
-        PlusCode = plusCode;
+        this.countryCode = countryCode;
+        this.website = website;
+        this.phone = phone;
+        this.location = location;
+        this.plusCode = plusCode;
         this.postalCode = postalCode;
         this.totalScore = totalScore;
         this.reviewsCount = reviewsCount;
