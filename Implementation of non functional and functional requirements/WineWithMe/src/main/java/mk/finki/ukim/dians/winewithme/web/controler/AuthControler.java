@@ -2,23 +2,23 @@ package mk.finki.ukim.dians.winewithme.web.controler;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import mk.finki.ukim.dians.winewithme.model.Contact;
 import mk.finki.ukim.dians.winewithme.model.User;
 import mk.finki.ukim.dians.winewithme.model.exception.PasswordNotMatchException;
 import mk.finki.ukim.dians.winewithme.model.exception.Username0rPasswordDoesntMatchException;
 import mk.finki.ukim.dians.winewithme.model.exception.UsernameExistsException;
+import mk.finki.ukim.dians.winewithme.service.ContactService;
 import mk.finki.ukim.dians.winewithme.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping
 @AllArgsConstructor
 public class AuthControler {
     private final UserService userService;
+    private  final ContactService contactService;
 
     @GetMapping("/login")
     private String login() {
@@ -69,5 +69,29 @@ public class AuthControler {
     private String logoutAccount(HttpSession session) {
         session.invalidate();
         return "redirect:/homepage";
+    }
+
+    @GetMapping("/about")
+    private String aboutPage(){
+        return "about";
+    }
+//    @GetMapping("/contact")
+//    private String contactPage(){
+//        return "contact";
+//    }
+@GetMapping("/contact")
+public String showContactForm(Model model) {
+    // Add an empty Contact object to the model for Thymeleaf to bind to
+    model.addAttribute("contact", new Contact());
+
+    return "contact"; // Assuming your Thymeleaf template is named "contact.html"
+}
+
+    @PostMapping("/submitContactForm")
+    public String submitContactForm(@ModelAttribute Contact contact, Model model) {
+        contactService.save(contact);
+        model.addAttribute("thankYou", true);
+
+        return "contact";
     }
 }
