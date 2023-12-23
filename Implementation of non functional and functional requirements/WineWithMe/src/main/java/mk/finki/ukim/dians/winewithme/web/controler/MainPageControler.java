@@ -7,9 +7,11 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import mk.finki.ukim.dians.winewithme.model.User;
+import mk.finki.ukim.dians.winewithme.model.exception.PasswordNotMatchException;
 import mk.finki.ukim.dians.winewithme.repository.UserRepository;
 import mk.finki.ukim.dians.winewithme.service.UserService;
 import mk.finki.ukim.dians.winewithme.service.WineryService;
+import org.h2.engine.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -58,6 +60,32 @@ public class MainPageControler {
     private String mainPage() {
         return "index";
     }
+    @GetMapping("/profile")
+    private String profile(Model model, HttpSession session,
+                           @RequestParam(required = false) String changePass,
+                           @RequestParam(required = false) String successfullyChanged,
+                           @RequestParam(required = false) String passwordsDontMatch,
+                           @RequestParam(required = false) String messageException,
+                           @RequestParam(required = false) String currentPasswordIncorrect){
+        User currentUser= (User) session.getAttribute("User");
+        model.addAttribute("user",userRepository.findById(currentUser.getId()).get());
+        model.addAttribute("changePass",changePass);
+        model.addAttribute("successfullyChanged",successfullyChanged);
+        model.addAttribute("message",messageException);
+        model.addAttribute("passwordsDontMatch",passwordsDontMatch);
+        model.addAttribute("currentPasswordIncorrect",currentPasswordIncorrect);
+        return "profile";
+    }
+    @GetMapping("/changePass")
+    private String changePass(Model model, HttpSession session){
+        User currentUser= (User) session.getAttribute("User");
+        model.addAttribute("user",userRepository.findById(currentUser.getId()).get());
+        String changePass = "true";
+        //model.addAttribute("changePass",true);
+        return "redirect:/profile?changePass=" + changePass;
+    }
+
+
 
     @PostMapping("/mainpage/{id}/favorite")
     private String favoriteWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
