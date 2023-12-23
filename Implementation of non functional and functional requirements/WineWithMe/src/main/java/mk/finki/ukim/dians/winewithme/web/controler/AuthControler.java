@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import mk.finki.ukim.dians.winewithme.model.Contact;
 import mk.finki.ukim.dians.winewithme.model.User;
 import mk.finki.ukim.dians.winewithme.model.exception.*;
+import mk.finki.ukim.dians.winewithme.repository.UserRepository;
 import mk.finki.ukim.dians.winewithme.service.ContactService;
 import mk.finki.ukim.dians.winewithme.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class AuthControler {
     private final UserService userService;
-    private  final ContactService contactService;
+    private final ContactService contactService;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     @GetMapping("/login")
@@ -70,10 +74,12 @@ public class AuthControler {
         session.invalidate();
         return "redirect:/homepage";
     }
+
     @GetMapping("/about")
-    private String aboutPage(){
+    private String aboutPage() {
         return "about";
     }
+
     //    @GetMapping("/contact")
 //    private String contactPage(){
 //        return "contact";
@@ -97,34 +103,35 @@ public class AuthControler {
     @PostMapping("/changePass")
     private String changePass(@RequestParam String currentPassword,
                               @RequestParam String newPassword,
-                              @RequestParam String confirmPassword, Model model,HttpSession session){
-        User currentUser= (User) session.getAttribute("User");
-        if(!(currentPassword.equals(currentUser.getPassword()))){
-            String exception = new PasswordNotMatchException().getMessage();
+                              @RequestParam String confirmPassword, Model model, HttpSession session) {
+        User currentUser = (User) session.getAttribute("User");
+        currentUser = userRepository.findById(currentUser.getId()).get();
+        if (!(passwordEncoder.matches(currentPassword, currentUser.getPassword()))) {
+            String exception = "Your current password is incorrect";
             String currentPasswordIncorrect = "true";
             String changePass = "true";
-//            model.addAttribute("changePass",true);
-//            model.addAttribute("currentPasswordIncorrect",true);
-//            model.addAttribute("message",exception);
-            return "redirect:/profile?currentPasswordIncorrect="+currentPasswordIncorrect+"&changePass="+changePass+"&messageException="+exception;
+
+            return "redirect:/profile?currentPasswordIncorrect=" + currentPasswordIncorrect + "&changePass=" + changePass + "&messageException=" + exception;
         }
-        if(!(newPassword.equals(confirmPassword))){
-            String exception = new PasswordNotMatchException().getMessage();
+        if (!(newPassword.equals(confirmPassword))) {
+            String exception = "Your passwords doesn't match";
             String passwordsDontMatch = "true";
             String changePass = "true";
-            //model.addAttribute("changePass",true);
-            //model.addAttribute("passwordsDontMatch",true);
-            //model.addAttribute("message",exception);
-            return "redirect:/profile?passwordsDontMatch="+passwordsDontMatch+"&changePass="+changePass+"&messageException="+exception;
+
+            return "redirect:/profile?passwordsDontMatch=" + passwordsDontMatch + "&changePass=" + changePass + "&messageException=" + exception;
         }
-//        model.addAttribute("passwordsDontMatch",false);
-//        model.addAttribute("currentPasswordIncorrect",false);
-//        model.addAttribute("changePass",false);
-        userService.updatePassword(currentUser.getUsername(),newPassword);
+        try {
+            userService.updatePassword(currentUser.getUsername(), newPassword);
+
+        }catch (InvalidPasswordException e){
+            String exception = e.getMessage();
+            String passwordsDontMatch = "true";
+            String changePass = "true";
+            return "redirect:/profile?passwordsDontMatch=" + passwordsDontMatch + "&changePass=" + changePass + "&messageException=" + exception;
+
+        }
         String successfullyChanged = "true";
-        //model.addAttribute("successfullyChanged",true);
-       // String messageForChangedPass = "Password has been successfully changed";
-        //model.addAttribute("messageForChangedPass",messageForChangedPass);
+
         return "redirect:/profile?successfullyChanged=" + successfullyChanged;
     }
 }

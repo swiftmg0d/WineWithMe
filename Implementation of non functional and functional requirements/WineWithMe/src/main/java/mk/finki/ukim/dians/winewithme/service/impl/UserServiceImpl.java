@@ -44,9 +44,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return null;
     }
     public User updatePassword(String username, String newPassword){
-
+        PasswordValidator.isValid(newPassword);
         User user = userRepository.findUserByUsername(username).get();
-        user.setPassword(newPassword);
+        user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
         return user;
 
