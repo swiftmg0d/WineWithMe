@@ -53,7 +53,7 @@ public class AuthFilter implements Filter {
         ) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            resp.sendRedirect("/homepage");
+            resp.sendRedirect("/homepage/en");
         }
 
 

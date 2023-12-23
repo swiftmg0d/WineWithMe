@@ -1,4 +1,4 @@
-package mk.finki.ukim.dians.winewithme.model.exception;
+package mk.finki.ukim.dians.winewithme.model.exception.password.en;
 
 public class InvalidPasswordException extends RuntimeException {
 

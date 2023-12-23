@@ -1,4 +1,4 @@
-package mk.finki.ukim.dians.winewithme.web.controler;
+package mk.finki.ukim.dians.winewithme.web.controler.mk;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @AllArgsConstructor
 @RequestMapping
-public class MainPageMkController {
+public class MainPageControllerMK {
     private final WineryService wineryService;
     private final UserRepository userRepository;
     @GetMapping("/mainpage/mk")
@@ -47,7 +47,7 @@ public class MainPageMkController {
 
             });
         }
-        return "mainMk";
+        return "mk/mainMk";
     }
 
     @PostMapping("/showinfo/mk")
@@ -59,10 +59,33 @@ public class MainPageMkController {
 
     @GetMapping("/homepage/mk")
     private String mainPage() {
-        return "indexMk";
+        return "mk/indexMk";
+    }
+    @GetMapping("/profile/mk")
+    private String profile(Model model, HttpSession session,
+                           @RequestParam(required = false) String changePass,
+                           @RequestParam(required = false) String successfullyChanged,
+                           @RequestParam(required = false) String passwordsDontMatch,
+                           @RequestParam(required = false) String messageException,
+                           @RequestParam(required = false) String currentPasswordIncorrect) {
+        User currentUser = (User) session.getAttribute("User");
+        model.addAttribute("user", userRepository.findById(currentUser.getId()).get());
+        model.addAttribute("changePass", changePass);
+        model.addAttribute("successfullyChanged", successfullyChanged);
+        model.addAttribute("message", messageException);
+        model.addAttribute("passwordsDontMatch", passwordsDontMatch);
+        model.addAttribute("currentPasswordIncorrect", currentPasswordIncorrect);
+        return "mk/profileMk";
     }
 
-    @PostMapping("/mainpage/mk/{id}/favorite")
+    @GetMapping("/changePass/mk")
+    private String changePass(Model model, HttpSession session) {
+        User currentUser = (User) session.getAttribute("User");
+        model.addAttribute("user", userRepository.findById(currentUser.getId()).get());
+        String changePass = "true";
+        return "redirect:/profile/mk?changePass=" + changePass;
+    }
+    @PostMapping("/mainpage/{id}/favorite/mk")
     private String favoriteWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
         wineryService.findById(id).ifPresent(i -> {
             userRepository.findById(user).ifPresent(k -> {
@@ -73,7 +96,7 @@ public class MainPageMkController {
         return "redirect:/mainpage/mk?id=" + id;
     }
 
-    @PostMapping("/mainpage/mk/{id}/undo")
+    @PostMapping("/mainpage/{id}/undo/mk")
     private String undoWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
         wineryService.findById(id).ifPresent(i -> {
             userRepository.findById(user).ifPresent(k -> {
@@ -84,7 +107,7 @@ public class MainPageMkController {
         return "redirect:/mainpage/mk?id=" + id;
     }
 
-    @GetMapping("/mainpage/mk/mywineries")
+    @GetMapping("/mainpage/mywineries/mk")
     private String showMyWineries(HttpSession session, Model model) {
         final User[] currentUser = {(User) session.getAttribute("User")};
         userRepository.findById(currentUser[0].getId()).ifPresent(i -> {
@@ -93,10 +116,10 @@ public class MainPageMkController {
         model.addAttribute("wineries", currentUser[0].getList0fWineries());
         model.addAttribute("user", currentUser[0]);
 
-        return "mywineriesMk";
+        return "mk/mywineriesMk";
     }
 
-    @PostMapping("/mainpage/mk/mywineries/{id}/undo")
+    @PostMapping("/mainpage/mywineries/{id}/undo/mk")
     private String undoShowMyWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
         wineryService.findById(id).ifPresent(i -> {
             userRepository.findById(user).ifPresent(k -> {
@@ -104,9 +127,9 @@ public class MainPageMkController {
                 userRepository.save(k);
             });
         });
-        return "redirect:/mainpage/mk/mywineries";
+        return "redirect:/mainpage/mywineries/mk";
     }
-    @PostMapping("/mainpage/mk/{id}/addreview")
+    @PostMapping("/mainpage/{id}/addreview/mk")
     private String addReviewWinery(HttpSession session,@PathVariable Long id,@RequestParam(required = false)Integer review){
         final User[] currentUser = {(User) session.getAttribute("User")};
         userRepository.findById(currentUser[0].getId()).ifPresent(i -> {

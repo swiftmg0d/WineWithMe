@@ -1,10 +1,14 @@
-package mk.finki.ukim.dians.winewithme.web.controler;
+package mk.finki.ukim.dians.winewithme.web.controler.en;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import mk.finki.ukim.dians.winewithme.model.Contact;
 import mk.finki.ukim.dians.winewithme.model.User;
-import mk.finki.ukim.dians.winewithme.model.exception.*;
+import mk.finki.ukim.dians.winewithme.model.exception.password.uni.PasswordNotMatchException;
+import mk.finki.ukim.dians.winewithme.model.exception.password.uni.Username0rPasswordDoesntMatchException;
+import mk.finki.ukim.dians.winewithme.model.exception.password.uni.UsernameExistsException;
+import mk.finki.ukim.dians.winewithme.model.exception.password.uni.UsernameInPasswordException;
+import mk.finki.ukim.dians.winewithme.model.exception.password.en.*;
 import mk.finki.ukim.dians.winewithme.repository.UserRepository;
 import mk.finki.ukim.dians.winewithme.service.ContactService;
 import mk.finki.ukim.dians.winewithme.service.UserService;
@@ -23,84 +27,80 @@ public class AuthControler {
     private final PasswordEncoder passwordEncoder;
 
 
-    @GetMapping("/login")
+    @GetMapping("/login/en")
     private String login() {
-        return "login";
+        return "en/login";
     }
 
-    @GetMapping("/register")
+    @GetMapping("/register/en")
     private String register() {
-        return "register";
+        return "en/register";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register/en")
     private String registerAccount(Model model, @RequestParam String name, @RequestParam String surname, @RequestParam String username, @RequestParam String password, @RequestParam String rpassword) {
         try {
-            userService.registerAccount(name, surname, username, password, rpassword);
+            userService.registerAccount(name, surname, username, password, rpassword,"EN");
         } catch (PasswordNotMatchException | UsernameExistsException | InvalidPasswordException |
                  UsernameInPasswordException e) {
             model.addAttribute("error", e.getMessage());
-            return "register";
+            return "en/register";
         }
-        return "redirect:/login";
+        return "redirect:/login/en";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login/en")
     private String loginAccount(Model model, HttpSession session, @RequestParam String username, @RequestParam String password) {
         try {
-            User currentUser = userService.loginAccount(username, password);
+            User currentUser = userService.loginAccount(username, password,"EN");
             session.setAttribute("User", currentUser);
         } catch (Username0rPasswordDoesntMatchException e) {
             model.addAttribute("error", e.getMessage());
-            return "login";
+            return "en/login";
         }
-        return "redirect:/mainpage";
+        return "redirect:/mainpage/en";
     }
 
-    @PostMapping("/auth-status")
+    @PostMapping("/auth-status/en")
     private String authStatus(HttpSession session) {
         User currentUser = (User) session.getAttribute("User");
         if (currentUser != null) {
-            return "redirect:/mainpage";
+            return "redirect:/mainpage/en";
         }
 
-        return "redirect:/login";
+        return "redirect:/login/en";
 
 
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/logout/en")
     private String logoutAccount(HttpSession session) {
         session.invalidate();
-        return "redirect:/homepage";
+        return "redirect:/homepage/en";
     }
 
-    @GetMapping("/about")
+    @GetMapping("/about/en")
     private String aboutPage() {
-        return "about";
+        return "en/about";
     }
 
-    //    @GetMapping("/contact")
-//    private String contactPage(){
-//        return "contact";
-//    }
-    @GetMapping("/contact")
+
+    @GetMapping("/contact/en")
     public String showContactForm(Model model) {
-        // Add an empty Contact object to the model for Thymeleaf to bind to
         model.addAttribute("contact", new Contact());
 
-        return "contact"; // Assuming your Thymeleaf template is named "contact.html"
+        return "en/contact";
     }
 
-    @PostMapping("/submitContactForm")
+    @PostMapping("/submitContactForm/en")
     public String submitContactForm(@ModelAttribute Contact contact, Model model) {
         contactService.save(contact);
         model.addAttribute("thankYou", true);
 
-        return "contact";
+        return "en/contact";
     }
 
-    @PostMapping("/changePass")
+    @PostMapping("/changePass/en")
     private String changePass(@RequestParam String currentPassword,
                               @RequestParam String newPassword,
                               @RequestParam String confirmPassword, Model model, HttpSession session) {
@@ -111,27 +111,27 @@ public class AuthControler {
             String currentPasswordIncorrect = "true";
             String changePass = "true";
 
-            return "redirect:/profile?currentPasswordIncorrect=" + currentPasswordIncorrect + "&changePass=" + changePass + "&messageException=" + exception;
+            return "redirect:/profile/en?currentPasswordIncorrect=" + currentPasswordIncorrect + "&changePass=" + changePass + "&messageException=" + exception;
         }
         if (!(newPassword.equals(confirmPassword))) {
             String exception = "Your passwords doesn't match";
             String passwordsDontMatch = "true";
             String changePass = "true";
 
-            return "redirect:/profile?passwordsDontMatch=" + passwordsDontMatch + "&changePass=" + changePass + "&messageException=" + exception;
+            return "redirect:/profile/en?passwordsDontMatch=" + passwordsDontMatch + "&changePass=" + changePass + "&messageException=" + exception;
         }
         try {
-            userService.updatePassword(currentUser.getUsername(), newPassword);
+            userService.updatePassword(currentUser.getUsername(), newPassword,"EN");
 
         }catch (InvalidPasswordException e){
             String exception = e.getMessage();
             String passwordsDontMatch = "true";
             String changePass = "true";
-            return "redirect:/profile?passwordsDontMatch=" + passwordsDontMatch + "&changePass=" + changePass + "&messageException=" + exception;
+            return "redirect:/profile/en?passwordsDontMatch=" + passwordsDontMatch + "&changePass=" + changePass + "&messageException=" + exception;
 
         }
         String successfullyChanged = "true";
 
-        return "redirect:/profile?successfullyChanged=" + successfullyChanged;
+        return "redirect:/profile/en?successfullyChanged=" + successfullyChanged;
     }
 }

@@ -6,9 +6,7 @@ import mk.finki.ukim.dians.winewithme.model.Winery;
 import mk.finki.ukim.dians.winewithme.repository.UserRepository;
 import mk.finki.ukim.dians.winewithme.repository.WineryRepository;
 import mk.finki.ukim.dians.winewithme.service.WineryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -81,23 +79,20 @@ public class WineryServiceImpl implements WineryService {
                 wineryRepository.save(winery);
             }
 
-    }
+        }
 
     }
 
     @Override
     public List<Winery> filter(String city, String title) {
-        if (title != null) {
+        if (title != null && city != null) {
+            return wineryRepository.findWineriesByCityEqualsIgnoreCaseAndTitleContainsIgnoreCase(city, title);
+        } else if (title != null) {
             return wineryRepository.findWineriesByTitleContainsIgnoreCase(title);
+        } else if (city != null) {
+            return wineryRepository.findWineriesByCityEqualsIgnoreCase(city);
         }
-        else if (city!=null){
-            return  wineryRepository.findWineriesByCityContainingIgnoreCase(city);
-        }
-        else if(title != null && city != null){
-            return wineryRepository.findWineriesByCityEqualsIgnoreCaseAndTitleContainsIgnoreCase(city,title);
-        }
-        else {
-            return wineryRepository.findAll();
-        }
+        return wineryRepository.findAll();
+
     }
 }

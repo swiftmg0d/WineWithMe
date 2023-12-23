@@ -26,11 +26,11 @@
 <div class="hero">
 
     <video autoplay loop muted playsinline class="back-video">
-        <source src="/video/Sparkling wine commercial.mp4" type="video/mp4">
+        <source src="/video/Sparkling%20wine%20commercial.mp4" type="video/mp4">
     </video>
     <nav>
         <a href="/mainpage/mk">
-            <img  src="/img/logo.png" class="logo">
+            <img src="/img/logo.png" class="logo">
 
         </a>
     </nav>
@@ -49,13 +49,13 @@
                             ,уживајте во вистинската доза на вино!
                         </p>
 
-                        <p class="styleborder lists-profile">
-                            <a href="#" style="text-decoration: none; color: ghostwhite; ">Профил</a>
+                        <p class="styleborder lists-profile" style="margin-top: -5px">
+                            <a href="/profile/mk" style="text-decoration: none; color: ghostwhite; ">Профил</a>
                         </p>
-                        <p class="styleborder lists-profile">
-                            <a href="/mainpage/mk/mywineries" style="text-decoration: none; color: ghostwhite ">Мои винарии</a>
+                        <p class="styleborder lists-profile" style="margin-top: -5px">
+                            <a href="/mainpage/mywineries/mk" style="text-decoration: none; color: ghostwhite ">Мои винарии</a>
                         </p>
-                        <p class="styleborder lists-profile">
+                        <p class="styleborder lists-profile" style="margin-top: -5px">
                             <a href="/logout/mk" style="text-decoration: none; color: ghostwhite ">Одјави се</a>
                         </p>
                     </div>
@@ -88,9 +88,8 @@
                         <td th:text="${wine.getAddress()}"></td>
                         <td th:text="${wine.getPhone()}"></td>
                         <td>
-                            <form th:method="post" th:action="@{'/mainpage/mk/mywineries/{id}/undo'(id=${wine.getId()})}">
-                                <button style="width: 100px; color: ghostwhite;" class="lists-profile" type="submit">Undo
-                                    favorite!
+                            <form th:method="post" th:action="@{'/mainpage/mywineries/{id}/undo/mk'(id=${wine.getId()})}">
+                                <button style="width: 100px; color: ghostwhite;" class="lists-profile" type="submit">Избриши од омилени!
                                 </button>
                                 <input name="user" type="hidden" th:value="${user.getId()}">
                             </form>

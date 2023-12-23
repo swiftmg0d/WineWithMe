@@ -29,10 +29,10 @@
 <div class="hero">
 
     <video autoplay loop muted playsinline class="back-video">
-        <source src="/video/Sparkling wine commercial.mp4" type="video/mp4">
+        <source src="/video/Sparkling%20wine%20commercial.mp4" type="video/mp4">
     </video>
     <nav>
-        <a href="/homepage">
+        <a href="/homepage/en">
         <img src="/img/logo.png" class="logo">
         </a>
     </nav>
@@ -49,13 +49,13 @@
                             Welcome dear <th:block th:text="${user.name}"></th:block>, make sure u get the right dose of wine!
                         </p>
                         <p class="styleborder lists-profile">
-                            <a href="/profile" style="text-decoration: none; color: ghostwhite; ">Profile</a>
+                            <a href="/profile/en" style="text-decoration: none; color: ghostwhite; ">Profile</a>
                         </p>
                         <p class="styleborder lists-profile">
-                            <a href="/mainpage/mywineries" style="text-decoration: none; color: ghostwhite ">My wineries</a>
+                            <a href="/mainpage/mywineries/en" style="text-decoration: none; color: ghostwhite ">My wineries</a>
                         </p>
                         <p class="styleborder lists-profile">
-                            <a href="/logout" style="text-decoration: none; color: ghostwhite ">Logout</a>
+                            <a href="/logout/en" style="text-decoration: none; color: ghostwhite ">Logout</a>
                         </p>
                     </div>
 
@@ -79,7 +79,7 @@
                 </div>
                 <div>
                     <div class="social-links">
-                        <form th:method="get" action="/changePass">
+                        <form th:method="get" action="/changePass/en">
                             <button style="width: 200px; color: ghostwhite;" class="change-password-button" type="submit">Change password
                             </button>
                         </form>
@@ -90,7 +90,7 @@
                     <p style="color: black">Password has been successfully changed,<span th:text="${user.getName()}"></span> </p>
                     <p class="profile-detail"><strong>Now go wine a little and laugh a lot.&#128513; &#127863;</strong></p>
                     <div class="social-links">
-                        <form th:method="get" action="/mainpage">
+                        <form th:method="get" action="/mainpage/en">
                             <button style="width: 100px; color: ghostwhite;" class="change-password-button" type="submit">Go
                             </button>
                         </form>
@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="change-password-form" th:if="${changePass}">
-                    <form id="change-password-form" action="/changePass" method="post">
+                    <form id="change-password-form" action="/changePass/en" method="post">
                         <h3>Change Password</h3>
                         <div class="form-group">
                             <th:block th:if="${currentPasswordIncorrect}">

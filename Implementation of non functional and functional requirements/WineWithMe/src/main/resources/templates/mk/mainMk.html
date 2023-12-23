@@ -25,10 +25,10 @@
 <div class="hero">
 
     <video autoplay loop muted playsinline class="back-video">
-        <source src="/video/Sparkling wine commercial.mp4" type="video/mp4">
+        <source src="/video/Sparkling%20wine%20commercial.mp4" type="video/mp4">
     </video>
     <nav>
-        <a href="/homepage">
+        <a href="/homepage/mk">
             <img src="/img/logo.png" class="logo">
 
         </a>
@@ -43,20 +43,19 @@
                     </div>
                     <div id="info-profile">
                         <p style="color: darkslategray; margin-bottom: 15px; margin-top: 2px; width: 150px; text-align: left; font-size: 15px; margin-left: 8px">
-                            Welcome dear
+                            Добредојде
                             <th:block th:text="${user?.name}"></th:block>
-                            , make sure u get the right dose of wine!
+                            , уживајте во вистинската доза на вино!
                         </p>
 
-                        <p class="styleborder lists-profile">
-                            <a href="/profile" style="text-decoration: none; color: ghostwhite; ">Profile</a>
+                        <p class="styleborder lists-profile" style="margin-top: -5px">
+                            <a href="/profile/mk" style="text-decoration: none; color: ghostwhite; ">Профил</a>
                         </p>
-                        <p class="styleborder lists-profile">
-                            <a href="/mainpage/mywineries" style="text-decoration: none; color: ghostwhite ">My
-                                wineries</a>
+                        <p class="styleborder lists-profile" style="margin-top: -5px">
+                            <a href="/mainpage/mywineries/mk" style="text-decoration: none; color: ghostwhite ">Мои винарии</a>
                         </p>
-                        <p class="styleborder lists-profile">
-                            <a href="/logout" style="text-decoration: none; color: ghostwhite ">Logout</a>
+                        <p class="styleborder lists-profile" style="margin-top: -5px">
+                            <a href="/logout/mk" style="text-decoration: none; color: ghostwhite ">Одјави се</a>
                         </p>
                     </div>
 
@@ -69,68 +68,68 @@
 
             <div id="wineries" class="styleborder">
                 <div style="margin-top: 10px">
-                    <form th:method="get" action="/mainpage">
+                    <form th:method="get" action="/mainpage/mk">
                         <input name="city" class="styleborder lists-profile"
-                               style="display: inline-block; width: 85px; height: 30px; color: white"
-                               placeholder="     by city!">
+                               style="display: inline-block; width: 85px; height: 30px; color: white; text-align: center"
+                               placeholder="По град!">
                         <input name="title" class="styleborder lists-profile"
-                               style="display: inline-block; width: 85px; height: 30px; color: white"
-                               placeholder="     by title!">
-                        <input class="styleborder lists-profile" type="submit" value="Search"
-                               style="width: 60px; height: 30px; color: white">
+                               style="display: inline-block; width: 85px; height: 30px; color: white; text-align: center"
+                               placeholder="По име!">
+                        <input class="styleborder lists-profile" type="submit" value="Пребарај"
+                               style="width: 70px; height: 30px; color: white">
                     </form>
                 </div>
 
                 <p style="color: darkslategray; margin-top: 10px; font-weight: bold; font-size: 20px; font-style: oblique">
-                    Winery info:
+                    Потадоци за винаријата:
                 </p>
 
 
                 <th:block th:if="(${wine}!=null)" style="color: darkslategray; margin-top: 20px">
                     <p style="color: darkslategray; margin-top: 9px;">
-                        <span style=" font-weight: bold">Name:</span>: <br> <span style="font-size: 15px"
+                        <span style=" font-weight: bold">Име:</span>: <br> <span style="font-size: 15px"
                                                                                   th:text="${wine?.getTitle()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Address</span>:<br><span style="font-size: 15px"
+                        <span style=" font-weight: bold">Адреса:</span>:<br><span style="font-size: 15px"
                                                                                   th:text="${wine?.getAddress()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">City:</span>: <br> <span style="font-size: 15px"
+                        <span style=" font-weight: bold">Град:</span>: <br> <span style="font-size: 15px"
                                                                                   th:text="${wine?.getCity()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Phone:</span>:<br> <span style="font-size: 15px"
+                        <span style=" font-weight: bold">Телефон:</span>:<br> <span style="font-size: 15px"
                                                                                   th:text="${wine?.getPhone()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Country code:</span>: <br><span style="font-size: 15px"
+                        <span style=" font-weight: bold">Државен код:</span>: <br><span style="font-size: 15px"
                                                                                          th:text="${wine?.getCountryCode()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Website:</span>: <br>
+                        <span style=" font-weight: bold">Веб-страница:</span>: <br>
                         <a th:text="(${wine.getWebsite()}!='Not mention!' ? 'Click for the website!' : 'Information not provided!' )"
                            style="font-size: 15px;text-decoration: none; color: darkslategray"
                            th:href="(${wine.getWebsite()}!='Not mention!' ? ${wine.getWebsite()} : '#' )"></a>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Total score:</span>: <br><span style="font-size: 15px"
+                        <span style=" font-weight: bold">Вкупен резултат:</span>: <br><span style="font-size: 15px"
                                                                                         th:text="${wine?.getTotalScore()}"></span>
                     </p>
                     <p style="color: darkslategray; margin-top: 6px">
-                        <span style=" font-weight: bold">Add review:</span>: <br>
-                    <form method="post" th:action="@{'/mainpage/{id}/addreview'(id=${wine.getId()})}">
+                        <span style=" font-weight: bold">Додадете оцена:</span>: <br>
+                    <form method="post" th:action="@{'/mainpage/{id}/addreview/mk'(id=${wine.getId()})}">
 
                         <input style="border-radius: 10px; width: 100px; text-align: center" name="review"
                                type="number" max="5" min="1"
-                        th:value="(${user?.getWineryReview()?.get(wine)})"
+                               th:value="(${user?.getWineryReview()?.get(wine)})"
                         >
 
 
                     </form>
                     </p>
                     <th:block th:if="${user?.getList0fWineries()?.contains(wine)}==true">
-                        <form th:method="post" th:action="@{'/mainpage/{id}/undo'(id=${wine.getId()})}">
+                        <form th:method="post" th:action="@{'/mainpage/{id}/undo/mk'(id=${wine.getId()})}">
                             <button style="width: 200px; color: ghostwhite; margin-top: 10px" class="lists-profile"
                                     type="submit">Undo
                                 favorite!
@@ -139,10 +138,9 @@
                         </form>
                     </th:block>
                     <th:block th:if="${user?.getList0fWineries()?.contains(wine)}==false">
-                        <form th:method="post" th:action="@{'/mainpage/{id}/favorite'(id=${wine.getId()})}">
+                        <form th:method="post" th:action="@{'/mainpage/{id}/favorite/mk'(id=${wine.getId()})}">
                             <button style="width: 200px; color: ghostwhite; margin-top: 10px" class="lists-profile"
-                                    type="submit">Add to
-                                favorite!
+                                    type="submit">Додај во омилени!
                             </button>
 
                             <input name="user" type="hidden" th:value="${user.getId()}">
@@ -218,12 +216,12 @@
     function onMarkerClick(e) {
         $.ajax({
             type: "POST",
-            url: "/showinfo",
+            url: "/showinfo/mk",
             dataType: "html",
             success: function (success) {
                 if (success) {
                     console.log(success)
-                    window.location.href = "http://localhost:8080/mainpage?id=" + e.target.id;
+                    window.location.href = "http://localhost:8080/mainpage/mk?id=" + e.target.id;
 
                 }
             },

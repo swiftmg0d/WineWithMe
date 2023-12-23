@@ -1,4 +1,6 @@
-package mk.finki.ukim.dians.winewithme.model.exception;
+package mk.finki.ukim.dians.winewithme.model.exception.password.en;
+
+import mk.finki.ukim.dians.winewithme.model.exception.password.en.InvalidPasswordException;
 
 public class PasswordValidator {
 
