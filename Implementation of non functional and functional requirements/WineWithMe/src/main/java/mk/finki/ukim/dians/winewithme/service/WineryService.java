@@ -13,4 +13,5 @@ public interface WineryService {
 
 
     void addReview(Winery winery, User user, Integer review);
+    List<Winery> filter(String city,String title);
 }

@@ -81,8 +81,23 @@ public class WineryServiceImpl implements WineryService {
                 wineryRepository.save(winery);
             }
 
+    }
+
+    }
+
+    @Override
+    public List<Winery> filter(String city, String title) {
+        if (title != null) {
+            return wineryRepository.findWineriesByTitleContainsIgnoreCase(title);
         }
-
-
+        else if (city!=null){
+            return  wineryRepository.findWineriesByCityContainingIgnoreCase(city);
+        }
+        else if(title != null && city != null){
+            return wineryRepository.findWineriesByCityEqualsIgnoreCaseAndTitleContainsIgnoreCase(city,title);
+        }
+        else {
+            return wineryRepository.findAll();
+        }
     }
 }
