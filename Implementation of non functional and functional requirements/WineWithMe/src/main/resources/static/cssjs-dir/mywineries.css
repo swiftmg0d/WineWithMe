@@ -1,0 +1,41 @@
+
+.border-style {
+
+    border-radius: 1.15rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    border: 2px solid whitesmoke;
+
+
+}
+
+#map {
+    z-index: 2;
+    width: 1000px;
+    height: 800px;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+}
+
+#slide-wineries {
+    width: 800px;
+    height: 720px;
+    overflow: scroll;
+    background-color: ghostwhite;
+    margin-top: 20px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border-radius: 1.15rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    border: 2px solid whitesmoke;
+    padding: 3px;
+    text-align: left;
+    color: darkslategray;
+}
+

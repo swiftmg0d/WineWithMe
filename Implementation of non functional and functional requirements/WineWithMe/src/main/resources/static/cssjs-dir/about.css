@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Poppins', sans serif;
 }
 
 body {
@@ -9,13 +10,14 @@ body {
 }
 
 .hero {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background-image: linear-gradient(rgba(12, 3, 51, 0.3), rgba(12, 3, 51, 0.3));
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 nav {
@@ -46,11 +48,11 @@ nav a {
     position: relative;
     z-index: 1;
     color: #fff;
-    font-size: 18px;
-    display: flex;
-    justify-content: space-evenly;
-}
+    width: 800px;
+    font-size: 15px;
 
+
+}
 
 .back-video {
     width: 100%;
@@ -62,23 +64,11 @@ nav a {
     z-index: 0;
 }
 
-#map {
-    z-index: 2;
-    width: 1000px;
-    height: 800px;
-    border: 2px solid white;
-    border-radius: 1.15rem;
-    margin-left: 120px;
-
-}
-
 #left-container {
-    width: 400px;
+    width: 800px;
     height: 800px;
-    padding-right: 300px;
-    margin-right: 10px;
-    margin-left: 180px;
     background-color: whitesmoke;
+    padding-right: 37px;
 
 }
 
@@ -101,8 +91,7 @@ nav a {
     margin-left: 45px;
     margin-top: 20px;
     background-color: ghostwhite;
-    width: 300px;
-    height: 530px;
+
 }
 
 button {
@@ -141,3 +130,4 @@ button {
     margin-bottom: 10px;
     border: 3px solid floralwhite;
 }
+
