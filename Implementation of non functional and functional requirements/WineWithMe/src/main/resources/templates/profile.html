@@ -32,7 +32,9 @@
         <source src="/video/Sparkling wine commercial.mp4" type="video/mp4">
     </video>
     <nav>
+        <a href="/homepage">
         <img src="/img/logo.png" class="logo">
+        </a>
     </nav>
     <div class="container" style="display: flex; justify-content: space-between">
 
@@ -77,15 +79,22 @@
                 </div>
                 <div>
                     <div class="social-links">
-                        <a href="/changePass" class="button-link" target="_blank" title="changePass">Change Password</a>
+                        <form th:method="get" action="/changePass">
+                            <button style="width: 200px; color: ghostwhite;" class="change-password-button" type="submit">Change password
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <br>
                 <div class="changed-password-form" th:if="${successfullyChanged}">
-                    <p style="color: black" th:text="${messageForChangedPass}"></p>
-                    <p class="profile-detail"><strong><span th:text="${user.getName()}"></span>,now go wine a little and laugh a lot.&#128513; &#127863;</strong></p>
+                    <p style="color: black">Password has been successfully changed,<span th:text="${user.getName()}"></span> </p>
+                    <p class="profile-detail"><strong>Now go wine a little and laugh a lot.&#128513; &#127863;</strong></p>
                     <div class="social-links">
-                        <a href="/mainpage" class="button-link" target="_blank" title="goWine">Go</a>
+                        <form th:method="get" action="/mainpage">
+                            <button style="width: 100px; color: ghostwhite;" class="change-password-button" type="submit">Go
+                            </button>
+                        </form>
+
                     </div>
                 </div>
 
@@ -130,5 +139,7 @@
     </div>
 
 </div>
+
+
 </body>
 </html>

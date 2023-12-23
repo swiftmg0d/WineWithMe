@@ -2,23 +2,24 @@ package mk.finki.ukim.dians.winewithme.web.controler;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import mk.finki.ukim.dians.winewithme.model.Contact;
 import mk.finki.ukim.dians.winewithme.model.User;
 import mk.finki.ukim.dians.winewithme.model.exception.PasswordNotMatchException;
 import mk.finki.ukim.dians.winewithme.model.exception.Username0rPasswordDoesntMatchException;
 import mk.finki.ukim.dians.winewithme.model.exception.UsernameExistsException;
+import mk.finki.ukim.dians.winewithme.service.ContactService;
 import mk.finki.ukim.dians.winewithme.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping
 @AllArgsConstructor
 public class AuthControler {
     private final UserService userService;
+    private  final ContactService contactService;
+
 
     @GetMapping("/login")
     private String login() {
@@ -70,33 +71,61 @@ public class AuthControler {
         session.invalidate();
         return "redirect:/homepage";
     }
+    @GetMapping("/about")
+    private String aboutPage(){
+        return "about";
+    }
+    //    @GetMapping("/contact")
+//    private String contactPage(){
+//        return "contact";
+//    }
+    @GetMapping("/contact")
+    public String showContactForm(Model model) {
+        // Add an empty Contact object to the model for Thymeleaf to bind to
+        model.addAttribute("contact", new Contact());
+
+        return "contact"; // Assuming your Thymeleaf template is named "contact.html"
+    }
+
+    @PostMapping("/submitContactForm")
+    public String submitContactForm(@ModelAttribute Contact contact, Model model) {
+        contactService.save(contact);
+        model.addAttribute("thankYou", true);
+
+        return "contact";
+    }
+
     @PostMapping("/changePass")
     private String changePass(@RequestParam String currentPassword,
                               @RequestParam String newPassword,
                               @RequestParam String confirmPassword, Model model,HttpSession session){
         User currentUser= (User) session.getAttribute("User");
-        model.addAttribute("user",currentUser);
         if(!(currentPassword.equals(currentUser.getPassword()))){
             String exception = new PasswordNotMatchException().getMessage();
-            model.addAttribute("changePass",true);
-            model.addAttribute("currentPasswordIncorrect",true);
-            model.addAttribute("message",exception);
-            return "profile";
+            String currentPasswordIncorrect = "true";
+            String changePass = "true";
+//            model.addAttribute("changePass",true);
+//            model.addAttribute("currentPasswordIncorrect",true);
+//            model.addAttribute("message",exception);
+            return "redirect:/profile?currentPasswordIncorrect="+currentPasswordIncorrect+"&changePass="+changePass+"&messageException="+exception;
         }
         if(!(newPassword.equals(confirmPassword))){
             String exception = new PasswordNotMatchException().getMessage();
-            model.addAttribute("changePass",true);
-            model.addAttribute("passwordsDontMatch",true);
-            model.addAttribute("message",exception);
-            return "profile";
+            String passwordsDontMatch = "true";
+            String changePass = "true";
+            //model.addAttribute("changePass",true);
+            //model.addAttribute("passwordsDontMatch",true);
+            //model.addAttribute("message",exception);
+            return "redirect:/profile?passwordsDontMatch="+passwordsDontMatch+"&changePass="+changePass+"&messageException="+exception;
         }
-        model.addAttribute("passwordsDontMatch",false);
-        model.addAttribute("currentPasswordIncorrect",false);
-        model.addAttribute("changePass",false);
+//        model.addAttribute("passwordsDontMatch",false);
+//        model.addAttribute("currentPasswordIncorrect",false);
+//        model.addAttribute("changePass",false);
         userService.updatePassword(currentUser.getUsername(),newPassword);
-        model.addAttribute("successfullyChanged",true);
-        String messageForChangedPass = "Password has been successfully changed";
-        model.addAttribute("messageForChangedPass",messageForChangedPass);
-        return "redirect:/profile";
+        String successfullyChanged = "true";
+        //model.addAttribute("successfullyChanged",true);
+       // String messageForChangedPass = "Password has been successfully changed";
+        //model.addAttribute("messageForChangedPass",messageForChangedPass);
+        return "redirect:/profile?successfullyChanged=" + successfullyChanged;
     }
 }

@@ -7,6 +7,7 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import mk.finki.ukim.dians.winewithme.model.User;
+import mk.finki.ukim.dians.winewithme.model.exception.PasswordNotMatchException;
 import mk.finki.ukim.dians.winewithme.repository.UserRepository;
 import mk.finki.ukim.dians.winewithme.service.UserService;
 import mk.finki.ukim.dians.winewithme.service.WineryService;
@@ -60,17 +61,28 @@ public class MainPageControler {
         return "index";
     }
     @GetMapping("/profile")
-    private String profile(Model model, HttpSession session){
+    private String profile(Model model, HttpSession session,
+                           @RequestParam(required = false) String changePass,
+                           @RequestParam(required = false) String successfullyChanged,
+                           @RequestParam(required = false) String passwordsDontMatch,
+                           @RequestParam(required = false) String messageException,
+                           @RequestParam(required = false) String currentPasswordIncorrect){
         User currentUser= (User) session.getAttribute("User");
-        model.addAttribute("user",currentUser);
+        model.addAttribute("user",userRepository.findById(currentUser.getId()).get());
+        model.addAttribute("changePass",changePass);
+        model.addAttribute("successfullyChanged",successfullyChanged);
+        model.addAttribute("message",messageException);
+        model.addAttribute("passwordsDontMatch",passwordsDontMatch);
+        model.addAttribute("currentPasswordIncorrect",currentPasswordIncorrect);
         return "profile";
     }
     @GetMapping("/changePass")
     private String changePass(Model model, HttpSession session){
         User currentUser= (User) session.getAttribute("User");
-        model.addAttribute("user",currentUser);
-        model.addAttribute("changePass",true);
-        return "profile";
+        model.addAttribute("user",userRepository.findById(currentUser.getId()).get());
+        String changePass = "true";
+        //model.addAttribute("changePass",true);
+        return "redirect:/profile?changePass=" + changePass;
     }
 
 
