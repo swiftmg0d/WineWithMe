@@ -34,7 +34,12 @@ public class MainPageControler {
         String jsonString = null;
         int number0f = wineryService.getAllWineries().size();
 
-        jsonString = objectMapper.writeValueAsString(wineryService.getAllWineries());
+
+        if (title == null && city == null) {
+            jsonString = objectMapper.writeValueAsString(wineryService.getAllWineries());
+        } else {
+            jsonString = objectMapper.writeValueAsString(wineryService.filter(city,title));
+        }
 
 
         model.addAttribute("list0f", jsonString);

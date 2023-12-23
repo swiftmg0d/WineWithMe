@@ -62,7 +62,6 @@ public class AuthControler {
 
         return "redirect:/login";
 
-
     }
 
     @GetMapping("/logout")
@@ -79,6 +78,7 @@ public class AuthControler {
 //    private String contactPage(){
 //        return "contact";
 //    }
+
 @GetMapping("/contact")
 public String showContactForm(Model model) {
     // Add an empty Contact object to the model for Thymeleaf to bind to
@@ -94,4 +94,6 @@ public String showContactForm(Model model) {
 
         return "contact";
     }
+
+
 }
