@@ -10,6 +10,7 @@ import mk.finki.ukim.dians.winewithme.model.User;
 import mk.finki.ukim.dians.winewithme.repository.UserRepository;
 import mk.finki.ukim.dians.winewithme.service.UserService;
 import mk.finki.ukim.dians.winewithme.service.WineryService;
+import org.h2.engine.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -58,6 +59,21 @@ public class MainPageControler {
     private String mainPage() {
         return "index";
     }
+    @GetMapping("/profile")
+    private String profile(Model model, HttpSession session){
+        User currentUser= (User) session.getAttribute("User");
+        model.addAttribute("user",currentUser);
+        return "profile";
+    }
+    @GetMapping("/changePass")
+    private String changePass(Model model, HttpSession session){
+        User currentUser= (User) session.getAttribute("User");
+        model.addAttribute("user",currentUser);
+        model.addAttribute("changePass",true);
+        return "profile";
+    }
+
+
 
     @PostMapping("/mainpage/{id}/favorite")
     private String favoriteWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
