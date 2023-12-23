@@ -97,6 +97,6 @@ public class AuthControler {
         model.addAttribute("successfullyChanged",true);
         String messageForChangedPass = "Password has been successfully changed";
         model.addAttribute("messageForChangedPass",messageForChangedPass);
-        return "profile";
+        return "redirect:/profile";
     }
 }
