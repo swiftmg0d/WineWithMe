@@ -70,4 +70,33 @@ public class AuthControler {
         session.invalidate();
         return "redirect:/homepage";
     }
+    @PostMapping("/changePass")
+    private String changePass(@RequestParam String currentPassword,
+                              @RequestParam String newPassword,
+                              @RequestParam String confirmPassword, Model model,HttpSession session){
+        User currentUser= (User) session.getAttribute("User");
+        model.addAttribute("user",currentUser);
+        if(!(currentPassword.equals(currentUser.getPassword()))){
+            String exception = new PasswordNotMatchException().getMessage();
+            model.addAttribute("changePass",true);
+            model.addAttribute("currentPasswordIncorrect",true);
+            model.addAttribute("message",exception);
+            return "profile";
+        }
+        if(!(newPassword.equals(confirmPassword))){
+            String exception = new PasswordNotMatchException().getMessage();
+            model.addAttribute("changePass",true);
+            model.addAttribute("passwordsDontMatch",true);
+            model.addAttribute("message",exception);
+            return "profile";
+        }
+        model.addAttribute("passwordsDontMatch",false);
+        model.addAttribute("currentPasswordIncorrect",false);
+        model.addAttribute("changePass",false);
+        userService.updatePassword(currentUser.getUsername(),newPassword);
+        model.addAttribute("successfullyChanged",true);
+        String messageForChangedPass = "Password has been successfully changed";
+        model.addAttribute("messageForChangedPass",messageForChangedPass);
+        return "profile";
+    }
 }

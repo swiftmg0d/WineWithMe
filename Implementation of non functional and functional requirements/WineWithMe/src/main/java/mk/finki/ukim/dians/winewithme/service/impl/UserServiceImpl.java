@@ -41,4 +41,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return null;
     }
+    public User updatePassword(String username, String newPassword){
+
+        User user = userRepository.findUserByUsername(username).get();
+        user.setPassword(newPassword);
+        userRepository.save(user);
+        return user;
+
+    }
 }
