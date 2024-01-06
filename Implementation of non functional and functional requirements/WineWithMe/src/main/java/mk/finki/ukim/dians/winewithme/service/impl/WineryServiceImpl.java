@@ -17,15 +17,36 @@ public class WineryServiceImpl implements WineryService {
     private final WineryRepository wineryRepository;
     private final UserRepository userRepository;
 
+    /**
+     * Finds all wineries
+     *
+     * @return all wineries
+     */
+
     @Override
     public List<Winery> getAllWineries() {
         return wineryRepository.findAll();
     }
 
+    /**
+     * finds a winery by ID
+     *
+     * @param id
+     * @return the winery with the ID wanted
+     */
+
     @Override
     public Optional<Winery> findById(Long id) {
         return wineryRepository.findById(id);
     }
+
+    /**
+     * Calculates the new rating of the winery
+     *
+     * @param score
+     * @param cntReview
+     * @return the new rating
+     */
 
     private Double getNewScore(Double score, Double cntReview) {
         double newScore = score / cntReview;
@@ -34,6 +55,13 @@ public class WineryServiceImpl implements WineryService {
         return newScore;
     }
 
+    /**
+     * Function for adding review
+     *
+     * @param winery
+     * @param user
+     * @param review
+     */
 
     @Override
     public void addReview(Winery winery, User user, Integer review) {
@@ -82,6 +110,14 @@ public class WineryServiceImpl implements WineryService {
         }
 
     }
+
+    /**
+     * Filters wineries based on the provided city and/or title.
+     *
+     * @param city
+     * @param title
+     * @return A list of wineries that match the specified criteria.
+     */
 
     @Override
     public List<Winery> filter(String city, String title) {

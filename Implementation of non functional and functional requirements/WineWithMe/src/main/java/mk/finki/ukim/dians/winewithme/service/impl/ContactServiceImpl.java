@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 public class ContactServiceImpl implements ContactService {
 private  final ContactRepository contactRepository;
 
+    /**
+     *
+     * @param contact
+     * @return
+     */
     @Override
     public Contact save(Contact contact) {
         return contactRepository.save(contact);
