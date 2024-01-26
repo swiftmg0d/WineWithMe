@@ -14,10 +14,21 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @AllArgsConstructor
 @RequestMapping
-public class MainPageControler {
+public class MainPageController {
     private final WineryService wineryService;
     private final UserRepository userRepository;
 
+    /**
+     * Get the information needed for the main page
+     *
+     * @param session
+     * @param model
+     * @param id
+     * @param city
+     * @param title
+     * @return the main page
+     * @throws JsonProcessingException
+     */
     @GetMapping("/mainpage/en")
     private String listAllWiniers(HttpSession session,
                                   Model model,
@@ -51,43 +62,25 @@ public class MainPageControler {
         return "en/main";
     }
 
+    /**
+     * Display the main page view
+     *
+     * @return main.html
+     */
+
     @PostMapping("/showinfo/en")
     private String post() {
         return "redirect:/mainpage/en";
     }
 
-    @GetMapping("/homepage/en")
-    private String mainPage() {
-        return "en/index";
-    }
-
-    @GetMapping("/profile/en")
-    private String profile(Model model, HttpSession session,
-                           @RequestParam(required = false) String changePass,
-                           @RequestParam(required = false) String successfullyChanged,
-                           @RequestParam(required = false) String passwordsDontMatch,
-                           @RequestParam(required = false) String messageException,
-                           @RequestParam(required = false) String currentPasswordIncorrect) {
-        User currentUser = (User) session.getAttribute("User");
-        model.addAttribute("user", userRepository.findById(currentUser.getId()).get());
-        model.addAttribute("changePass", changePass);
-        model.addAttribute("successfullyChanged", successfullyChanged);
-        model.addAttribute("message", messageException);
-        model.addAttribute("passwordsDontMatch", passwordsDontMatch);
-        model.addAttribute("currentPasswordIncorrect", currentPasswordIncorrect);
-        return "en/profile";
-    }
-
-    @GetMapping("/changePass/en")
-    private String changePass(Model model, HttpSession session) {
-        User currentUser = (User) session.getAttribute("User");
-        model.addAttribute("user", userRepository.findById(currentUser.getId()).get());
-        String changePass = "true";
-        return "redirect:/profile/en?changePass=" + changePass;
-    }
-
-
-
+    /**
+     * Add the winery to favorites
+     *
+     * @param user
+     * @param id
+     * @param model
+     * @return thе main page with the id of the winery added to favorites in the URL
+     */
     @PostMapping("/mainpage/{id}/favorite/en")
     private String favoriteWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
         wineryService.findById(id).ifPresent(i -> {
@@ -99,6 +92,15 @@ public class MainPageControler {
         return "redirect:/mainpage/en?id=" + id;
     }
 
+    /**
+     * Remove the winery from favorites
+     *
+     * @param user
+     * @param id
+     * @param model
+     * @return the view with the removed winery from the favorites list
+     */
+
     @PostMapping("/mainpage/{id}/undo/en")
     private String undoWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
         wineryService.findById(id).ifPresent(i -> {
@@ -109,6 +111,14 @@ public class MainPageControler {
         });
         return "redirect:/mainpage/en?id=" + id;
     }
+
+    /**
+     * Display the wineries added to favorites
+     *
+     * @param session
+     * @param model
+     * @return view of the users favorite wineries
+     */
 
     @GetMapping("/mainpage/mywineries/en")
     private String showMyWineries(HttpSession session, Model model) {
@@ -122,6 +132,14 @@ public class MainPageControler {
         return "en/mywineries";
     }
 
+    /**
+     * Show the favorites after removing a winery
+     *
+     * @param user
+     * @param id
+     * @param model
+     * @return the view with the removed winery from the favorites list
+     */
     @PostMapping("/mainpage/mywineries/{id}/undo/en")
     private String undoShowMyWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
         wineryService.findById(id).ifPresent(i -> {
@@ -133,6 +151,14 @@ public class MainPageControler {
         return "redirect:/mainpage/mywineries/en";
     }
 
+    /**
+     * Add review for a winery
+     *
+     * @param session
+     * @param id
+     * @param review
+     * @return the main page
+     */
     @PostMapping("/mainpage/{id}/addreview/en")
     private String addReviewWinery(HttpSession session, @PathVariable Long id, @RequestParam(required = false) Integer review) {
         final User[] currentUser = {(User) session.getAttribute("User")};

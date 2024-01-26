@@ -24,6 +24,17 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Function for registration of new accounts
+     *
+     * @param name
+     * @param surname
+     * @param username
+     * @param password
+     * @param rpassword
+     * @param type      The language type ("MK" for Macedonian, "EN" for English)
+     * @return The registered user
+     */
     @Override
     public User registerAccount(String name, String surname, String username, String password, String rpassword, String type) {
 
@@ -50,6 +61,14 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(new User(name, surname, username, passwordEncoder.encode(password)));
     }
 
+    /**
+     * Function for user login
+     *
+     * @param username
+     * @param password
+     * @param lang     The language type ("MK" for Macedonian, "EN" for English)
+     * @return The logged-in user
+     */
     @Override
     public User loginAccount(String username, String password, String lang) {
 
@@ -68,6 +87,14 @@ public class UserServiceImpl implements UserService {
         return currentUser.get();
     }
 
+    /**
+     * Function for updating user password
+     *
+     * @param username
+     * @param newPassword
+     * @param lang        The language type ("MK" for Macedonian, "EN" for English)
+     * @return The user with updated password
+     */
 
     public User updatePassword(String username, String newPassword, String lang) {
         if (lang.equals("MK")) PasswordValidatorMK.isValid(newPassword);

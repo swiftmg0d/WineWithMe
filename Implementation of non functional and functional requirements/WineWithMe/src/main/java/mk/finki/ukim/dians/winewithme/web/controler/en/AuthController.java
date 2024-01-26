@@ -2,7 +2,6 @@ package mk.finki.ukim.dians.winewithme.web.controler.en;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
-import mk.finki.ukim.dians.winewithme.model.Contact;
 import mk.finki.ukim.dians.winewithme.model.User;
 import mk.finki.ukim.dians.winewithme.model.exception.password.uni.PasswordNotMatchException;
 import mk.finki.ukim.dians.winewithme.model.exception.password.uni.Username0rPasswordDoesntMatchException;
@@ -10,7 +9,6 @@ import mk.finki.ukim.dians.winewithme.model.exception.password.uni.UsernameExist
 import mk.finki.ukim.dians.winewithme.model.exception.password.uni.UsernameInPasswordException;
 import mk.finki.ukim.dians.winewithme.model.exception.password.en.*;
 import mk.finki.ukim.dians.winewithme.repository.UserRepository;
-import mk.finki.ukim.dians.winewithme.service.ContactService;
 import mk.finki.ukim.dians.winewithme.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -20,27 +18,49 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping
 @AllArgsConstructor
-public class AuthControler {
+public class AuthController {
     private final UserService userService;
-    private final ContactService contactService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-
+    /**
+     * Get the login form
+     *
+     * @return login.html
+     */
     @GetMapping("/login/en")
     private String login() {
         return "en/login";
     }
+
+    /**
+     * Get the register form
+     *
+     * @return register.html
+     */
 
     @GetMapping("/register/en")
     private String register() {
         return "en/register";
     }
 
+    /**
+     * Handles the registration of a new user.
+     *
+     * @param model
+     * @param name
+     * @param surname
+     * @param username
+     * @param password
+     * @param rpassword
+     * @return Redirects to the login page if successful,
+     * otherwise returns to the registration page with an error message.
+     */
+
     @PostMapping("/register/en")
     private String registerAccount(Model model, @RequestParam String name, @RequestParam String surname, @RequestParam String username, @RequestParam String password, @RequestParam String rpassword) {
         try {
-            userService.registerAccount(name, surname, username, password, rpassword,"EN");
+            userService.registerAccount(name, surname, username, password, rpassword, "EN");
         } catch (PasswordNotMatchException | UsernameExistsException | InvalidPasswordException |
                  UsernameInPasswordException e) {
             model.addAttribute("error", e.getMessage());
@@ -49,10 +69,21 @@ public class AuthControler {
         return "redirect:/login/en";
     }
 
+    /**
+     * Handles the user login.
+     *
+     * @param model
+     * @param session
+     * @param username
+     * @param password
+     * @return Redirects to the main page if login is successful,
+     * otherwise returns to the login page with an error message.
+     */
+
     @PostMapping("/login/en")
     private String loginAccount(Model model, HttpSession session, @RequestParam String username, @RequestParam String password) {
         try {
-            User currentUser = userService.loginAccount(username, password,"EN");
+            User currentUser = userService.loginAccount(username, password, "EN");
             session.setAttribute("User", currentUser);
         } catch (Username0rPasswordDoesntMatchException e) {
             model.addAttribute("error", e.getMessage());
@@ -60,6 +91,13 @@ public class AuthControler {
         }
         return "redirect:/mainpage/en";
     }
+
+    /**
+     * Checks the authentication status of the user.
+     *
+     * @param session
+     * @return A string representing a redirect to the main page if the user is authenticated, otherwise a redirect to the login page.
+     */
 
     @PostMapping("/auth-status/en")
     private String authStatus(HttpSession session) {
@@ -70,8 +108,14 @@ public class AuthControler {
 
         return "redirect:/login/en";
 
-
     }
+
+    /**
+     * Logs out the user and invalidates the current session.
+     *
+     * @param session
+     * @return Redirects to the homepage.
+     */
 
     @GetMapping("/logout/en")
     private String logoutAccount(HttpSession session) {
@@ -79,26 +123,16 @@ public class AuthControler {
         return "redirect:/homepage/en";
     }
 
-    @GetMapping("/about/en")
-    private String aboutPage() {
-        return "en/about";
-    }
-
-
-    @GetMapping("/contact/en")
-    public String showContactForm(Model model) {
-        model.addAttribute("contact", new Contact());
-
-        return "en/contact";
-    }
-
-    @PostMapping("/submitContactForm/en")
-    public String submitContactForm(@ModelAttribute Contact contact, Model model) {
-        contactService.save(contact);
-        model.addAttribute("thankYou", true);
-
-        return "en/contact";
-    }
+    /**
+     * Handles the process of changing the user's password.
+     *
+     * @param currentPassword
+     * @param newPassword
+     * @param confirmPassword
+     * @param model
+     * @param session
+     * @return Redirects to the profile page with appropriate messages.
+     */
 
     @PostMapping("/changePass/en")
     private String changePass(@RequestParam String currentPassword,
@@ -121,9 +155,9 @@ public class AuthControler {
             return "redirect:/profile/en?passwordsDontMatch=" + passwordsDontMatch + "&changePass=" + changePass + "&messageException=" + exception;
         }
         try {
-            userService.updatePassword(currentUser.getUsername(), newPassword,"EN");
+            userService.updatePassword(currentUser.getUsername(), newPassword, "EN");
 
-        }catch (InvalidPasswordException e){
+        } catch (InvalidPasswordException e) {
             String exception = e.getMessage();
             String passwordsDontMatch = "true";
             String changePass = "true";
@@ -133,5 +167,49 @@ public class AuthControler {
         String successfullyChanged = "true";
 
         return "redirect:/profile/en?successfullyChanged=" + successfullyChanged;
+    }
+
+    /**
+     * Displays the change password form.
+     *
+     * @param model
+     * @param session
+     * @return Redirects to the profile page with appropriate messages.
+     */
+    @GetMapping("/changePass/en")
+    private String changePass(Model model, HttpSession session) {
+        User currentUser = (User) session.getAttribute("User");
+        model.addAttribute("user", userRepository.findById(currentUser.getId()).get());
+        String changePass = "true";
+        return "redirect:/profile/en?changePass=" + changePass;
+    }
+
+    /**
+     * Displays the user profile page with optional messages and flags.
+     *
+     * @param model
+     * @param session
+     * @param changePass
+     * @param successfullyChanged
+     * @param passwordsDontMatch
+     * @param messageException         Error message to be displayed.
+     * @param currentPasswordIncorrect
+     * @return the view of the users profile
+     */
+    @GetMapping("/profile/en")
+    private String profile(Model model, HttpSession session,
+                           @RequestParam(required = false) String changePass,
+                           @RequestParam(required = false) String successfullyChanged,
+                           @RequestParam(required = false) String passwordsDontMatch,
+                           @RequestParam(required = false) String messageException,
+                           @RequestParam(required = false) String currentPasswordIncorrect) {
+        User currentUser = (User) session.getAttribute("User");
+        model.addAttribute("user", userRepository.findById(currentUser.getId()).get());
+        model.addAttribute("changePass", changePass);
+        model.addAttribute("successfullyChanged", successfullyChanged);
+        model.addAttribute("message", messageException);
+        model.addAttribute("passwordsDontMatch", passwordsDontMatch);
+        model.addAttribute("currentPasswordIncorrect", currentPasswordIncorrect);
+        return "en/profile";
     }
 }
