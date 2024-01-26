@@ -1,0 +1,239 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WineWithMe</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://onpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"/>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+    <link rel="icon" href="/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/cssjs-dir/main.css">
+</head>
+<body>
+
+
+<div class="hero">
+
+    <video autoplay loop muted playsinline class="back-video">
+        <source src="/video/Sparkling%20wine%20commercial.mp4" type="video/mp4">
+    </video>
+    <nav>
+        <a href="/homepage/en">
+            <img src="/img/logo.png" class="logo">
+
+        </a>
+    </nav>
+    <div class="container" style="display: flex; justify-content: space-between">
+
+        <div id="left-container" class="styleborder">
+            <div id="profile" class="styleborder">
+                <div style="display: flex; justify-content: space-around">
+                    <div class="styleborder" id="icon-profile">
+
+                    </div>
+                    <div id="info-profile">
+                        <p style="color: darkslategray; margin-bottom: 15px; margin-top: 2px; width: 150px; text-align: left; font-size: 15px; margin-left: 8px">
+                            Welcome dear
+                            <th:block th:text="${user?.name}"></th:block>
+                            , make sure u get the right dose of wine!
+                        </p>
+
+                        <p class="styleborder lists-profile">
+                            <a href="/profile/en" style="text-decoration: none; color: ghostwhite; ">Profile</a>
+                        </p>
+                        <p class="styleborder lists-profile">
+                            <a href="/mainpage/mywineries/en" style="text-decoration: none; color: ghostwhite ">My
+                                wineries</a>
+                        </p>
+                        <p class="styleborder lists-profile">
+                            <a href="/logout/en" style="text-decoration: none; color: ghostwhite ">Logout</a>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div style="width: 70px; height: 100px">
+                    <img style="height: 100px; margin-left: 7px" src="/img/wine.png"/>
+                </div>
+            </div>
+
+            <div id="wineries" class="styleborder">
+                <div style="margin-top: 10px">
+                    <form th:method="get" action="/mainpage/en">
+                        <input name="city" class="styleborder lists-profile"
+                               style="display: inline-block; width: 85px; height: 30px; color: white;text-align: center"
+                               placeholder="by city!">
+                        <input name="title" class="styleborder lists-profile"
+                               style="display: inline-block; width: 85px; height: 30px; color: white; text-align: center"
+                               placeholder="by title!">
+                        <input class="styleborder lists-profile" type="submit" value="Search"
+                               style="width: 70px; height: 30px; color: white">
+                    </form>
+                </div>
+
+                <p style="color: darkslategray; margin-top: 10px; font-weight: bold; font-size: 20px; font-style: oblique">
+                    Winery info:
+                </p>
+
+
+                <th:block th:if="(${wine}!=null)" style="color: darkslategray; margin-top: 20px">
+                    <p style="color: darkslategray; margin-top: 9px;">
+                        <span style=" font-weight: bold">Name:</span>: <br> <span style="font-size: 15px"
+                                                                                  th:text="${wine?.getTitle()}"></span>
+                    </p>
+                    <p style="color: darkslategray; margin-top: 6px">
+                        <span style=" font-weight: bold">Address:</span>:<br><span style="font-size: 15px"
+                                                                                  th:text="${wine?.getAddress()}"></span>
+                    </p>
+                    <p style="color: darkslategray; margin-top: 6px">
+                        <span style=" font-weight: bold">City:</span>: <br> <span style="font-size: 15px"
+                                                                                  th:text="${wine?.getCity()}"></span>
+                    </p>
+                    <p style="color: darkslategray; margin-top: 6px">
+                        <span style=" font-weight: bold">Phone:</span>:<br> <span style="font-size: 15px"
+                                                                                  th:text="${wine?.getPhone()}"></span>
+                    </p>
+                    <p style="color: darkslategray; margin-top: 6px">
+                        <span style=" font-weight: bold">Country code:</span>: <br><span style="font-size: 15px"
+                                                                                         th:text="${wine?.getCountryCode()}"></span>
+                    </p>
+                    <p style="color: darkslategray; margin-top: 6px">
+                        <span style=" font-weight: bold">Website:</span>: <br>
+                        <a th:text="(${wine.getWebsite()}!='Not mention!' ? 'Click for the website!' : 'Information not provided!' )"
+                           style="font-size: 15px;text-decoration: none; color: darkslategray"
+                           th:href="(${wine.getWebsite()}!='Not mention!' ? ${wine.getWebsite()} : '#' )"></a>
+                    </p>
+                    <p style="color: darkslategray; margin-top: 6px">
+                        <span style=" font-weight: bold">Total score:</span>: <br><span style="font-size: 15px"
+                                                                                        th:text="${wine?.getTotalScore()}"></span>
+                    </p>
+                    <p style="color: darkslategray; margin-top: 6px">
+                        <span style=" font-weight: bold">Add review:</span>: <br>
+                    <form method="post" th:action="@{'/mainpage/{id}/addreview/en'(id=${wine.getId()})}">
+
+                        <input style="border-radius: 10px; width: 100px; text-align: center" name="review"
+                               type="number" max="5" min="1"
+                        th:value="(${user?.getWineryReview()?.get(wine)})"
+                        >
+
+
+                    </form>
+                    </p>
+                    <th:block th:if="${user?.getList0fWineries()?.contains(wine)}==true">
+                        <form th:method="post" th:action="@{'/mainpage/{id}/undo/en'(id=${wine.getId()})}">
+                            <button style="width: 200px; color: ghostwhite; margin-top: 10px" class="lists-profile"
+                                    type="submit">Undo
+                                favorite!
+                            </button>
+                            <input name="user" type="hidden" th:value="${user.getId()}">
+                        </form>
+                    </th:block>
+                    <th:block th:if="${user?.getList0fWineries()?.contains(wine)}==false">
+                        <form th:method="post" th:action="@{'/mainpage/{id}/favorite/en'(id=${wine.getId()})}">
+                            <button style="width: 200px; color: ghostwhite; margin-top: 10px" class="lists-profile"
+                                    type="submit">Add to
+                                favorite!
+                            </button>
+
+                            <input name="user" type="hidden" th:value="${user.getId()}">
+                        </form>
+                    </th:block>
+                </th:block>
+            </div>
+
+        </div>
+
+        <div id="map" class="styleborder"></div>
+
+    </div>
+
+</div>
+<script th:inline="javascript">
+    var lat = /*[[${lat}]]*/ 'default';
+    console.log(lat)
+    var lng = /*[[${lng}]]*/ 'default';
+    console.log(lng)
+    var wineries = JSON.parse(/*[[${list0f}]]*/ '[]');
+    var customIcon = L.icon({
+        iconUrl: '/img/marker.png',
+        iconSize: [40, 45],
+        iconAnchor: [20, 45],
+        popupAnchor: [0, -30]
+    });
+
+
+    const map = L.map('map').setView([51.505, -0.09], 13);
+    map.locate({setView: true, maxZoom: 20});
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+
+    if (lat != null && lng != null) {
+        map.on('locationfound', function (e) {
+            // var marker = L.marker(e.latlng).bindPopup("Your current location!").addTo(map);
+            map.flyTo([lat, lng], 14);
+
+            // Create a routing control
+            var control = L.Routing.control({
+                waypoints: [
+                    L.latLng(e.latlng.lat, e.latlng.lng), // Current location
+                    L.latLng(lat, lng) // Destination
+                ],
+                routeWhileDragging: true
+            }).addTo(map);
+        });
+    } else {
+        map.on('locationfound', function (e) {
+            //var marker = L.marker(e.latlng).addTo(map);
+            map.removeLayer(L.marker(e.latlng));
+            map.flyTo(e.latlng, 11);
+        });
+    }
+
+    wineries.forEach(function (wine) {
+
+        var location = wine.location;
+        latlnt = {"Lat": location.split("  ")[0], "Lng": location.split("  ")[1]}
+
+        var marker = L.marker([location.split(" ")[0], location.split(" ")[1]], {icon: customIcon}).bindPopup(wine.name);
+
+        marker.on("click", onMarkerClick);
+        marker.id = wine.id
+        marker.addTo(map)
+    });
+
+
+    function onMarkerClick(e) {
+        $.ajax({
+            type: "POST",
+            url: "/showinfo/en",
+            dataType: "html",
+            success: function (success) {
+                if (success) {
+                    console.log(success)
+                    window.location.href = "http://localhost:8080/mainpage/en?id=" + e.target.id;
+
+                }
+            },
+            fail: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>

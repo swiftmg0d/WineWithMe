@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>WineWithMe</title>
+    <link rel="icon" href="/img/logo.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="/cssjs-dir/index.css">
+
+</head>
+<body>
+
+<div class="hero">
+    <video autoplay loop muted playsinline class="back-video">
+        <source src="/video/videoBackground1.mp4" type="video/mp4">
+    </video>
+    <nav>
+        <a href="/homepage/en">
+            <img src="/img/logo.png" class="logo">
+
+        </a>
+        <ul>
+            <li><a href="/homepage/en">HOME</a></li>
+            <li><a href="/about/en">ABOUT</a></li>
+            <li><a href="/contact/en">CONTACT</a></li>
+            <li><a href="/homepage/mk">MK</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>WineWithMe</h1>
+        <p>Travel to the world of winemaking with just one touch of the screen. Share your experiences, explore new
+            aromas and create delicious memories.</p>
+        <form th:method="post" action="/auth-status/en">
+            <button type="submit">Let's wine
+            </button>
+        </form>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

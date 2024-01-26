@@ -1,0 +1,125 @@
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WineWithMe</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://onpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+
+  <link rel="icon" href="/img/logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="/cssjs-dir/about.css">
+  <link rel="stylesheet" href="/cssjs-dir/index.css">
+    <style>
+
+        #contact-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        #contact-form label {
+            display: block;
+            margin-top: 5px;
+            font-family: 'Poppins', sans-serif;
+            color: darkslategray;
+        }
+
+        #contact-form input,
+        #contact-form textarea,
+        #contact-form button {
+            margin-top: 5px;
+            font-family: 'Poppins', sans-serif;
+            color: darkslategray;
+        }
+
+
+
+        #thank-you-message {
+            color: darkslategray;
+            margin-top: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<div class="hero">
+
+  <video autoplay loop muted playsinline class="back-video">
+    <source src="/video/Sparkling%20wine%20commercial.mp4" type="video/mp4">
+  </video>
+  <nav>
+    <a href="/homepage/en">
+      <img src="/img/logo.png" class="logo">
+
+    </a>    <ul>
+      <li><a href="/homepage/en">HOME</a></li>
+      <li><a href="/about/en">ABOUT</a></li>
+      <li><a href="/contact/en">CONTACT</a></li>
+    </ul>
+  </nav>
+  <div class="container" style="display: flex; justify-content: space-between">
+
+    <div id="left-container" class="styleborder">
+      <header>
+                <h1 style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif">Contact Us</h1>
+              </header>
+
+              <section id="contact-form">
+                <h2 style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif">Send us a message</h2>
+                <form th:action="@{/submitContactForm}" method="post">
+
+                  <label  style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif" for="name"
+                         >Name:</label >
+                  <input th:value="${contact.name}" type="text" id="name" name="name" required style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif">
+
+                  <label style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif" for="email">Email:</label>
+                  <input  th:value="${contact.email}" type="email" id="email" name="email" required style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif">
+
+                  <label style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif" for="subject">Subject:</label>
+                  <input th:value="${contact.subject}" type="text" id="subject" name="subject" required style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif">
+
+                  <label style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif" for="message">Message:</label>
+                  <textarea th:value="${contact.message}" style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif" id="message" name="message" required>
+
+                  </textarea>
+                  <br>
+                  <button type="submit" id="button">Send</button>
+                  <div th:if="${thankYou}" id="thank-you-message">
+                    <p style=" color: darkslategray;">Thank You for your message!</p>
+                  </div>
+
+                </form>
+              </section>
+
+              <section id="contact-info" style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif">
+                <h2 style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif">Contact Information</h2>
+                <p style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif">Email: info@winewithme.com</p>
+                <p style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif">Phone: 071 234 567</p>
+              </section>
+
+            </div>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
