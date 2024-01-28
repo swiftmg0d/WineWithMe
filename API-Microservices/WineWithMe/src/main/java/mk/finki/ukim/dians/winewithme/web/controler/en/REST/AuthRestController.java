@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/auth/en")
 @AllArgsConstructor
 public class AuthRestController {
     private final UserService userService;

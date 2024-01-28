@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/mk")
+@RequestMapping("/api/home/mk")
 @AllArgsConstructor
 public class RestHomePageControllerMK {
     private final ContactService contactService;
