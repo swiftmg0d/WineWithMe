@@ -31,7 +31,7 @@ public class AuthController {
     /**
      * Get the login form
      *
-     * @return ResponseEntity with login.html or appropriate status
+     * @return ModelAndView which name is login.html
      */
     @GetMapping("/login/en")
     public ModelAndView login() {
@@ -44,7 +44,7 @@ public class AuthController {
     /**
      * Get the register form
      *
-     * @return ResponseEntity with register.html or appropriate status
+     * @return ModelAndView which name is register.html
      */
     @GetMapping("/register/en")
     public ModelAndView register() {
@@ -62,7 +62,7 @@ public class AuthController {
      * @param username
      * @param password
      * @param rpassword
-     * @return Redirects to the login page if successful,
+     * @return ModelAndView and redirects to the login page if successful,
      * otherwise returns to the registration page with an error message.
      */
     @PostMapping("/register/en")
@@ -92,7 +92,7 @@ public class AuthController {
      *
      * @param username
      * @param password
-     * @return Redirects to the main page if login is successful,
+     * @return ModelAndView and redirects to the main page if login is successful,
      * otherwise returns to the login page with an error message.
      */
     @PostMapping("/login/en")
@@ -145,7 +145,7 @@ public class AuthController {
      * Logs out the user and invalidates the current session.
      *
      * @param session
-     * @return ModelAndView which name is a redirect URL to the homepage.
+     * @return ModelAndView and redirect to the homepage.
      */
     @GetMapping("/logout/en")
     public ModelAndView logoutAccount(HttpSession session) {
@@ -163,7 +163,7 @@ public class AuthController {
      * @param confirmPassword
      * @param model
      * @param session
-     * @return ResponseEntity with a redirect URL to the profile page with appropriate messages.
+     * @return ModelAndView and redirect to the profile page with appropriate messages.
      */
     @PostMapping("/changePass/en")
     public ModelAndView changePass(
@@ -222,7 +222,7 @@ public class AuthController {
      *
      * @param model
      * @param session
-     * @return ResponseEntity with a redirect URL to the profile page with appropriate messages.
+     * @return ModelAndView with a redirect URL to the profile page with appropriate messages.
      */
     @GetMapping("/changePass/en")
     public ModelAndView changePass(Model model, HttpSession session) {
@@ -243,7 +243,7 @@ public class AuthController {
      * @param passwordsDontMatch
      * @param messageException         Error message to be displayed.
      * @param currentPasswordIncorrect
-     * @return ResponseEntity with a model containing the user's profile and messages.
+     * @return ModelAndView containing the user's profile and messages.
      */
     @GetMapping("/profile/en")
     public ModelAndView profile(
