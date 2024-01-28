@@ -83,7 +83,7 @@
 
               <section id="contact-form">
                 <h2 style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif">Send us a message</h2>
-                <form th:action="@{/submitContactForm}" method="post">
+                <form th:object="${contact}" th:action="@{/submitContactForm/en}" method="post">
 
                   <label  style="color: darkslategray; margin-top: 20px;  font-family: 'Poppins', sans serif" for="name"
                          >Name:</label >
