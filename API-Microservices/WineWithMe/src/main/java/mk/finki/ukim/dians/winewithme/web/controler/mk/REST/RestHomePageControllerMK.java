@@ -20,21 +20,21 @@ public class RestHomePageControllerMK {
     @GetMapping("/homepage")
     public ResponseEntity<Map<String, String>>mainPage() {
         Map<String, String> response = new HashMap<>();
-        response.put("message", "Welcome to the homepage!");
+        response.put("message", "Добродојдовте во почетната страна!");
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/about")
     public ResponseEntity<Map<String, String>> aboutPage() {
         Map<String, String> response = new HashMap<>();
-        response.put("message", "This is the about page.");
+        response.put("message", "Добродојдовте во страната за нас! ");
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/contact")
     public ResponseEntity<Map<String, String>> showContactForm() {
         Map<String, String> response = new HashMap<>();
-        response.put("message", "This is the contact form.");
+        response.put("message", "Добродојдовте во контакт страна!");
         return ResponseEntity.ok(response);
     }
 
@@ -45,7 +45,7 @@ public class RestHomePageControllerMK {
 
         // You can customize the response message
         Map<String, String> response = new HashMap<>();
-        response.put("message", "Contact form submitted successfully!");
+        response.put("message", "Контант формата е испратена усепешно!");
 
         // Respond with a 201 status code and the response map
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

@@ -7,6 +7,8 @@ import mk.finki.ukim.dians.winewithme.model.User;
 import mk.finki.ukim.dians.winewithme.repository.UserRepository;
 import mk.finki.ukim.dians.winewithme.service.UserService;
 import mk.finki.ukim.dians.winewithme.service.WineryService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,23 +22,8 @@ public class RestMainPageController {
     private final UserRepository userRepository;
     private final UserService userService;
 
-    /**
-     * Get the information needed for the main page
-     *
-     * @param session
-     * @param model
-     * @param id
-     * @param city
-     * @param title
-     * @return the main page
-     * @throws JsonProcessingException
-     */
     @GetMapping("/mainpage/en")
-    private String listAllWiniers(HttpSession session, Model model, @RequestParam(required = false) Long id, String city, String title) throws JsonProcessingException {
-
-        User currentUser = (User) session.getAttribute("User");
-        model.addAttribute("user", userRepository.findById(currentUser.getId()).get());
-
+    public ResponseEntity<?> listAllWineries(@RequestParam(required = false) Long id, String city, String title) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = null;
 
@@ -48,111 +35,45 @@ public class RestMainPageController {
             jsonString = objectMapper.writeValueAsString(wineryService.filter(city, title));
         }
 
-
-        model.addAttribute("list0f", jsonString);
-
-        if (id != null) {
-            wineryService.findById(id).ifPresent(i -> {
-                model.addAttribute("wine", i);
-                model.addAttribute("lat", i.getLocation().split(" ")[0]);
-                model.addAttribute("lng", i.getLocation().split(" ")[1]);
-
-            });
-        }
-        return "en/main";
+        return new ResponseEntity<>(jsonString, HttpStatus.OK);
     }
 
-    /**
-     * Display the main page view
-     *
-     * @return main.html
-     */
-
-    @PostMapping("/showinfo/en")
-    private String post() {
-        return "redirect:/mainpage/en";
-    }
-
-    /**
-     * Add the winery to favorites
-     *
-     * @param user
-     * @param id
-     * @param model
-     * @return thе main page with the id of the winery added to favorites in the URL
-     */
     @PostMapping("/mainpage/{id}/favorite/en")
-    private String favoriteWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
+    public ResponseEntity<?> favoriteWinery(@RequestParam Long user, @PathVariable Long id) {
         userService.favoriteWinery(user,id);
-        return "redirect:/mainpage/en?id=" + id;
+        return new ResponseEntity<>("Winery added to favorites", HttpStatus.OK);
     }
-
-    /**
-     * Remove the winery from favorites
-     *
-     * @param user
-     * @param id
-     * @param model
-     * @return the view with the removed winery from the favorites list
-     */
 
     @PostMapping("/mainpage/{id}/undo/en")
-    private String undoWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
+    public ResponseEntity<?> undoWinery(@RequestParam Long user, @PathVariable Long id) {
         userService.undoFavorityWinery(user,id);
-        return "redirect:/mainpage/en?id=" + id;
+        return new ResponseEntity<>("Winery removed from favorites", HttpStatus.OK);
     }
-
-    /**
-     * Display the wineries added to favorites
-     *
-     * @param session
-     * @param model
-     * @return view of the users favorite wineries
-     */
 
     @GetMapping("/mainpage/mywineries/en")
-    private String showMyWineries(HttpSession session, Model model) {
-        final User[] currentUser = {(User) session.getAttribute("User")};
-        userRepository.findById(currentUser[0].getId()).ifPresent(i -> {
+    public ResponseEntity<?> showMyWineries(@SessionAttribute("User") User user) {
+        final User[] currentUser = {null};
+        userRepository.findById(user.getId()).ifPresent(i -> {
             currentUser[0] = i;
         });
-        model.addAttribute("wineries", currentUser[0].getList0fWineries());
-        model.addAttribute("user", currentUser[0]);
 
-        return "en/mywineries";
+        return new ResponseEntity<>(currentUser[0].getList0fWineries(), HttpStatus.OK);
     }
 
-    /**
-     * Show the favorites after removing a winery
-     *
-     * @param user
-     * @param id
-     * @param model
-     * @return the view with the removed winery from the favorites list
-     */
     @PostMapping("/mainpage/mywineries/{id}/undo/en")
-    private String undoShowMyWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
+    public ResponseEntity<?> undoShowMyWinery(@RequestParam Long user, @PathVariable Long id) {
         userService.undoShowMyWinery(user,id);
-        return "redirect:/mainpage/mywineries/en";
+        return new ResponseEntity<>("Winery removed from favorites", HttpStatus.OK);
     }
-
-    /**
-     * Add review for a winery
-     *
-     * @param session
-     * @param id
-     * @param review
-     * @return the main page
-     */
     @PostMapping("/mainpage/{id}/addreview/en")
-    private String addReviewWinery(HttpSession session, @PathVariable Long id, @RequestParam(required = false) Integer review) {
-        final User[] currentUser = {(User) session.getAttribute("User")};
-        userRepository.findById(currentUser[0].getId()).ifPresent(i -> {
-            currentUser[0] = i;
+    public ResponseEntity<?> addReviewWinery(@PathVariable Long id, @RequestParam(required = false) Integer review, @SessionAttribute("User") User user) {
+        final User[] currentUser = {null};
+        userRepository.findById(user.getId()).ifPresent(i -> {
+            currentUser[0] =i;
         });
         wineryService.addReview(wineryService.findById(id).get(), currentUser[0], review);
 
-
-        return "redirect:/mainpage/en?id=" + id;
+        return new ResponseEntity<>("Review added", HttpStatus.OK);
     }
+
 }
