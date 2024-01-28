@@ -6,10 +6,13 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import mk.finki.ukim.dians.winewithme.model.User;
 import mk.finki.ukim.dians.winewithme.repository.UserRepository;
+import mk.finki.ukim.dians.winewithme.service.UserService;
 import mk.finki.ukim.dians.winewithme.service.WineryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 @Controller
 @AllArgsConstructor
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class MainPageControllerMK {
     private final WineryService wineryService;
     private final UserRepository userRepository;
+    private final UserService userService;
 
 
     /**
@@ -31,27 +35,25 @@ public class MainPageControllerMK {
      * @throws JsonProcessingException
      */
     @GetMapping("/mainpage/mk")
-    private String listAllWiniers(HttpSession session,
-                                  Model model,
-                                  @RequestParam(required = false) Long id,
-                                  @RequestParam(required = false) String city,
-                                  @RequestParam(required = false) String title) throws JsonProcessingException {
+    private String listAllWiniers(HttpSession session, Model model, @RequestParam(required = false) Long id, @RequestParam(required = false) String city, @RequestParam(required = false) String title) throws JsonProcessingException {
+
         User currentUser = (User) session.getAttribute("User");
-        model.addAttribute("wineries", wineryService.getAllWineries());
         model.addAttribute("user", userRepository.findById(currentUser.getId()).get());
+
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = null;
-        int number0f = wineryService.getAllWineries().size();
 
-
-        if (title == null && city == null) {
+        if (city == null && title == null) {
             jsonString = objectMapper.writeValueAsString(wineryService.getAllWineries());
-        } else {
+        } else if(Objects.equals(city, "") && Objects.equals(title, "")){
+            jsonString = objectMapper.writeValueAsString(wineryService.getAllWineries());
+        }else{
             jsonString = objectMapper.writeValueAsString(wineryService.filter(city, title));
         }
 
 
         model.addAttribute("list0f", jsonString);
+
         if (id != null) {
             wineryService.findById(id).ifPresent(i -> {
                 model.addAttribute("wine", i);
@@ -60,6 +62,7 @@ public class MainPageControllerMK {
 
             });
         }
+
         return "mk/mainMk";
     }
 
@@ -84,12 +87,7 @@ public class MainPageControllerMK {
      */
     @PostMapping("/mainpage/{id}/favorite/mk")
     private String favoriteWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
-        wineryService.findById(id).ifPresent(i -> {
-            userRepository.findById(user).ifPresent(k -> {
-                k.getList0fWineries().add(i);
-                userRepository.save(k);
-            });
-        });
+        userService.favoriteWinery(user,id);
         return "redirect:/mainpage/mk?id=" + id;
     }
 
@@ -103,12 +101,7 @@ public class MainPageControllerMK {
      */
     @PostMapping("/mainpage/{id}/undo/mk")
     private String undoWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
-        wineryService.findById(id).ifPresent(i -> {
-            userRepository.findById(user).ifPresent(k -> {
-                k.getList0fWineries().remove(i);
-                userRepository.save(k);
-            });
-        });
+        userService.undoFavorityWinery(user,id);
         return "redirect:/mainpage/mk?id=" + id;
     }
 
@@ -142,12 +135,7 @@ public class MainPageControllerMK {
      */
     @PostMapping("/mainpage/mywineries/{id}/undo/mk")
     private String undoShowMyWinery(@RequestParam Long user, @PathVariable Long id, Model model) {
-        wineryService.findById(id).ifPresent(i -> {
-            userRepository.findById(user).ifPresent(k -> {
-                k.getList0fWineries().remove(i);
-                userRepository.save(k);
-            });
-        });
+        userService.undoShowMyWinery(user,id);
         return "redirect:/mainpage/mywineries/mk";
     }
 
