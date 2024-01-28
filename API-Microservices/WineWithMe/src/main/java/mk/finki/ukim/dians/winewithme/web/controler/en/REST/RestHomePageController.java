@@ -1,5 +1,4 @@
-package mk.finki.ukim.dians.winewithme.web.controler.mk;
-
+package mk.finki.ukim.dians.winewithme.web.controler.en.REST;
 
 import lombok.AllArgsConstructor;
 import mk.finki.ukim.dians.winewithme.model.Contact;
@@ -12,9 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/mk")
+@RequestMapping("/api/en")
 @AllArgsConstructor
-public class RestHomePageControllerMK {
+public class RestHomePageController {
     private final ContactService contactService;
 
     @GetMapping("/homepage")
