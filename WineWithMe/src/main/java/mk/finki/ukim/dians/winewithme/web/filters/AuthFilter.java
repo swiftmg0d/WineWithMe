@@ -50,6 +50,7 @@ public class AuthFilter implements Filter {
                 uri.startsWith(ignorePaths[4]) || uri.startsWith(ignorePaths[5])
       
                 || uri.startsWith("/contact") || uri.startsWith("/about") || uri.startsWith("/submitContactForm")
+                || uri.startsWith("/api")
         ) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
