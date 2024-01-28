@@ -1,0 +1,145 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WineWithMe</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://onpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+
+
+    <link rel="icon" href="/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/cssjs-dir/main.css">
+
+    <link rel="stylesheet" href="/cssjs-dir/profile.css">
+</head>
+<body>
+
+
+<div class="hero">
+
+    <video autoplay loop muted playsinline class="back-video">
+        <source src="/video/Sparkling%20wine%20commercial.mp4" type="video/mp4">
+    </video>
+    <nav>
+        <a href="/homepage/en">
+        <img src="/img/logo.png" class="logo">
+        </a>
+    </nav>
+    <div class="container" style="display: flex; justify-content: space-between">
+
+        <div id="left-container" class="styleborder">
+            <div id="profile" class="styleborder">
+                <div style="display: flex; justify-content: space-around">
+                    <div class="styleborder" id="icon-profile">
+
+                    </div>
+                    <div id="info-profile">
+                        <p style="color: darkslategray; margin-bottom: 15px; margin-top: 2px; width: 150px; text-align: left; font-size: 15px; margin-left: 8px">
+                            Welcome dear <th:block th:text="${user.name}"></th:block>, make sure u get the right dose of wine!
+                        </p>
+                        <p class="styleborder lists-profile">
+                            <a href="/profile/en" style="text-decoration: none; color: ghostwhite; ">Profile</a>
+                        </p>
+                        <p class="styleborder lists-profile">
+                            <a href="/mainpage/mywineries/en" style="text-decoration: none; color: ghostwhite ">My wineries</a>
+                        </p>
+                        <p class="styleborder lists-profile">
+                            <a href="/logout/en" style="text-decoration: none; color: ghostwhite ">Logout</a>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div style="width: 70px; height: 100px">
+                    <img style="height: 100px; margin-left: 7px" src="/img/wine.png"/>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div id="map" class="styleborder" style="background-color: white">
+            <div id="user-profile-info" class="user-profile-container">
+                <div class="user-profile-header">
+                    <img src="/img/wine.jpg" alt="User Profile Image" class="profile-image">
+                    <h2 class="profile-name" th:text="${user.getName() + ' ' + user.getSurname()}"></h2>
+                    <span class="profile-username">Username: <p class="profile-username" th:text="${user.getUsername()}"></p></span>
+                </div>
+                <div>
+                    <div class="social-links">
+                        <form th:method="get" action="/changePass/en">
+                            <button style="width: 200px; color: ghostwhite;" class="change-password-button" type="submit">Change password
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div class="changed-password-form" th:if="${successfullyChanged}">
+                    <p style="color: black">Password has been successfully changed,<span th:text="${user.getName()}"></span> </p>
+                    <p class="profile-detail"><strong>Now go wine a little and laugh a lot.&#128513; &#127863;</strong></p>
+                    <div class="social-links">
+                        <form th:method="get" action="/mainpage/en">
+                            <button style="width: 100px; color: ghostwhite;" class="change-password-button" type="submit">Go
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="change-password-form" th:if="${changePass}">
+                    <form id="change-password-form" action="/changePass/en" method="post">
+                        <h3>Change Password</h3>
+                        <div class="form-group">
+                            <th:block th:if="${currentPasswordIncorrect}">
+                                <span style="color: red" th:text="${message}"></span>
+                            </th:block>
+                            <br>
+                            <label for="current-password">Current Password:</label>
+                            <input type="password" id="current-password" name="currentPassword" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-password">New Password:</label>
+                            <input type="password" id="new-password" name="newPassword" required>
+                        </div>
+
+                        <div class="form-group">
+                            <th:block th:if="${passwordsDontMatch}">
+                                <span style="color: red" th:text="${message}"></span>
+                            </th:block>
+                            <br>
+                            <label for="confirm-password">Confirm New Password:</label>
+                            <input type="password" id="confirm-password" name="confirmPassword" required>
+                            <button type="submit" class="change-password-button">Change</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            </th:block>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>
