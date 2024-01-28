@@ -19,7 +19,8 @@ import java.io.IOException;
                 @WebInitParam(name = "ignore-path3", value = "/homepage"),
                 @WebInitParam(name = "ignore-path4", value = "/auth-status"),
                 @WebInitParam(name = "ignore-path5", value = "/video"),
-                @WebInitParam(name = "ignore-path6", value = "/cssjs-dir")})
+                @WebInitParam(name = "ignore-path6", value = "/cssjs-dir"),
+        })
 public class AuthFilter implements Filter {
     private String[] ignorePaths;
 
@@ -48,8 +49,8 @@ public class AuthFilter implements Filter {
         if (user != null || uri.contains(ignorePaths[0]) || uri.contains(ignorePaths[1]) ||
                 uri.contains(ignorePaths[2]) || uri.contains(ignorePaths[3]) ||
                 uri.startsWith(ignorePaths[4]) || uri.startsWith(ignorePaths[5])
-      
                 || uri.startsWith("/contact") || uri.startsWith("/about") || uri.startsWith("/submitContactForm")
+                || uri.startsWith("/api")
         ) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
