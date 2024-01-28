@@ -15,146 +15,111 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-
-@RestController
+@Controller
 @RequestMapping
 @AllArgsConstructor
 public class AuthControllerMK {
     private final UserService userService;
-    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
-    /**
-     * Get the login form
-     *
-     * @return ModelAndView which name is login.html
-     */
-    @GetMapping("/login/mk")
-    public ModelAndView login() {
-        // You can customize this based on your logic
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("mk/loginMk");
-        return modelAndView;
-    }
+    private final UserRepository userRepository;
 
     /**
      * Get the register form
      *
-     * @return ModelAndView which name is register.html
+     * @return registerMk.html
      */
+
     @GetMapping("/register/mk")
-    public ModelAndView register() {
-        // You can customize this based on your logic
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("mk/registerMk");
-        return modelAndView;
+    private String register() {
+        return "mk/registerMk";
     }
 
     /**
      * Handles the registration of a new user.
      *
+     * @param model
      * @param name
      * @param surname
      * @param username
      * @param password
      * @param rpassword
-     * @return ModelAndView and redirects to the login page if successful,
+     * @return Redirects to the login page if successful,
      * otherwise returns to the registration page with an error message.
      */
     @PostMapping("/register/mk")
-    public ModelAndView registerAccount(
-            @RequestParam String name,
-            @RequestParam String surname,
-            @RequestParam String username,
-            @RequestParam String password,
-            @RequestParam String rpassword) {
-
-        ModelAndView modelAndView = new ModelAndView();
-
+    private String registerAccount(Model model, @RequestParam String name, @RequestParam String surname, @RequestParam String username, @RequestParam String password, @RequestParam String rpassword) {
         try {
             userService.registerAccount(name, surname, username, password, rpassword, "MK");
-            modelAndView.setViewName("mk/loginMk");
-            return modelAndView;
         } catch (PasswordNotMatchException | UsernameExistsException | InvalidPasswordExceptionMK |
                  UsernameInPasswordException e) {
-            modelAndView.addObject("error", e.getMessage());
-            modelAndView.setViewName("mk/registerMk");
-            return modelAndView;
+            model.addAttribute("error", e.getMessage());
+            return "mk/registerMk";
         }
+        return "redirect:/login/mk";
+    }
+
+    /**
+     * Get the login form
+     *
+     * @return loginMk.html
+     */
+    @GetMapping("/login/mk")
+    private String login() {
+        return "mk/loginMk";
     }
 
     /**
      * Handles the user login.
      *
+     * @param model
+     * @param session
      * @param username
      * @param password
-     * @return ModelAndView and redirects to the main page if login is successful,
+     * @return Redirects to the main page if login is successful,
      * otherwise returns to the login page with an error message.
      */
+
     @PostMapping("/login/mk")
-    public ModelAndView loginAccount(
-            @RequestParam String username,
-            @RequestParam String password,HttpSession session) {
-
-        ModelAndView modelAndView = new ModelAndView();
-
+    private String loginAccount(Model model, HttpSession session, @RequestParam String username, @RequestParam String password) {
         try {
             User currentUser = userService.loginAccount(username, password, "MK");
-
             session.setAttribute("User", currentUser);
-            String redirectUrl = "/mainpage/mk";
-
-            return new ModelAndView(new RedirectView(redirectUrl, true));
-
         } catch (Username0rPasswordDoesntMatchException e) {
-            modelAndView.addObject("error", e.getMessage());
-            modelAndView.setViewName("mk/loginMk");
-
-            return modelAndView;
+            model.addAttribute("error", e.getMessage());
+            return "mk/loginMk";
         }
+        return "redirect:/mainpage/mk";
     }
 
     /**
      * Checks the authentication status of the user.
      *
      * @param session
-     * @return ModelAndView for redirect based on the authentication status.
+     * @return A string representing a redirect to the main page if the user is authenticated, otherwise a redirect to the login page.
      */
-    @PostMapping("/auth-status/mk")
-    public ModelAndView authStatus(HttpSession session) {
-        User currentUser = (User) session.getAttribute("User");
 
+    @PostMapping("/auth-status/mk")
+    private String authStatus(HttpSession session) {
+        User currentUser = (User) session.getAttribute("User");
         if (currentUser != null) {
-            // User is authenticated, redirect to main page
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("redirect:/mainpage/mk");
-            return modelAndView;
+            return "redirect:/mainpage/mk";
         }
 
-        // User is not authenticated, redirect to login page
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/login/mk");
-        return modelAndView;
+        return "redirect:/login/mk";
+
     }
 
     /**
      * Logs out the user and invalidates the current session.
      *
      * @param session
-     * @return ModelAndView and redirect to the homepage.
+     * @return Redirects to the homepage.
      */
     @GetMapping("/logout/mk")
-    public ModelAndView logoutAccount(HttpSession session) {
+    private String logoutAccount(HttpSession session) {
         session.invalidate();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/homepage/mk");
-        return modelAndView;
+        return "redirect:/homepage/mk";
     }
 
     /**
@@ -165,63 +130,42 @@ public class AuthControllerMK {
      * @param confirmPassword
      * @param model
      * @param session
-     * @return ModelAndView and redirect to the profile page with appropriate messages.
+     * @return Redirects to the profile page with appropriate messages.
      */
-    @PostMapping("/changePass/mk")
-    public ModelAndView changePass(
-            @RequestParam String currentPassword,
-            @RequestParam String newPassword,
-            @RequestParam String confirmPassword,
-            Model model,
-            HttpSession session) throws UnsupportedEncodingException {
 
+    @PostMapping("/changePass/mk")
+    private String changePass(@RequestParam String currentPassword,
+                              @RequestParam String newPassword,
+                              @RequestParam String confirmPassword, Model model, HttpSession session) {
         User currentUser = (User) session.getAttribute("User");
         currentUser = userRepository.findById(currentUser.getId()).get();
-
         if (!(passwordEncoder.matches(currentPassword, currentUser.getPassword()))) {
-            String exception = "Вашата моментална лозинка е неточна";
-            exception = URLEncoder.encode(exception, StandardCharsets.UTF_8.toString());
+            String exception = "Вашата моментална лозика е неточна";
             String currentPasswordIncorrect = "true";
             String changePass = "true";
-            ModelAndView modelAndView = new ModelAndView();
-            String redirectUrl = "/profile/mk?currentPasswordIncorrect=" +
-                    currentPasswordIncorrect + "&changePass=" + changePass + "&messageException=" + exception;
 
-            return new ModelAndView("redirect:" + redirectUrl);
-
-
+            return "redirect:/profile/mk?currentPasswordIncorrect=" + currentPasswordIncorrect + "&changePass=" + changePass + "&messageException=" + exception;
         }
-
         if (!(newPassword.equals(confirmPassword))) {
             String exception = "Вашите лозинки не се совпаѓаат";
-            exception = URLEncoder.encode(exception, StandardCharsets.UTF_8.toString());
             String passwordsDontMatch = "true";
             String changePass = "true";
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("redirect:/profile/mk?passwordsDontMatch=" +
-                    passwordsDontMatch + "&changePass=" + changePass + "&messageException=" + exception);
 
-            return modelAndView;
+            return "redirect:/profile/mk?passwordsDontMatch=" + passwordsDontMatch + "&changePass=" + changePass + "&messageException=" + exception;
         }
-
         try {
             userService.updatePassword(currentUser.getUsername(), newPassword, "MK");
-        } catch (InvalidPasswordExceptionMK e) {
+
+        } catch (InvalidPasswordException e) {
             String exception = e.getMessage();
-            exception = URLEncoder.encode(exception, StandardCharsets.UTF_8.toString());
             String passwordsDontMatch = "true";
             String changePass = "true";
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("redirect:/profile/mk?passwordsDontMatch=" +
-                    passwordsDontMatch + "&changePass=" + changePass + "&messageException=" + exception);
+            return "redirect:/profile/mk?passwordsDontMatch=" + passwordsDontMatch + "&changePass=" + changePass + "&messageException=" + exception;
 
-            return modelAndView;
         }
-
         String successfullyChanged = "true";
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/profile/mk?successfullyChanged=" + successfullyChanged);
-        return modelAndView;
+
+        return "redirect:/profile/mk?successfullyChanged=" + successfullyChanged;
     }
 
     /**
@@ -229,17 +173,16 @@ public class AuthControllerMK {
      *
      * @param model
      * @param session
-     * @return ModelAndView with a redirect URL to the profile page with appropriate messages.
+     * @return Redirects to the profile page with appropriate messages.
      */
     @GetMapping("/changePass/mk")
-    public ModelAndView changePass(Model model, HttpSession session) {
+    private String changePass(Model model, HttpSession session) {
         User currentUser = (User) session.getAttribute("User");
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("user", userRepository.findById(currentUser.getId()).get());
+        model.addAttribute("user", userRepository.findById(currentUser.getId()).get());
         String changePass = "true";
-        modelAndView.setViewName("redirect:/profile/mk?changePass=" + changePass);
-        return modelAndView;
+        return "redirect:/profile/mk?changePass=" + changePass;
     }
+
     /**
      * Displays the user profile page with optional messages and flags.
      *
@@ -250,30 +193,24 @@ public class AuthControllerMK {
      * @param passwordsDontMatch
      * @param messageException         Error message to be displayed.
      * @param currentPasswordIncorrect
-     * @return ModelAndView containing the user's profile and messages.
+     * @return the view of the users profile
      */
     @GetMapping("/profile/mk")
-    public ModelAndView profile(
-            Model model,
-            HttpSession session,
-            @RequestParam(required = false) String changePass,
-            @RequestParam(required = false) String successfullyChanged,
-            @RequestParam(required = false) String passwordsDontMatch,
-            @RequestParam(required = false) String messageException,
-            @RequestParam(required = false) String currentPasswordIncorrect) {
-
-        ModelAndView modelAndView = new ModelAndView();
-
+    private String profile(Model model, HttpSession session,
+                           @RequestParam(required = false) String changePass,
+                           @RequestParam(required = false) String successfullyChanged,
+                           @RequestParam(required = false) String passwordsDontMatch,
+                           @RequestParam(required = false) String messageException,
+                           @RequestParam(required = false) String currentPasswordIncorrect) {
         User currentUser = (User) session.getAttribute("User");
-        modelAndView.addObject("user", userRepository.findById(currentUser.getId()).get());
-        modelAndView.addObject("changePass", changePass);
-        modelAndView.addObject("successfullyChanged", successfullyChanged);
-        modelAndView.addObject("message", messageException);
-        modelAndView.addObject("passwordsDontMatch", passwordsDontMatch);
-        modelAndView.addObject("currentPasswordIncorrect", currentPasswordIncorrect);
-        modelAndView.setViewName("mk/profileMk");
-
-        return modelAndView;
+        model.addAttribute("user", userRepository.findById(currentUser.getId()).get());
+        model.addAttribute("changePass", changePass);
+        model.addAttribute("successfullyChanged", successfullyChanged);
+        model.addAttribute("message", messageException);
+        model.addAttribute("passwordsDontMatch", passwordsDontMatch);
+        model.addAttribute("currentPasswordIncorrect", currentPasswordIncorrect);
+        return "mk/profileMk";
     }
-}
 
+
+}
