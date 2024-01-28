@@ -9,7 +9,9 @@ import mk.finki.ukim.dians.winewithme.model.exception.password.uni.UsernameExist
 import mk.finki.ukim.dians.winewithme.model.exception.password.uni.UsernameInPasswordException;
 import mk.finki.ukim.dians.winewithme.model.exception.password.en.*;
 import mk.finki.ukim.dians.winewithme.repository.UserRepository;
+import mk.finki.ukim.dians.winewithme.repository.WineryRepository;
 import mk.finki.ukim.dians.winewithme.service.UserService;
+import mk.finki.ukim.dians.winewithme.service.WineryService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,6 +25,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final WineryService wineryService;
 
     /**
      * Function for registration of new accounts
@@ -105,5 +108,35 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return user;
 
+    }
+
+    @Override
+    public void favoriteWinery(Long user, Long id) {
+        wineryService.findById(id).ifPresent(i -> {
+            userRepository.findById(user).ifPresent(k -> {
+                k.getList0fWineries().add(i);
+                userRepository.save(k);
+            });
+        });
+    }
+
+    @Override
+    public void undoFavorityWinery(Long user, Long id) {
+        wineryService.findById(id).ifPresent(i -> {
+            userRepository.findById(user).ifPresent(k -> {
+                k.getList0fWineries().remove(i);
+                userRepository.save(k);
+            });
+        });
+    }
+
+    @Override
+    public void undoShowMyWinery(Long user, Long id) {
+        wineryService.findById(id).ifPresent(i -> {
+            userRepository.findById(user).ifPresent(k -> {
+                k.getList0fWineries().remove(i);
+                userRepository.save(k);
+            });
+        });
     }
 }
