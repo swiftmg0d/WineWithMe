@@ -14,3 +14,5 @@
 - [Домашна задача 2](https://github.com/swiftmg0d/WineWithMe/tree/Homework2)
 - [Домашна задача 3](https://github.com/swiftmg0d/WineWithMe/tree/Homework3)
 - [Домашна задача 4](https://github.com/swiftmg0d/WineWithMe/tree/Homework4)
+### Reworked version:
+- [Click](https://github.com/swiftmg0d/winewithme-rework)
